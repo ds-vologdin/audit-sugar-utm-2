@@ -1,0 +1,5 @@
+Django==2.1
+django-configurations==2.1
+django_debug_toolbar==1.10
+django-extensions==2.1.2
+psycopg2-binary==2.7.5
