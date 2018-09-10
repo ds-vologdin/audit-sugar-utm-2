@@ -1,7 +1,7 @@
 import os
 from configurations import Configuration, values
 
-from .settings_private import DatabaseDevMixins
+from .settings_private import DatabaseDevMixin
 
 
 class Base(Configuration):
@@ -25,6 +25,8 @@ class Base(Configuration):
         'django.contrib.staticfiles',
 
         'django_extensions',
+
+        'utm_billing.apps.UtmbillingConfig',
     ]
 
     MIDDLEWARE = [
@@ -88,7 +90,7 @@ class Base(Configuration):
     STATIC_URL = '/static/'
 
 
-class Dev(DatabaseDevMixins, Base):
+class Dev(DatabaseDevMixin, Base):
     DEBUG = True
     INSTALLED_APPS = Base.INSTALLED_APPS + ['debug_toolbar']
     MIDDLEWARE = Base.MIDDLEWARE + [
