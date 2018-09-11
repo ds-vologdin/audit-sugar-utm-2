@@ -98,3 +98,4 @@ class Dev(DatabaseDevMixin, Base):
     ]
     INTERNAL_IPS = ['127.0.0.1']
     ALLOWED_HOSTS = Base.ALLOWED_HOSTS + ['127.0.0.1', 'testserver']
+    STATIC_ROOT = os.path.join(Base.BASE_DIR, 'static')
