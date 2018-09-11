@@ -29,7 +29,7 @@ def group_pays_by_date(pays_raw):
 
 
 def fetch_pays_from_utm(date_begin, date_end):
-    ''' Получить данные из БД UTM '''
+    """ Получить данные из БД UTM """
 
     date_begin_timestamp = get_timestamp_from_date(date_begin)
     date_end_timestamp = get_timestamp_from_date(date_end + timedelta(days=1))
@@ -46,9 +46,9 @@ def fetch_pays_from_utm(date_begin, date_end):
 
 
 def calculate_pays_stat_periods(pays, report_periods):
-    '''Функция рассчитывает статистику по платежам за каждый период
+    """Функция рассчитывает статистику по платежам за каждый период
        в report_periods
-    '''
+    """
     pays_periods_dicts = []
     # sum_tmp и count_tmp используется для расчёта смещения относительно
     # предыдущего отчётного периода
@@ -95,7 +95,7 @@ def calculate_pays_stat_periods(pays, report_periods):
              'count_dif_p': round(count_dif_p, 2),
              }
         )
-    # Запрашиваем помесячную статистику по исходящему остаткуна
+    # Запрашиваем помесячную статистику по исходящему остатку
     # на начало месяца и по количеству активных абонентов на начало месяца
     # Если статистика не помесячная, то balances_periods = None
     balances_periods = fetch_balances_periods(report_periods)
@@ -103,6 +103,7 @@ def calculate_pays_stat_periods(pays, report_periods):
     # Объединяем pays_stat_periods и balances_periods
     if not balances_periods:
         return pays_periods_dicts
+    print(balances_periods)
     for pays_period_dict, balance_period in zip(pays_periods_dicts, balances_periods):
         pays_period_dict.update(
             {
@@ -116,7 +117,7 @@ def calculate_pays_stat_periods(pays, report_periods):
 
 
 def calculate_summary_statistic_pays(pays_stat_periods, report_periods, last):
-    ''' Считаем статистику по всем платежам '''
+    """ Считаем статистику по всем платежам """
     summ_pay, count_pay = 0, 0
     for pay in pays_stat_periods:
         summ_pay += pay['summ']
@@ -146,7 +147,7 @@ def calculate_summary_statistic_pays(pays_stat_periods, report_periods, last):
 
 
 def fetch_balances_periods(report_periods):
-    ''' Функция расчёта баланса по заданным периодам '''
+    """ Функция расчёта баланса по заданным периодам """
     # Расчитываем только в случае если отчёт помесячный
     date_begin, date_end = report_periods[0]
     if (date_end - date_begin) < timedelta(days=28):
@@ -156,8 +157,8 @@ def fetch_balances_periods(report_periods):
     for date_begin, date_end in report_periods:
         # считаем сколько людей с положительным балансом перешло
         # на текущий месяц, какой у них средний баланс
-        timestamp_begin = get_timestamp_from_date(date_begin)
-        timestamp_end = get_timestamp_from_date(date_begin+timedelta(days=1))
+        # в базе время в utc, потому вычитаем 3 часа!
+        timestamp_begin = get_timestamp_from_date(date_begin) - 10800
 
         active_balance = session_utm.query(
             func.count(BalanceHistory.out_balance),
@@ -166,23 +167,19 @@ def fetch_balances_periods(report_periods):
         ).join(
             User, BalanceHistory.account_id == User.basic_account
         ).filter(
-            BalanceHistory.date >= timestamp_begin,
-            BalanceHistory.date < timestamp_end,
-            User.login.op('~')('^\d\d\d\d\d$'),
+            BalanceHistory.date == timestamp_begin,
+            User.login.op('~')(r'^\d\d\d\d\d$'),
             BalanceHistory.out_balance >= 0,
             BalanceHistory.out_balance < 15000
         ).all()
 
         # Смотрим средний баланс среди всех абонентов
         all_balance = session_utm.query(
-            func.count(BalanceHistory.out_balance),
             func.avg(BalanceHistory.out_balance),
-            func.sum(BalanceHistory.out_balance),
         ).join(
             User, BalanceHistory.account_id == User.basic_account
         ).filter(
-            BalanceHistory.date >= timestamp_begin,
-            BalanceHistory.date < timestamp_end,
+            BalanceHistory.date == timestamp_begin,
             User.login.op('~')('^\d\d\d\d\d$'),
             BalanceHistory.out_balance > -15000,
             BalanceHistory.out_balance < 15000

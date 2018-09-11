@@ -144,7 +144,7 @@ def get_report_periods(date_begin, date_end):
 
 def get_timestamp_from_date(date_current):
     if not date_current:
-        return None
+        return
     return datetime.combine(
         date_current, datetime.min.time()
     ).timestamp()
