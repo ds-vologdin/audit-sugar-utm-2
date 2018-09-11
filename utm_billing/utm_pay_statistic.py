@@ -30,9 +30,9 @@ def group_pays_by_date(pays_raw):
 
 def fetch_pays_from_utm(date_begin, date_end):
     """ Получить данные из БД UTM """
-
-    date_begin_timestamp = get_timestamp_from_date(date_begin)
-    date_end_timestamp = get_timestamp_from_date(date_end + timedelta(days=1))
+    # в базе время в utc, потому вычитаем 3 часа!
+    date_begin_timestamp = get_timestamp_from_date(date_begin) - 10800
+    date_end_timestamp = get_timestamp_from_date(date_end + timedelta(days=1)) - 10800
     pays_raw = session_utm.query(
         PaymentTransaction.payment_enter_date,
         PaymentTransaction.payment_absolute
@@ -103,13 +103,11 @@ def calculate_pays_stat_periods(pays, report_periods):
     # Объединяем pays_stat_periods и balances_periods
     if not balances_periods:
         return pays_periods_dicts
-    print(balances_periods)
     for pays_period_dict, balance_period in zip(pays_periods_dicts, balances_periods):
         pays_period_dict.update(
             {
                 'count_active': balance_period.get('count', 0),
                 'avg_balance': balance_period.get('avg', 0),
-                'avg_balance_all': balance_period.get('avg_all', 0),
                 'sum_balance': balance_period.get('summ', 0),
             }
         )
@@ -173,28 +171,12 @@ def fetch_balances_periods(report_periods):
             BalanceHistory.out_balance < 15000
         ).all()
 
-        # Смотрим средний баланс среди всех абонентов
-        all_balance = session_utm.query(
-            func.avg(BalanceHistory.out_balance),
-        ).join(
-            User, BalanceHistory.account_id == User.basic_account
-        ).filter(
-            BalanceHistory.date == timestamp_begin,
-            User.login.op('~')('^\d\d\d\d\d$'),
-            BalanceHistory.out_balance > -15000,
-            BalanceHistory.out_balance < 15000
-        ).all()
-
         count, avg, summ = active_balance[0] if len(active_balance) == 1 else (0, 0, 0)
-
-        avg_all = all_balance[0][0] if len(all_balance) == 1 else 0
-
         balances_dicts.append(
             {'date': date_begin,
              'count': count,
              'avg': avg,
              'summ': summ,
-             'avg_all': avg_all,
              }
         )
     return balances_dicts
