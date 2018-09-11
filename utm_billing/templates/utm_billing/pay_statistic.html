@@ -17,6 +17,7 @@
             <th class="text-center">Платежей</th>
             <th class="text-center" colspan=2>Изменение количества</th>
             <th class="text-center">ARPU</th>
+            <th class="text-center" title="Средний баланс активных клиентов на 1 число">Средний баланс</th>
         </tr>
         </thead>
         <tbody class="text-center">
@@ -44,6 +45,7 @@
                     <td>{{ pay.count_dif_p|floatformat:2 }}%</td>
                 {% endif %}
                 <td>{{ pay.avg }}</td>
+                <td>{{ pay.avg_balance|floatformat:2 }}</td>
             </tr>
             {% endfor %}
             <tr>
@@ -69,6 +71,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
         </tbody>
     </table>
@@ -81,7 +84,10 @@
 <script>
 var date_labels = [{% for pay in pays_stat %} "{{ pay.date|date:'Y-m' }}", {% endfor %}];
 var pays_sum = [{% for pay in pays_stat %} {{ pay.summ|floatformat:2 }}, {% endfor %}];
-var pays_count = [{% for pay in pays_stat %} {{ pay.count }}, {% endfor %}]
+var pays_sum_balance = [{% for pay in pays_stat %} {{ pay.sum_balance|floatformat:2 }}, {% endfor %}];
+var pays_count = [{% for pay in pays_stat %} {{ pay.count }}, {% endfor %}];
+var pays_count_active = [{% for pay in pays_stat %} {{ pay.count_active }}, {% endfor %}];
+console.log(pays_count_active);
 var chart_pays_sum = document.getElementById("chart-pays-sum");
 var chart_pays_sum_js = new Chart(chart_pays_sum, {
     type: 'line',
@@ -95,6 +101,15 @@ var chart_pays_sum_js = new Chart(chart_pays_sum, {
             borderWidth: 2,
             pointRadius: 1,
             data: pays_sum,
+        },
+        {
+            label: "Суммарный баланс на 1 число",
+            borderColor: 'red',
+            backgroundColor: 'transparent',
+            lineTension: 0.2,
+            borderWidth: 2,
+            pointRadius: 1,
+            data: pays_sum_balance,
         },]
     },
     options: {
@@ -121,6 +136,15 @@ var chart_pays_count_js = new Chart(chart_pays_count, {
             borderWidth: 2,
             pointRadius: 1,
             data: pays_count,
+        },
+        {
+            label: "Активных на 1 число",
+            borderColor: 'red',
+            backgroundColor: 'transparent',
+            lineTension: 0.2,
+            borderWidth: 2,
+            pointRadius: 1,
+            data: pays_count_active,
         },]
     },
     options: {
