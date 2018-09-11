@@ -12,6 +12,8 @@ engine_utm = engine_from_config(
     pool_pre_ping=True
 )
 
-session_factory_utm = sessionmaker(bind=engine_utm)
+# У нас только права на чтение, так что нет смысла заморачиваться с commit и
+# rollback, потому используем опцию autocommit=True
+session_factory_utm = sessionmaker(bind=engine_utm, autocommit=True)
 Session_utm = scoped_session(session_factory_utm)
 session_utm = Session_utm()
