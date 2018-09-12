@@ -1,4 +1,5 @@
 from datetime import datetime, date, timedelta
+import pytz
 
 
 def get_report_begin_end_date(year='', month='', last='month'):
@@ -142,9 +143,10 @@ def get_report_periods(date_begin, date_end):
     return period
 
 
-def get_timestamp_from_date(date_current):
+def get_timestamp_from_date(date_current, utcoffset=10800):
     if not date_current:
         return
-    return datetime.combine(
-        date_current, datetime.min.time()
-    ).timestamp()
+    timestamp = datetime.combine(date_current, datetime.min.time()).timestamp()
+    if isinstance(utcoffset, int):
+        timestamp -= utcoffset
+    return timestamp

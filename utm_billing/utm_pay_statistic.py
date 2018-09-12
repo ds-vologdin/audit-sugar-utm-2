@@ -31,8 +31,8 @@ def group_pays_by_date(pays_raw):
 def fetch_pays_from_utm(date_begin, date_end):
     """ Получить данные из БД UTM """
     # в базе время в utc, потому вычитаем 3 часа!
-    date_begin_timestamp = get_timestamp_from_date(date_begin) - 10800
-    date_end_timestamp = get_timestamp_from_date(date_end + timedelta(days=1)) - 10800
+    date_begin_timestamp = get_timestamp_from_date(date_begin)
+    date_end_timestamp = get_timestamp_from_date(date_end + timedelta(days=1))
     pays_raw = session_utm.query(
         PaymentTransaction.payment_enter_date,
         PaymentTransaction.payment_absolute
@@ -156,7 +156,7 @@ def fetch_balances_periods(report_periods):
         # считаем сколько людей с положительным балансом перешло
         # на текущий месяц, какой у них средний баланс
         # в базе время в utc, потому вычитаем 3 часа!
-        timestamp_begin = get_timestamp_from_date(date_begin) - 10800
+        timestamp_begin = get_timestamp_from_date(date_begin)
 
         active_balance = session_utm.query(
             func.count(BalanceHistory.out_balance),
