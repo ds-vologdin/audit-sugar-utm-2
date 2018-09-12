@@ -1,5 +1,11 @@
 from datetime import datetime, date, timedelta
-import pytz
+
+
+def get_begin_end_date_previous_month():
+    current_month_first_day = date.today().replace(day=1)
+    date_end = current_month_first_day - timedelta(days=1)
+    date_begin = date_end.replace(day=1)
+    return date_begin, date_end
 
 
 def get_report_begin_end_date(year='', month='', last='month'):
