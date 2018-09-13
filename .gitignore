@@ -1,5 +1,6 @@
 *_private.*
 .idea/
+*.ipynb
 
 # Стандартный .gitignore, который предлагает github.com
 

@@ -1,50 +1,87 @@
 from datetime import datetime, date, timedelta
 
 
-def get_begin_end_date_previous_month():
-    current_month_first_day = date.today().replace(day=1)
+def is_valid_year(year):
+    if not isinstance(year, int):
+        return False
+    return 2000 < year <= date.today().year
+
+
+def is_valid_month(month):
+    if not isinstance(month, int):
+        return False
+    return 0 < month <= 12
+
+
+def get_begin_end_date_previous_month(date_current):
+    current_month_first_day = date_current.replace(day=1)
     date_end = current_month_first_day - timedelta(days=1)
     date_begin = date_end.replace(day=1)
     return date_begin, date_end
 
 
-def get_report_begin_end_date(year='', month='', last='month'):
-    """Функция формирования даты начала и конца отчётного периода"""
-    if not year:
-        # не задан год
-        date_end = date.today()
-        # Год не задан, берём период - последние 30 дней
-        if last == 'week':
-            date_begin = date_end - timedelta(days=6)
-        elif last == 'month':
-            date_begin = date_end - timedelta(days=30)
-        elif last == 'quarter':
-            date_begin = date_end - timedelta(days=90)
-        elif last == 'year':
-            date_begin = date_end.replace(year=(date_end.year-1), day=1)
-        elif last == '2years':
-            date_begin = date_end.replace(year=(date_end.year-2), day=1)
-        elif last == '3years':
-            date_begin = date_end.replace(year=(date_end.year-3), day=1)
-
-        return date_begin, date_end
-
-    if not month:
-        # Не задан месяц
-        # Берём период - весь год
-        date_begin = date(int(year), 1, 1)
-        date_end = date(int(year), 12, 31)
-
-        return date_begin, date_end
-
-    # Задан месяц и год
-    date_begin = date(int(year), int(month), 1)
-    if int(month) < 12:
-        date_end = date(int(year), int(month)+1, 1) - timedelta(days=1)
+def get_begin_end_date_previous_quarter(date_current):
+    current_month_first_day = date_current.replace(day=1)
+    date_end = current_month_first_day - timedelta(days=1)
+    if date_end.month > 2:
+        date_begin = date_end.replace(month=date_end.month-2, day=1)
     else:
-        date_end = date(int(year), 12, 31)
-
+        date_begin = date_end.replace(year=date_end.year-1, month=(date_end.month-2)+12, day=1)
     return date_begin, date_end
+
+
+def get_calc_begin_end_date_with_offset_days(offset_days):
+    def calculate_date(date_current):
+        return date_current - timedelta(days=offset_days), date_current
+    return calculate_date
+
+
+def get_calc_begin_end_date_with_offset_years(offset_years):
+    def calculate_date(date_current):
+        return date_current.replace(year=(date_current.year - offset_years), day=1), date_current
+    return calculate_date
+
+
+def get_begin_end_date_in_report_last_type(last='month'):
+    last_type_calc = {
+        'week': get_calc_begin_end_date_with_offset_days(offset_days=6),
+        'month': get_calc_begin_end_date_with_offset_days(offset_days=30),
+        'full_month': get_begin_end_date_previous_month,
+        'quarter': get_calc_begin_end_date_with_offset_days(offset_days=90),
+        'full_quarter': get_begin_end_date_previous_quarter,
+        'year': get_calc_begin_end_date_with_offset_years(offset_years=1),
+        '2years': get_calc_begin_end_date_with_offset_years(offset_years=2),
+        '3years': get_calc_begin_end_date_with_offset_years(offset_years=3),
+    }
+    date_current = date.today()
+    calculate_dates = last_type_calc.get(last, lambda date_current: (None, None))
+    return calculate_dates(date_current)
+
+
+def get_begin_end_date_at_month(year, month):
+    date_begin = date(year, month, 1)
+    if month == 12:
+        date_end = date(year, 12, 31)
+    else:
+        date_end = date(year, month + 1, 1) - timedelta(days=1)
+    return date_begin, date_end
+
+
+def get_report_begin_end_date(year=None, month=None, last='month'):
+    """Функция формирования даты начала и конца отчётного периода"""
+    if year is None:
+        return get_begin_end_date_in_report_last_type(last)
+
+    if not is_valid_year(year):
+        return None, None
+
+    if month is None:
+        return date(year, 1, 1), date(year, 12, 31)
+
+    if not is_valid_month(month):
+        return None, None
+
+    return get_begin_end_date_at_month(year, month)
 
 
 def get_type_report(year, month):

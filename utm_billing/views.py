@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
+from django.http import Http404
 
 from .helpers import get_report_begin_end_date
-from .helpers import get_begin_end_date_previous_month
 from .helpers import get_report_periods, get_type_report
 from .helpers import get_last_years, get_last_months
 
@@ -54,10 +54,13 @@ class BlockUsersMonth(TemplateView):
 
         year = kwargs.get('year')
         month = kwargs.get('month')
-        if year and month:
-            date_start, date_stop = get_report_begin_end_date(year, month)
-        else:
-            date_start, date_stop = get_begin_end_date_previous_month()
+
+        date_start, date_stop = get_report_begin_end_date(
+            year, month, last='full_month')
+
+        if not (date_start or date_stop):
+            raise Http404('Не корректный url')
+
         block_users = fetch_users_block_month(date_start, date_stop)
         months_report = get_last_months(last=12)
 
