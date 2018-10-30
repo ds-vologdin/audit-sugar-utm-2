@@ -28,7 +28,7 @@
             <tr>
             {% endif %}
                 <td>
-                    <a href="/audit/utmpays/{{ pay.date|date:'Y' }}/{{ pay.date|date:'m' }}">{{ pay.date|date:'Y-m' }}</a>
+                    <a href="{% url 'pay_month' pay.date|date:'Y' pay.date|date:'m' %}">{{ pay.date|date:'Y-m' }}</a>
                 </td>
                 <td>{{ pay.summ|floatformat:2 }}</td>
                 {% if pay.sum_dif == 0 %}
