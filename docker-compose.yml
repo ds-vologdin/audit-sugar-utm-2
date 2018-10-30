@@ -1,0 +1,24 @@
+version: "2"
+services:
+  audit-sugar-utm:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app/
+    env_file:
+      - "audit-sugar-utm.env"
+    depends_on:
+      - "audit_db"
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+  audit_db:
+    image: postgres
+    volumes:
+      - "audit_db_data:/var/lib/postgresql/data"
+    env_file:
+      - "postgres.env"
+    restart: always
+
+volumes:
+  audit_db_data:
