@@ -1,0 +1,126 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+<div class="jumbotron">
+    <h1>Платежи физических лиц за месяц</h1>
+    <h3>График поступления платежей</h3>
+    <canvas id="chart-pays-sum"></canvas>
+    <h2>График количества платежей</h2>
+    <canvas id="chart-pays-count"></canvas>
+
+    <table class="table table-hover" >
+        <thead>
+        <tr>
+            <th class="text-center">Дата</th>
+            <th class="text-center">Сумма</th>
+            <th class="text-center">Изменение суммы</th>
+            <th class="text-center">Платежей</th>
+            <th class="text-center">Изменение количества</th>
+            <th class="text-center">ARPU</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for pay in pays_stat %}
+            {% if pay.sum_dif < 0 %}
+            <tr class='warning'>
+            {% else %}
+            <tr>
+            {% endif %}
+                <td>{{ pay.date|date:'Y-m-d' }}</td>
+                <td>{{ pay.summ|floatformat:2 }}</td>
+                {% if pay.sum_dif == 0 %}
+                    <td></td>
+                {% else %}
+                    <td>{{ pay.sum_dif|floatformat:2 }}</td>
+                {% endif %}
+                <td class="text-center">{{ pay.count }}</td>
+                {% if pay.count_dif == 0%}
+                    <td></td>
+                {% else %}
+                    <td>{{ pay.count_dif }}</td>
+                {% endif %}
+                <td>{{ pay.avg }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td><b>Итого</b></td>
+                <td><b>{{ pays_stat_summary.summ|floatformat:2 }}</b></td>
+                <td></td>
+                <td><b>{{ pays_stat_summary.count }}</b></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>Среднее</b></td>
+                <td><b>{{ pays_stat_summary.avg_summ|floatformat:2 }}</b></td>
+                <td></td>
+                <td><b>{{ pays_stat_summary.avg_count|floatformat:2 }}</b></td>
+                <td></td>
+                <td><b>{{ pays_stat_summary.avg_pay|floatformat:2 }}</b></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock main %}
+
+{% block js %}
+<!--JS для прорисовки графика -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script>
+var date_labels = [{% for pay in pays_stat %} "{{ pay.date|date:'Y-m-d' }}", {% endfor %}];
+var pays_sum = [{% for pay in pays_stat %} {{ pay.summ|floatformat:2 }}, {% endfor %}];
+var pays_count = [{% for pay in pays_stat %} {{ pay.count }}, {% endfor %}];
+var chart_pays_sum = document.getElementById("chart-pays-sum");
+var chart_pays_sum_js = new Chart(chart_pays_sum, {
+    type: 'line',
+    data: {
+        labels: date_labels,
+        datasets: [{
+            label: "Платежи",
+            borderColor: 'blue',
+            backgroundColor: 'transparent',
+            lineTension: 0.2,
+            borderWidth: 2,
+            pointRadius: 1,
+            data: pays_sum,
+        },]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                display: true,
+                ticks: {
+                    suggestedMin: 0,
+                }
+            }]
+        }
+    }
+});
+var chart_pays_count = document.getElementById("chart-pays-count");
+var chart_pays_count_js = new Chart(chart_pays_count, {
+    type: 'line',
+    data: {
+        labels: date_labels,
+        datasets: [{
+            label: "Количество платежей",
+            borderColor: 'blue',
+            backgroundColor: 'transparent',
+            lineTension: 0.2,
+            borderWidth: 2,
+            pointRadius: 1,
+            data: pays_count,
+        },]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                display: true,
+                ticks: {
+                    suggestedMin: 0,
+                }
+            }]
+        }
+    }
+});
+</script>
+{% endblock js%}

@@ -10,9 +10,7 @@ from .utm_pay_statistic import calculate_summary_statistic_pays
 from .utm_block_users import fetch_users_block_month
 
 
-class PayStatisticView(TemplateView):
-    template_name = "utm_billing/pay_statistic.html"
-
+class GetContextPayStatisticMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -25,8 +23,7 @@ class PayStatisticView(TemplateView):
         report_periods = get_report_periods(date_begin, date_end)
         pays_stat_periods = calculate_pays_stat_periods(pays, report_periods)
         pays_stat_summary = calculate_summary_statistic_pays(
-            pays_stat_periods, report_periods, last
-        )
+            pays_stat_periods, report_periods, last)
 
         months_report = get_last_months(last=12)
         years_report = get_last_years(last=5)
@@ -44,6 +41,14 @@ class PayStatisticView(TemplateView):
 
         context.update(context_current)
         return context
+
+
+class PayStatisticView(GetContextPayStatisticMixin, TemplateView):
+    template_name = "utm_billing/pay_statistic.html"
+
+
+class PayMonthStatisticView(GetContextPayStatisticMixin, TemplateView):
+    template_name = "utm_billing/pay_month_statistic.html"
 
 
 class BlockUsersMonth(TemplateView):
