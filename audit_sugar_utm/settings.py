@@ -27,6 +27,7 @@ class Base(Configuration):
         'django_extensions',
 
         'utm_billing.apps.UtmbillingConfig',
+        'sugar_crm.apps.SugarCrmConfig',
     ]
 
     MIDDLEWARE = [
