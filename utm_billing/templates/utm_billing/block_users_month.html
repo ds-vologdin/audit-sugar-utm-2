@@ -5,32 +5,41 @@
 {% timezone "Europe/Moscow" %}
 <div class="jumbotron">
     <h1>Заблокированные абоненты ({{ date_begin|date:'Y-m' }})</h1>
-    <p>Всего заблокировано {{ block_users|length }} абонентов</p>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Логин</th>
-                    <th>Абонент</th>
-                    <th>Адрес</th>
-                    <th>Тариф</th>
-                    <th>Телефон</th>
-                    <th class="th-data">Дата</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for block in block_users %}
-
-                    <tr class="main-table__tr">
-                        <td>{{ block.login}}</td>
-                        <td>{{ block.user }}</td>
-                        <td>{{ block.address }}</td>
-                        <td>{{ block.tarif }}</td>
-                        <td>{{ block.phone }}</td>
-                        <td>{{ block.date|date:'Y-m-d' }}</td>
-                    </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбрать период
+        </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          {% for month in months %}
+              <a class="dropdown-item" href="{% url 'block_month' month|date:'Y' month|date:'m' %}">{{ month|date:'Y-m' }}</a>
+          {% endfor %}
+      </div>
+    </div>
+    <h3>Заблокировано абонентов: {{ block_users|length }}</h3>
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th>Логин</th>
+                <th>Абонент</th>
+                <th>Адрес</th>
+                <th>Тариф</th>
+                <th>Телефон</th>
+                <th class="th-date">Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for block in block_users %}
+            <tr class="main-table__tr">
+                <td>{{ block.login}}</td>
+                <td>{{ block.user }}</td>
+                <td>{{ block.address }}</td>
+                <td>{{ block.tarif }}</td>
+                <td>{{ block.phone }}</td>
+                <td>{{ block.date|date:'Y-m-d' }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endtimezone %}
 {% endblock main %}
