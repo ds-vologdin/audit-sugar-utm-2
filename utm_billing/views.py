@@ -27,14 +27,13 @@ class GetContextPayStatisticMixin:
 
         months_report = get_last_months(last=12)
         years_report = get_last_years(last=5)
-        type_report = get_type_report(year, month)
 
         context_current = {
             'pays_stat': pays_stat_periods,
             'pays_stat_summary': pays_stat_summary,
             'months': months_report,
             'years': years_report,
-            'type': type_report,
+            'type_report': 'pays_users',
             'date_begin': date_begin,
             'date_end': date_end,
         }
@@ -73,6 +72,7 @@ class BlockUsersMonth(TemplateView):
             'block_users': block_users,
             'date_begin': date_start,
             'months': months_report,
+            'type_report': 'block_users',
         }
 
         context.update(context_current)
