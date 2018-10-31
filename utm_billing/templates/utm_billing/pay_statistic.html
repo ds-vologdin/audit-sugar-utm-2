@@ -2,13 +2,30 @@
 
 {% block main %}
 <div class="jumbotron">
-    <h1>Платежи физических лиц</h1>
+    <h1>Платежи физических лиц
+        {% if date_begin and date_end %}
+            ({{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }})
+        {% endif %}
+    </h1>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбрать период
+        </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'pay_last' 'year' %}">Последний год</a>
+          <a class="dropdown-item" href="{% url 'pay_last' '2years' %}">Последние 2 года</a>
+          <a class="dropdown-item" href="{% url 'pay_last' '3years' %}">Последние 3 года</a>
+          {% for year in years %}
+              <a class="dropdown-item" href="{% url 'pay_year' year|date:'Y' %}">{{ year|date:'Y' }} год</a>
+          {% endfor %}
+      </div>
+    </div>
     <h3>График поступления платежей</h3>
     <canvas id="chart-pays-sum"></canvas>
     <h2>График количества платежей</h2>
     <canvas id="chart-pays-count"></canvas>
-
-    <table class="table table-hover" >
+    <h2>Поступление платежей в цифрах</h2>
+    <table class="table table-hover table-sm" >
         <thead>
         <tr>
             <th class="text-center">Дата</th>
@@ -23,7 +40,7 @@
         <tbody class="text-center">
         {% for pay in pays_stat %}
             {% if pay.sum_dif < 0 %}
-            <tr class='warning'>
+            <tr class='table-warning'>
             {% else %}
             <tr>
             {% endif %}
@@ -32,14 +49,14 @@
                 </td>
                 <td>{{ pay.summ|floatformat:2 }}</td>
                 {% if pay.sum_dif == 0 %}
-                    <td></td><td></td>
+                    <td>-</td><td>-</td>
                 {% else %}
                     <td>{{ pay.sum_dif|floatformat:2 }}</td>
                     <td>{{ pay.sum_dif_p|floatformat:2 }}%</td>
                 {% endif %}
                 <td class="text-center">{{ pay.count }}</td>
                 {% if pay.count_dif == 0%}
-                    <td></td><td></td>
+                    <td>-</td><td>-</td>
                 {% else %}
                     <td>{{ pay.count_dif }}</td>
                     <td>{{ pay.count_dif_p|floatformat:2 }}%</td>
@@ -58,7 +75,6 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td><b>Среднее</b></td>
@@ -67,10 +83,8 @@
                 <td></td>
                 <td><b>{{ pays_stat_summary.avg_count|floatformat:2 }}</b></td>
                 <td></td>
+                <td></td>
                 <td><b>{{ pays_stat_summary.avg_pay|floatformat:2 }}</b></td>
-                <td></td>
-                <td></td>
-                <td></td>
                 <td></td>
             </tr>
         </tbody>
@@ -87,7 +101,6 @@ var pays_sum = [{% for pay in pays_stat %} {{ pay.summ|floatformat:2 }}, {% endf
 var pays_sum_balance = [{% for pay in pays_stat %} {{ pay.sum_balance|floatformat:2 }}, {% endfor %}];
 var pays_count = [{% for pay in pays_stat %} {{ pay.count }}, {% endfor %}];
 var pays_count_active = [{% for pay in pays_stat %} {{ pay.count_active }}, {% endfor %}];
-console.log(pays_count_active);
 var chart_pays_sum = document.getElementById("chart-pays-sum");
 var chart_pays_sum_js = new Chart(chart_pays_sum, {
     type: 'line',
