@@ -67,6 +67,8 @@ class Base(Configuration):
         }
     }
 
+    DATABASE_ROUTERS = ['sugar_crm.db_routers.SugarCrmDBRouter', ]
+
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
