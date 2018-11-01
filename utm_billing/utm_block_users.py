@@ -13,13 +13,13 @@ def fetch_blocked_users(block_date_start=None, block_date_stop=None):
 
     blocked_users_query = session_utm.query(
         User.id, User.login, User.full_name, User.actual_address,
-        User.mobile_telephone, BlocksInfo.start_date
+        User.mobile_telephone, BlocksInfo.start_date.label('block_date')
     ).join(
         BlocksInfo, User.basic_account == BlocksInfo.account_id
     ).filter(
         BlocksInfo.expire_date > timestamp_expire,
         User.login.op('~')('^\d\d\d\d\d$')
-    ).order_by(BlocksInfo.start_date)
+    ).distinct(User.id).order_by(User.id)
 
     if block_date_start:
         timestamp_begin = get_timestamp_from_date(block_date_start)
@@ -30,7 +30,13 @@ def fetch_blocked_users(block_date_start=None, block_date_stop=None):
             block_date_stop + timedelta(days=1))
         blocked_users_query = blocked_users_query.filter(
             BlocksInfo.start_date < timestamp_end)
-    return list(blocked_users_query)
+
+    blocked_users_query = blocked_users_query.cte()
+    blocked_users_query_ordered = session_utm.query(
+        blocked_users_query
+    ).order_by(blocked_users_query.c.block_date)
+
+    return list(blocked_users_query_ordered)
 
 
 def fetch_blocked_users_at_month(block_date_start, block_date_stop):
