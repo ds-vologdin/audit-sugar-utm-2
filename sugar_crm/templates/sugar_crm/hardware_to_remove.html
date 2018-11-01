@@ -1,13 +1,42 @@
 {% extends "base/base.html" %}
 
 {% block main %}
-    <div class="jumbotron">
-{#    {% for user in blocked_users %}#}
-{#        <li>{{ user }}</li>#}
-{#    {% endfor %}#}
-    {{ hardware_to_remove|length }}
-    {% for hardware in hardware_to_remove %}
-        <li>{{ hardware }}</li>
-    {% endfor %}
-    </div>
+<div class="jumbotron">
+    <h1>Оборудование на снятие</h1>
+    <h2>Количество: {{ hardware_to_remove|length }}</h2>
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th class="text-center">Логин</th>
+                <th>Абонент</th>
+                <th>Тариф</th>
+                <th>Телефон</th>
+                <th class="text-center" title="Дата блокировки">Дата</th>
+                <th class="text-center">Оборудование</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hardware in hardware_to_remove %}
+                <tr>
+                    <td class="text-center">{{ hardware.login }}</td>
+                    <td>{{ hardware.name }}</td>
+                    <td>{{ hardware.tariff }}</td>
+                    <td>{{ hardware.phone }}</td>
+                    <td class="text-center">{{ hardware.block_date|date:'Y-m-d' }}</td>
+                    <td>
+                        <ul>
+                        {% for device in hardware.hardware %}
+                            <li>{{ device.type }} ({{ device.inventory }}): {{ device.description }}
+                                {% if device.status %}
+                                    - {{ device.status }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock main %}
