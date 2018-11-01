@@ -2,12 +2,12 @@ from django.views.generic import TemplateView
 from django.http import Http404
 
 from .helpers import get_report_begin_end_date
-from .helpers import get_report_periods, get_type_report
+from .helpers import get_report_periods
 from .helpers import get_last_years, get_last_months
 
 from .utm_pay_statistic import fetch_pays_from_utm, calculate_pays_stat_periods
 from .utm_pay_statistic import calculate_summary_statistic_pays
-from .utm_block_users import fetch_users_block_month
+from .utm_block_users import fetch_blocked_users_at_month
 
 
 class GetContextPayStatisticMixin:
@@ -65,7 +65,7 @@ class BlockUsersMonth(TemplateView):
         if not (date_start or date_stop):
             raise Http404('Не корректный url')
 
-        block_users = fetch_users_block_month(date_start, date_stop)
+        block_users = fetch_blocked_users_at_month(date_start, date_stop)
         months_report = get_last_months(last=12)
 
         context_current = {
