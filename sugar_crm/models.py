@@ -1,5696 +1,5449 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
-from django.db import models
-
-
-class A0001Notes(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    notes = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'a0001_notes'
-
-
-class A0001NotesAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'a0001_notes_audit'
-
-
-class AccAccesscontract(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    cost = models.IntegerField(blank=True, null=True)
-    inet = models.IntegerField(blank=True, null=True)
-    typecontract = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesscontract'
-
-
-class AccAccesscontractAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesscontract_audit'
-
-
-class AccAccesscontractContactsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_accesscontract_contactsacc_accesscontract_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_accesscontract_contactscontacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesscontract_contacts_c'
-
-
-class AccAccesscontractNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_accesscontract_notesacc_accesscontract_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_accesscontract_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesscontract_notes_c'
-
-
-class AccAccessdocuments(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    file_ext = models.CharField(max_length=100, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    active_date = models.DateField(blank=True, null=True)
-    exp_date = models.DateField(blank=True, null=True)
-    category_id = models.CharField(max_length=100, blank=True, null=True)
-    subcategory_id = models.CharField(max_length=100, blank=True, null=True)
-    status_id = models.CharField(max_length=100, blank=True, null=True)
-    teypedoc = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accessdocuments'
-
-
-class AccAccessdocumentsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accessdocuments_audit'
-
-
-class AccAccessdocumentsNotes1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_accessdocuments_notes_1acc_accessdocuments_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_accessdocuments_notes_1notes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accessdocuments_notes_1_c'
-
-
-class AccAccessdocumentsNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_accessdocuments_notesacc_accessdocuments_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_accessdocuments_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accessdocuments_notes_c'
-
-
-class AccAccesserror(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    dateerror = models.DateField(blank=True, null=True)
-    dateaccess = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesserror'
-
-
-class AccAccesserrorAccFacilityC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_accesserror_acc_facilityacc_facility_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_accesserror_acc_facilityacc_accesserror_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesserror_acc_facility_c'
-
-
-class AccAccesserrorAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesserror_audit'
-
-
-class AccAccesserrorNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_accesserror_notesacc_accesserror_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_accesserror_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_accesserror_notes_c'
-
-
-class AccFacility(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    accessmode = models.TextField(blank=True, null=True)
-    presencekey = models.IntegerField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    facilitymap = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility'
-
-
-class AccFacilityAccAccesscontractC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_facility_acc_accesscontractacc_facility_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_facility_acc_accesscontractacc_accesscontract_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility_acc_accesscontract_c'
-
-
-class AccFacilityAccAccessdocumentsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_facility_acc_accessdocumentsacc_facility_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_facility_acc_accessdocumentsacc_accessdocuments_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility_acc_accessdocuments_c'
-
-
-class AccFacilityAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility_audit'
-
-
-class AccFacilityContactsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_facility_contactsacc_facility_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_facility_contactscontacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility_contacts_c'
-
-
-class AccFacilityCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    district_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility_cstm'
-
-
-class AccFacilityNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_facility_notesacc_facility_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_facility_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_facility_notes_c'
-
-
-class AccRequisition(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    accessmode = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_requisition'
-
-
-class AccRequisitionAccAccessdocumentsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_requisition_acc_accessdocumentsacc_requisition_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_requisition_acc_accessdocumentsacc_accessdocuments_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_requisition_acc_accessdocuments_c'
-
-
-class AccRequisitionAccFacilityC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_requisition_acc_facilityacc_requisition_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_requisition_acc_facilityacc_facility_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_requisition_acc_facility_c'
-
-
-class AccRequisitionAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_requisition_audit'
-
-
-class AccRequisitionCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    accessmodecheck_c = models.CharField(max_length=100, blank=True, null=True)
-    equipment_c = models.CharField(max_length=255, blank=True, null=True)
-    address_sogl_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_requisition_cstm'
-
-
-class AccRequisitionNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_requisition_notesacc_requisition_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_requisition_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_requisition_notes_c'
-
-
-class AccUk(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    phone = models.CharField(max_length=255, blank=True, null=True)
-    fax = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk'
-
-
-class AccUkAccAccesscontractC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_uk_acc_accesscontractacc_uk_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_uk_acc_accesscontractacc_accesscontract_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk_acc_accesscontract_c'
-
-
-class AccUkAccAccessdocumentsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_uk_acc_accessdocumentsacc_uk_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_uk_acc_accessdocumentsacc_accessdocuments_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk_acc_accessdocuments_c'
-
-
-class AccUkAccFacilityC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_uk_acc_facilityacc_uk_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_uk_acc_facilityacc_facility_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk_acc_facility_c'
-
-
-class AccUkAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk_audit'
-
-
-class AccUkContactsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_uk_contactsacc_uk_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_uk_contactscontacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk_contacts_c'
-
-
-class AccUkNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    acc_uk_notesacc_uk_ida = models.CharField(max_length=36, blank=True, null=True)
-    acc_uk_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acc_uk_notes_c'
-
-
-class Accounts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=150, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    account_type = models.CharField(max_length=100, blank=True, null=True)
-    industry = models.CharField(max_length=100, blank=True, null=True)
-    annual_revenue = models.CharField(max_length=100, blank=True, null=True)
-    phone_fax = models.CharField(max_length=100, blank=True, null=True)
-    billing_address_street = models.CharField(max_length=150, blank=True, null=True)
-    billing_address_city = models.CharField(max_length=100, blank=True, null=True)
-    billing_address_state = models.CharField(max_length=100, blank=True, null=True)
-    billing_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    billing_address_country = models.CharField(max_length=255, blank=True, null=True)
-    rating = models.CharField(max_length=100, blank=True, null=True)
-    phone_office = models.CharField(max_length=100, blank=True, null=True)
-    phone_alternate = models.CharField(max_length=100, blank=True, null=True)
-    website = models.CharField(max_length=255, blank=True, null=True)
-    ownership = models.CharField(max_length=100, blank=True, null=True)
-    employees = models.CharField(max_length=10, blank=True, null=True)
-    ticker_symbol = models.CharField(max_length=10, blank=True, null=True)
-    shipping_address_street = models.CharField(max_length=150, blank=True, null=True)
-    shipping_address_city = models.CharField(max_length=100, blank=True, null=True)
-    shipping_address_state = models.CharField(max_length=100, blank=True, null=True)
-    shipping_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    shipping_address_country = models.CharField(max_length=255, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-    sic_code = models.CharField(max_length=10, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts'
-
-
-class AccountsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_audit'
-
-
-class AccountsBugs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-    bug_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_bugs'
-
-
-class AccountsCalls1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    accounts_calls_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    accounts_calls_1calls_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_calls_1_c'
-
-
-class AccountsCases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-    case_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_cases'
-
-
-class AccountsConPConnectionsPlan1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    accounts_con_p_connections_plan_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    accounts_con_p_connections_plan_1con_p_connections_plan_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_con_p_connections_plan_1_c'
-
-
-class AccountsContacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_contacts'
-
-
-class AccountsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    internet_acc_c = models.IntegerField(blank=True, null=True)
-    phone_acc_c = models.IntegerField(blank=True, null=True)
-    pdcpgi_acc_c = models.IntegerField(blank=True, null=True)
-    inet_pvk_acc_c = models.IntegerField(blank=True, null=True)
-    inet_ip_acc_c = models.IntegerField(blank=True, null=True)
-    month_profit_acc_c = models.IntegerField(blank=True, null=True)
-    packet_acc_c = models.IntegerField(blank=True, null=True)
-    block_acc_c = models.IntegerField(blank=True, null=True)
-    vats_acc_c = models.IntegerField(blank=True, null=True)
-    tv_acc_c = models.IntegerField(blank=True, null=True)
-    inet_date_acc_c = models.DateField(blank=True, null=True)
-    phone_date_acc_c = models.DateField(blank=True, null=True)
-    closed_acc_c = models.IntegerField(blank=True, null=True)
-    date_close_acc_c = models.DateField(blank=True, null=True)
-    blockletter_acc_c = models.IntegerField(blank=True, null=True)
-    date_blockletter_acc_c = models.DateField(blank=True, null=True)
-    close_couse_acc_c = models.CharField(max_length=100, blank=True, null=True)
-    close_comment_acc_c = models.TextField(blank=True, null=True)
-    status_acc_c = models.CharField(max_length=100, blank=True, null=True)
-    priority_acc_c = models.CharField(max_length=100, blank=True, null=True)
-    debtor_acc_c = models.IntegerField(blank=True, null=True)
-    address_map_acc_c = models.CharField(max_length=255, blank=True, null=True)
-    cctv_acc_c = models.IntegerField(blank=True, null=True)
-    cost_pdcpgi_acc_c = models.IntegerField(blank=True, null=True)
-    company_acc_c = models.IntegerField(blank=True, null=True)
-    bandwidth_c = models.FloatField(blank=True, null=True)
-    login_ph_c = models.CharField(max_length=255, blank=True, null=True)
-    phone_new_c = models.CharField(max_length=255, blank=True, null=True)
-    phone_from_bug_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_cstm'
-
-
-class AccountsMaMount1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    accounts_ma_mount_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    accounts_ma_mount_1ma_mount_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_ma_mount_1_c'
-
-
-class AccountsNotes1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    accounts_notes_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    accounts_notes_1notes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_notes_1_c'
-
-
-class AccountsOpportunities(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    opportunity_id = models.CharField(max_length=36, blank=True, null=True)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_opportunities'
-
-
-class AccountsPoPo1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    accounts_po_po_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    accounts_po_po_1po_po_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_po_po_1_c'
-
-
-class AccountsTcTariffchangeinet1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    accounts_tc_tariffchangeinet_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    accounts_tc_tariffchangeinet_1tc_tariffchangeinet_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'accounts_tc_tariffchangeinet_1_c'
-
-
-class AclActions(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=150, blank=True, null=True)
-    category = models.CharField(max_length=100, blank=True, null=True)
-    acltype = models.CharField(max_length=100, blank=True, null=True)
-    aclaccess = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acl_actions'
-
-
-class AclRoles(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=150, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acl_roles'
-
-
-class AclRolesActions(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    role_id = models.CharField(max_length=36, blank=True, null=True)
-    action_id = models.CharField(max_length=36, blank=True, null=True)
-    access_override = models.IntegerField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acl_roles_actions'
-
-
-class AclRolesUsers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    role_id = models.CharField(max_length=36, blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'acl_roles_users'
-
-
-class AddressBook(models.Model):
-    assigned_user_id = models.CharField(max_length=36)
-    bean = models.CharField(max_length=50, blank=True, null=True)
-    bean_id = models.CharField(max_length=36)
-
-    class Meta:
-        managed = False
-        db_table = 'address_book'
-
-
-class Bugs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    bug_number = models.IntegerField(unique=True)
-    type = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    priority = models.CharField(max_length=100, blank=True, null=True)
-    resolution = models.CharField(max_length=255, blank=True, null=True)
-    work_log = models.TextField(blank=True, null=True)
-    found_in_release = models.CharField(max_length=255, blank=True, null=True)
-    fixed_in_release = models.CharField(max_length=255, blank=True, null=True)
-    source = models.CharField(max_length=255, blank=True, null=True)
-    product_category = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bugs'
-
-
-class BugsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bugs_audit'
-
-
-class BugsCBugComments1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    bugs_c_bug_comments_1bugs_ida = models.CharField(max_length=36, blank=True, null=True)
-    bugs_c_bug_comments_1c_bug_comments_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bugs_c_bug_comments_1_c'
-
-
-class BugsCalls1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    bugs_calls_1bugs_ida = models.CharField(max_length=36, blank=True, null=True)
-    bugs_calls_1calls_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bugs_calls_1_c'
-
-
-class BugsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    phone_bugs_c = models.CharField(max_length=255, blank=True, null=True)
-    department_bugs_c = models.CharField(max_length=100, blank=True, null=True)
-    reason_for_closure_bugs_c = models.CharField(max_length=255, blank=True, null=True)
-    type_bugs_c = models.CharField(max_length=100, blank=True, null=True)
-    status_bugs_c = models.CharField(max_length=100, blank=True, null=True)
-    address_bugs_c = models.CharField(max_length=255, blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-    bug_id_c = models.CharField(max_length=36, blank=True, null=True)
-    date_close_c = models.DateTimeField(blank=True, null=True)
-    priority_bugs_c = models.CharField(max_length=255, blank=True, null=True)
-    departure_bugs_c = models.IntegerField(blank=True, null=True)
-    new_reason_for_closure_bugs_c = models.TextField(blank=True, null=True)
-    new_priority_bugs_c = models.CharField(max_length=100, blank=True, null=True)
-    service_is_delivered_c = models.CharField(max_length=255, blank=True, null=True)
-    duration_bug_c = models.FloatField(blank=True, null=True)
-    perform_c = models.TextField(blank=True, null=True)
-    localisation_c = models.TextField(blank=True, null=True)
-    todo_c = models.CharField(max_length=255, blank=True, null=True)
-    duration_min_c = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bugs_cstm'
-
-
-class CBugComments(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'c_bug_comments'
-
-
-class CBugCommentsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'c_bug_comments_audit'
-
-
-class CBugCommentsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-
-    class Meta:
-        managed = False
-        db_table = 'c_bug_comments_cstm'
-
-
-class Calls(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    duration_hours = models.IntegerField(blank=True, null=True)
-    duration_minutes = models.IntegerField(blank=True, null=True)
-    date_start = models.DateTimeField(blank=True, null=True)
-    date_end = models.DateTimeField(blank=True, null=True)
-    parent_type = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    direction = models.CharField(max_length=100, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-    reminder_time = models.IntegerField(blank=True, null=True)
-    email_reminder_time = models.IntegerField(blank=True, null=True)
-    email_reminder_sent = models.IntegerField(blank=True, null=True)
-    outlook_id = models.CharField(max_length=255, blank=True, null=True)
-    repeat_type = models.CharField(max_length=36, blank=True, null=True)
-    repeat_interval = models.IntegerField(blank=True, null=True)
-    repeat_dow = models.CharField(max_length=7, blank=True, null=True)
-    repeat_until = models.DateField(blank=True, null=True)
-    repeat_count = models.IntegerField(blank=True, null=True)
-    repeat_parent_id = models.CharField(max_length=36, blank=True, null=True)
-    recurring_source = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'calls'
-
-
-class CallsContacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    call_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    required = models.CharField(max_length=1, blank=True, null=True)
-    accept_status = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'calls_contacts'
-
-
-class CallsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    number_call_c = models.IntegerField(blank=True, null=True)
-    check_call_c = models.IntegerField(blank=True, null=True)
-    input_number_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'calls_cstm'
-
-
-class CallsLeads(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    call_id = models.CharField(max_length=36, blank=True, null=True)
-    lead_id = models.CharField(max_length=36, blank=True, null=True)
-    required = models.CharField(max_length=1, blank=True, null=True)
-    accept_status = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'calls_leads'
-
-
-class CallsNumbers(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    input_number = models.CharField(max_length=20, blank=True, null=True)
-    date_call = models.DateTimeField(blank=True, null=True)
-    output_number = models.CharField(max_length=20, blank=True, null=True)
-    not_received_number = models.CharField(max_length=20, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'calls_numbers'
-
-
-class CallsUsers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    call_id = models.CharField(max_length=36, blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    required = models.CharField(max_length=1, blank=True, null=True)
-    accept_status = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'calls_users'
-
-
-class CampaignLog(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    target_tracker_key = models.CharField(max_length=36, blank=True, null=True)
-    target_id = models.CharField(max_length=36, blank=True, null=True)
-    target_type = models.CharField(max_length=100, blank=True, null=True)
-    activity_type = models.CharField(max_length=100, blank=True, null=True)
-    activity_date = models.DateTimeField(blank=True, null=True)
-    related_id = models.CharField(max_length=36, blank=True, null=True)
-    related_type = models.CharField(max_length=100, blank=True, null=True)
-    archived = models.IntegerField(blank=True, null=True)
-    hits = models.IntegerField(blank=True, null=True)
-    list_id = models.CharField(max_length=36, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    more_information = models.CharField(max_length=100, blank=True, null=True)
-    marketing_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'campaign_log'
-
-
-class CampaignTrkrs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    tracker_name = models.CharField(max_length=30, blank=True, null=True)
-    tracker_url = models.CharField(max_length=255, blank=True, null=True)
-    tracker_key = models.IntegerField()
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    is_optout = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'campaign_trkrs'
-
-
-class Campaigns(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    tracker_key = models.IntegerField()
-    tracker_count = models.IntegerField(blank=True, null=True)
-    refer_url = models.CharField(max_length=255, blank=True, null=True)
-    tracker_text = models.CharField(max_length=255, blank=True, null=True)
-    start_date = models.DateField(blank=True, null=True)
-    end_date = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    impressions = models.IntegerField(blank=True, null=True)
-    currency_id = models.CharField(max_length=36, blank=True, null=True)
-    budget = models.FloatField(blank=True, null=True)
-    expected_cost = models.FloatField(blank=True, null=True)
-    actual_cost = models.FloatField(blank=True, null=True)
-    expected_revenue = models.FloatField(blank=True, null=True)
-    campaign_type = models.CharField(max_length=100, blank=True, null=True)
-    objective = models.TextField(blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
-    frequency = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'campaigns'
-
-
-class CampaignsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'campaigns_audit'
-
-
-class Cases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    case_number = models.IntegerField(unique=True)
-    type = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    priority = models.CharField(max_length=100, blank=True, null=True)
-    resolution = models.TextField(blank=True, null=True)
-    work_log = models.TextField(blank=True, null=True)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cases'
-
-
-class CasesAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cases_audit'
-
-
-class CasesBugs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    case_id = models.CharField(max_length=36, blank=True, null=True)
-    bug_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cases_bugs'
-
-
-class CasesCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cases_cstm'
-
-
-class CatRepairsList(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cat_repairs_list'
-
-
-class CatWorkList(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cat_work_list'
-
-
-class ConPConnectionsPlan(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'con_p_connections_plan'
-
-
-class ConPConnectionsPlanAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'con_p_connections_plan_audit'
-
-
-class ConPConnectionsPlanCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    address_plan_c = models.CharField(max_length=255, blank=True, null=True)
-    time_connection_c = models.CharField(max_length=255, blank=True, null=True)
-    date_connection_c = models.DateField(blank=True, null=True)
-    contacts_c = models.CharField(max_length=255, blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-    number_opp_c = models.CharField(max_length=255, blank=True, null=True)
-    tariff_plan_c = models.CharField(max_length=255, blank=True, null=True)
-    issued_hard_c = models.IntegerField(blank=True, null=True)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-    base_station_c = models.TextField(blank=True, null=True)
-    level_signal_c = models.CharField(max_length=255, blank=True, null=True)
-    enter_roof_c = models.TextField(blank=True, null=True)
-    type_conn_c = models.CharField(max_length=100, blank=True, null=True)
-    type_hard_c = models.TextField(blank=True, null=True)
-    radio_c = models.IntegerField(blank=True, null=True)
-    point_address_c = models.CharField(max_length=255, blank=True, null=True)
-    ip_address_c = models.CharField(max_length=255, blank=True, null=True)
-    brigada_c = models.CharField(max_length=100, blank=True, null=True)
-    gps_check_c = models.IntegerField(blank=True, null=True)
-    ra_survey_id_c = models.CharField(max_length=36, blank=True, null=True)
-    comment_mount_c = models.TextField(blank=True, null=True)
-    check_mount_c = models.IntegerField(blank=True, null=True)
-    call_pl_c = models.IntegerField(blank=True, null=True)
-    user_id1_c = models.CharField(max_length=36, blank=True, null=True)
-    call_comment_c = models.TextField(blank=True, null=True)
-    start_time_c = models.DateTimeField(blank=True, null=True)
-    end_time_c = models.DateTimeField(blank=True, null=True)
-    user_id2_c = models.CharField(max_length=36, blank=True, null=True)
-    user_id3_c = models.CharField(max_length=36, blank=True, null=True)
-    job_list_c = models.TextField(blank=True, null=True)
-    cat_work_c = models.CharField(max_length=100, blank=True, null=True)
-    remarks_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_one_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_two_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_three_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_four_c = models.CharField(max_length=255, blank=True, null=True)
-    user_id4_c = models.CharField(max_length=36, blank=True, null=True)
-    acc_requisition_id_c = models.CharField(max_length=36, blank=True, null=True)
-    call_date_c = models.DateField(blank=True, null=True)
-    status_mount_c = models.CharField(max_length=100, blank=True, null=True)
-    channel_speed_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'con_p_connections_plan_cstm'
-
-
-class ConPConnectionsPlanNotes1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    con_p_connections_plan_notes_1con_p_connections_plan_ida = models.CharField(max_length=36, blank=True, null=True)
-    con_p_connections_plan_notes_1notes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'con_p_connections_plan_notes_1_c'
-
-
-class Config(models.Model):
-    category = models.CharField(max_length=32, blank=True, null=True)
-    name = models.CharField(max_length=32, blank=True, null=True)
-    value = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'config'
-
-
-class Contacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    salutation = models.CharField(max_length=255, blank=True, null=True)
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    title = models.CharField(max_length=100, blank=True, null=True)
-    department = models.CharField(max_length=255, blank=True, null=True)
-    do_not_call = models.IntegerField(blank=True, null=True)
-    phone_home = models.CharField(max_length=100, blank=True, null=True)
-    phone_mobile = models.CharField(max_length=100, blank=True, null=True)
-    phone_work = models.CharField(max_length=100, blank=True, null=True)
-    phone_other = models.CharField(max_length=100, blank=True, null=True)
-    phone_fax = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_street = models.CharField(max_length=150, blank=True, null=True)
-    primary_address_city = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_state = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    primary_address_country = models.CharField(max_length=255, blank=True, null=True)
-    alt_address_street = models.CharField(max_length=150, blank=True, null=True)
-    alt_address_city = models.CharField(max_length=100, blank=True, null=True)
-    alt_address_state = models.CharField(max_length=100, blank=True, null=True)
-    alt_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    alt_address_country = models.CharField(max_length=255, blank=True, null=True)
-    assistant = models.CharField(max_length=75, blank=True, null=True)
-    assistant_phone = models.CharField(max_length=100, blank=True, null=True)
-    lead_source = models.CharField(max_length=255, blank=True, null=True)
-    reports_to_id = models.CharField(max_length=36, blank=True, null=True)
-    birthdate = models.DateField(blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'contacts'
-
-
-class ContactsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'contacts_audit'
-
-
-class ContactsBugs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    bug_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_role = models.CharField(max_length=50, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'contacts_bugs'
-
-
-class ContactsCases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    case_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_role = models.CharField(max_length=50, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'contacts_cases'
-
-
-class ContactsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'contacts_cstm'
-
-
-class ContactsUsers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'contacts_users'
-
-
-class CronRemoveDocuments(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    bean_id = models.CharField(max_length=36, blank=True, null=True)
-    module = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'cron_remove_documents'
-
-
-class Currencies(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=36, blank=True, null=True)
-    symbol = models.CharField(max_length=36, blank=True, null=True)
-    iso4217 = models.CharField(max_length=3, blank=True, null=True)
-    conversion_rate = models.FloatField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36)
-
-    class Meta:
-        managed = False
-        db_table = 'currencies'
-
-
-class CustomFields(models.Model):
-    bean_id = models.CharField(max_length=36, blank=True, null=True)
-    set_num = models.IntegerField(blank=True, null=True)
-    field0 = models.CharField(max_length=255, blank=True, null=True)
-    field1 = models.CharField(max_length=255, blank=True, null=True)
-    field2 = models.CharField(max_length=255, blank=True, null=True)
-    field3 = models.CharField(max_length=255, blank=True, null=True)
-    field4 = models.CharField(max_length=255, blank=True, null=True)
-    field5 = models.CharField(max_length=255, blank=True, null=True)
-    field6 = models.CharField(max_length=255, blank=True, null=True)
-    field7 = models.CharField(max_length=255, blank=True, null=True)
-    field8 = models.CharField(max_length=255, blank=True, null=True)
-    field9 = models.CharField(max_length=255, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'custom_fields'
-
-
-class DevDevelopment(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    finish = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'dev_development'
-
-
-class DevDevelopmentAccRequisitionC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    dev_development_acc_requisitiondev_development_ida = models.CharField(max_length=36, blank=True, null=True)
-    dev_development_acc_requisitionacc_requisition_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'dev_development_acc_requisition_c'
-
-
-class DevDevelopmentAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'dev_development_audit'
-
-
-class DevDevelopmentNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    dev_development_notesdev_development_ida = models.CharField(max_length=36, blank=True, null=True)
-    dev_development_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'dev_development_notes_c'
-
-
-class DevDevelopmentRaSurveyC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    dev_development_ra_surveydev_development_ida = models.CharField(max_length=36, blank=True, null=True)
-    dev_development_ra_surveyra_survey_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'dev_development_ra_survey_c'
-
-
-class DevDevelopmentSkSketchC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    dev_development_sk_sketchdev_development_ida = models.CharField(max_length=36, blank=True, null=True)
-    dev_development_sk_sketchsk_sketch_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'dev_development_sk_sketch_c'
-
-
-class DocumentRevisions(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    change_log = models.CharField(max_length=255, blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    doc_id = models.CharField(max_length=100, blank=True, null=True)
-    doc_type = models.CharField(max_length=100, blank=True, null=True)
-    doc_url = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    file_ext = models.CharField(max_length=100, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    revision = models.CharField(max_length=100, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'document_revisions'
-
-
-class Documents(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
-    doc_id = models.CharField(max_length=100, blank=True, null=True)
-    doc_type = models.CharField(max_length=100, blank=True, null=True)
-    doc_url = models.CharField(max_length=255, blank=True, null=True)
-    active_date = models.DateField(blank=True, null=True)
-    exp_date = models.DateField(blank=True, null=True)
-    category_id = models.CharField(max_length=100, blank=True, null=True)
-    subcategory_id = models.CharField(max_length=100, blank=True, null=True)
-    status_id = models.CharField(max_length=100, blank=True, null=True)
-    document_revision_id = models.CharField(max_length=36, blank=True, null=True)
-    related_doc_id = models.CharField(max_length=36, blank=True, null=True)
-    related_doc_rev_id = models.CharField(max_length=36, blank=True, null=True)
-    is_template = models.IntegerField(blank=True, null=True)
-    template_type = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'documents'
-
-
-class DocumentsAccounts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'documents_accounts'
-
-
-class DocumentsBugs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    bug_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'documents_bugs'
-
-
-class DocumentsCases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    case_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'documents_cases'
-
-
-class DocumentsContacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'documents_contacts'
-
-
-class DocumentsOpportunities(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'documents_opportunities'
-
-
-class EaddrAction(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    type_action = models.CharField(max_length=100, blank=True, null=True)
-    date_action = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eaddr_action'
-
-
-class EaddrActionAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eaddr_action_audit'
-
-
-class EaddrActionEaddrEmptyAddressC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    eaddr_action_eaddr_empty_addresseaddr_empty_address_ida = models.CharField(max_length=36, blank=True, null=True)
-    eaddr_action_eaddr_empty_addresseaddr_action_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eaddr_action_eaddr_empty_address_c'
-
-
-class EaddrEmptyAddress(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    type_address = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eaddr_empty_address'
-
-
-class EaddrEmptyAddressAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    eaddr_empty_address_accountseaddr_empty_address_ida = models.CharField(max_length=36, blank=True, null=True)
-    eaddr_empty_address_accountsaccounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eaddr_empty_address_accounts_c'
-
-
-class EaddrEmptyAddressAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eaddr_empty_address_audit'
-
-
-class Eapm(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    password = models.CharField(max_length=255, blank=True, null=True)
-    url = models.CharField(max_length=255, blank=True, null=True)
-    application = models.CharField(max_length=100, blank=True, null=True)
-    api_data = models.TextField(blank=True, null=True)
-    consumer_key = models.CharField(max_length=255, blank=True, null=True)
-    consumer_secret = models.CharField(max_length=255, blank=True, null=True)
-    oauth_token = models.CharField(max_length=255, blank=True, null=True)
-    oauth_secret = models.CharField(max_length=255, blank=True, null=True)
-    validated = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eapm'
-
-
-class EmElectricMeters(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    date_install = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'em_electric_meters'
-
-
-class EmElectricMetersAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'em_electric_meters_audit'
-
-
-class EmElectricMetersEmMetersDataC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    em_electric_meters_em_meters_dataem_electric_meters_ida = models.CharField(max_length=36, blank=True, null=True)
-    em_electric_meters_em_meters_dataem_meters_data_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'em_electric_meters_em_meters_data_c'
-
-
-class EmMetersData(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_meters_date = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'em_meters_data'
-
-
-class EmMetersDataAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'em_meters_data_audit'
-
-
-class EmailAddrBeanRel(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    email_address_id = models.CharField(max_length=36)
-    bean_id = models.CharField(max_length=36)
-    bean_module = models.CharField(max_length=100, blank=True, null=True)
-    primary_address = models.IntegerField(blank=True, null=True)
-    reply_to_address = models.IntegerField(blank=True, null=True)
-    date_created = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'email_addr_bean_rel'
-
-
-class EmailAddresses(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    email_address = models.CharField(max_length=255, blank=True, null=True)
-    email_address_caps = models.CharField(max_length=255, blank=True, null=True)
-    invalid_email = models.IntegerField(blank=True, null=True)
-    opt_out = models.IntegerField(blank=True, null=True)
-    date_created = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'email_addresses'
-
-
-class EmailCache(models.Model):
-    ie_id = models.CharField(max_length=36, blank=True, null=True)
-    mbox = models.CharField(max_length=60, blank=True, null=True)
-    subject = models.CharField(max_length=255, blank=True, null=True)
-    fromaddr = models.CharField(max_length=100, blank=True, null=True)
-    toaddr = models.CharField(max_length=255, blank=True, null=True)
-    senddate = models.DateTimeField(blank=True, null=True)
-    message_id = models.CharField(max_length=255, blank=True, null=True)
-    mailsize = models.PositiveIntegerField(blank=True, null=True)
-    imap_uid = models.PositiveIntegerField(blank=True, null=True)
-    msgno = models.PositiveIntegerField(blank=True, null=True)
-    recent = models.IntegerField(blank=True, null=True)
-    flagged = models.IntegerField(blank=True, null=True)
-    answered = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    seen = models.IntegerField(blank=True, null=True)
-    draft = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'email_cache'
-
-
-class EmailMarketing(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    from_name = models.CharField(max_length=100, blank=True, null=True)
-    from_addr = models.CharField(max_length=100, blank=True, null=True)
-    reply_to_name = models.CharField(max_length=100, blank=True, null=True)
-    reply_to_addr = models.CharField(max_length=100, blank=True, null=True)
-    inbound_email_id = models.CharField(max_length=36, blank=True, null=True)
-    date_start = models.DateTimeField(blank=True, null=True)
-    template_id = models.CharField(max_length=36)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    all_prospect_lists = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'email_marketing'
-
-
-class EmailMarketingProspectLists(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    prospect_list_id = models.CharField(max_length=36, blank=True, null=True)
-    email_marketing_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'email_marketing_prospect_lists'
-
-
-class EmailTemplates(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    published = models.CharField(max_length=3, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    subject = models.CharField(max_length=255, blank=True, null=True)
-    body = models.TextField(blank=True, null=True)
-    body_html = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    text_only = models.IntegerField(blank=True, null=True)
-    type = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'email_templates'
-
-
-class Emailman(models.Model):
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    marketing_id = models.CharField(max_length=36, blank=True, null=True)
-    list_id = models.CharField(max_length=36, blank=True, null=True)
-    send_date_time = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    in_queue = models.IntegerField(blank=True, null=True)
-    in_queue_date = models.DateTimeField(blank=True, null=True)
-    send_attempts = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    related_id = models.CharField(max_length=36, blank=True, null=True)
-    related_type = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'emailman'
-
-
-class Emails(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_sent = models.DateTimeField(blank=True, null=True)
-    message_id = models.CharField(max_length=255, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    flagged = models.IntegerField(blank=True, null=True)
-    reply_to_status = models.IntegerField(blank=True, null=True)
-    intent = models.CharField(max_length=100, blank=True, null=True)
-    mailbox_id = models.CharField(max_length=36, blank=True, null=True)
-    parent_type = models.CharField(max_length=100, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'emails'
-
-
-class EmailsBeans(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    email_id = models.CharField(max_length=36, blank=True, null=True)
-    bean_id = models.CharField(max_length=36, blank=True, null=True)
-    bean_module = models.CharField(max_length=100, blank=True, null=True)
-    campaign_data = models.TextField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_beans'
-
-
-class EmailsEmailAddrRel(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    email_id = models.CharField(max_length=36)
-    address_type = models.CharField(max_length=4, blank=True, null=True)
-    email_address_id = models.CharField(max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_email_addr_rel'
-
-
-class EmailsText(models.Model):
-    email_id = models.CharField(primary_key=True, max_length=36)
-    from_addr = models.CharField(max_length=255, blank=True, null=True)
-    reply_to_addr = models.CharField(max_length=255, blank=True, null=True)
-    to_addrs = models.TextField(blank=True, null=True)
-    cc_addrs = models.TextField(blank=True, null=True)
-    bcc_addrs = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    description_html = models.TextField(blank=True, null=True)
-    raw_source = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_text'
-
-
-class EqPickupeq(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    list = models.CharField(max_length=255, blank=True, null=True)
-    contact = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    requestdate = models.DateField(blank=True, null=True)
-    performdate = models.DateField(blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eq_pickupeq'
-
-
-class EqPickupeqAccFacilityC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    eq_pickupeq_acc_facilityeq_pickupeq_ida = models.CharField(max_length=36, blank=True, null=True)
-    eq_pickupeq_acc_facilityacc_facility_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eq_pickupeq_acc_facility_c'
-
-
-class EqPickupeqAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eq_pickupeq_audit'
-
-
-class EqPickupeqContactsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    eq_pickupeq_contactseq_pickupeq_ida = models.CharField(max_length=36, blank=True, null=True)
-    eq_pickupeq_contactscontacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eq_pickupeq_contacts_c'
-
-
-class EqPickupeqNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    eq_pickupeq_noteseq_pickupeq_ida = models.CharField(max_length=36, blank=True, null=True)
-    eq_pickupeq_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'eq_pickupeq_notes_c'
-
-
-class FieldsMetaData(models.Model):
-    id = models.CharField(primary_key=True, max_length=255)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    vname = models.CharField(max_length=255, blank=True, null=True)
-    comments = models.CharField(max_length=255, blank=True, null=True)
-    help = models.CharField(max_length=255, blank=True, null=True)
-    custom_module = models.CharField(max_length=255, blank=True, null=True)
-    type = models.CharField(max_length=255, blank=True, null=True)
-    len = models.IntegerField(blank=True, null=True)
-    required = models.IntegerField(blank=True, null=True)
-    default_value = models.CharField(max_length=255, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    audited = models.IntegerField(blank=True, null=True)
-    massupdate = models.IntegerField(blank=True, null=True)
-    duplicate_merge = models.SmallIntegerField(blank=True, null=True)
-    reportable = models.IntegerField(blank=True, null=True)
-    importable = models.CharField(max_length=255, blank=True, null=True)
-    ext1 = models.CharField(max_length=255, blank=True, null=True)
-    ext2 = models.CharField(max_length=255, blank=True, null=True)
-    ext3 = models.CharField(max_length=255, blank=True, null=True)
-    ext4 = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'fields_meta_data'
-
-
-class Folders(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=25, blank=True, null=True)
-    folder_type = models.CharField(max_length=25, blank=True, null=True)
-    parent_folder = models.CharField(max_length=36, blank=True, null=True)
-    has_child = models.IntegerField(blank=True, null=True)
-    is_group = models.IntegerField(blank=True, null=True)
-    is_dynamic = models.IntegerField(blank=True, null=True)
-    dynamic_query = models.TextField(blank=True, null=True)
-    assign_to_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36)
-    modified_by = models.CharField(max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'folders'
-
-
-class FoldersRel(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    folder_id = models.CharField(max_length=36)
-    polymorphic_module = models.CharField(max_length=25, blank=True, null=True)
-    polymorphic_id = models.CharField(max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'folders_rel'
-
-
-class FoldersSubscriptions(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    folder_id = models.CharField(max_length=36)
-    assigned_user_id = models.CharField(max_length=36)
-
-    class Meta:
-        managed = False
-        db_table = 'folders_subscriptions'
-
-
-class ImportMaps(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=254, blank=True, null=True)
-    source = models.CharField(max_length=36, blank=True, null=True)
-    enclosure = models.CharField(max_length=1, blank=True, null=True)
-    delimiter = models.CharField(max_length=1, blank=True, null=True)
-    module = models.CharField(max_length=36, blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
-    default_values = models.TextField(blank=True, null=True)
-    has_header = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    is_published = models.CharField(max_length=3, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'import_maps'
-
-
-class InboundEmail(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    server_url = models.CharField(max_length=100, blank=True, null=True)
-    email_user = models.CharField(max_length=100, blank=True, null=True)
-    email_password = models.CharField(max_length=100, blank=True, null=True)
-    port = models.IntegerField(blank=True, null=True)
-    service = models.CharField(max_length=50, blank=True, null=True)
-    mailbox = models.TextField(blank=True, null=True)
-    delete_seen = models.IntegerField(blank=True, null=True)
-    mailbox_type = models.CharField(max_length=10, blank=True, null=True)
-    template_id = models.CharField(max_length=36, blank=True, null=True)
-    stored_options = models.TextField(blank=True, null=True)
-    group_id = models.CharField(max_length=36, blank=True, null=True)
-    is_personal = models.IntegerField(blank=True, null=True)
-    groupfolder_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inbound_email'
-
-
-class InboundEmailAutoreply(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    autoreplied_to = models.CharField(max_length=100, blank=True, null=True)
-    ie_id = models.CharField(max_length=36)
-
-    class Meta:
-        managed = False
-        db_table = 'inbound_email_autoreply'
-
-
-class InboundEmailCacheTs(models.Model):
-    id = models.CharField(primary_key=True, max_length=255)
-    ie_timestamp = models.PositiveIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inbound_email_cache_ts'
-
-
-class InstComments(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_comments'
-
-
-class InstCommentsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_comments_audit'
-
-
-class InstCommentsInstPlanC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    inst_comments_inst_planinst_comments_ida = models.CharField(max_length=36, blank=True, null=True)
-    inst_comments_inst_planinst_plan_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_comments_inst_plan_c'
-
-
-class InstPlan(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    actual_time = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    duration = models.IntegerField(blank=True, null=True)
-    contact = models.CharField(max_length=255, blank=True, null=True)
-    equipment = models.TextField(blank=True, null=True)
-    tu = models.CharField(max_length=255, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-    reservation_time = models.CharField(max_length=255, blank=True, null=True)
-    date_work = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan'
-
-
-class InstPlanAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    inst_plan_accountsinst_plan_ida = models.CharField(max_length=36, blank=True, null=True)
-    inst_plan_accountsaccounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan_accounts_c'
-
-
-class InstPlanAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan_audit'
-
-
-class InstPlanContactsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    inst_plan_contactsinst_plan_ida = models.CharField(max_length=36, blank=True, null=True)
-    inst_plan_contactscontacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan_contacts_c'
-
-
-class InstPlanNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    inst_plan_notesinst_plan_ida = models.CharField(max_length=36, blank=True, null=True)
-    inst_plan_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan_notes_c'
-
-
-class InstPlanPhysiPhisicC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    inst_plan_physi_phisicinst_plan_ida = models.CharField(max_length=36, blank=True, null=True)
-    inst_plan_physi_phisicphysi_phisic_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan_physi_phisic_c'
-
-
-class InstPlanRaSurveyC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    inst_plan_ra_surveyinst_plan_ida = models.CharField(max_length=36, blank=True, null=True)
-    inst_plan_ra_surveyra_survey_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'inst_plan_ra_survey_c'
-
-
-class JjwgAddressCache(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    lat = models.FloatField(blank=True, null=True)
-    lng = models.FloatField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_address_cache'
-
-
-class JjwgAddressCacheAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_address_cache_audit'
-
-
-class JjwgAreas(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-    state = models.CharField(max_length=255, blank=True, null=True)
-    country = models.CharField(max_length=255, blank=True, null=True)
-    coordinates = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_areas'
-
-
-class JjwgAreasAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_areas_audit'
-
-
-class JjwgMaps(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    distance = models.FloatField(blank=True, null=True)
-    unit_type = models.CharField(max_length=100, blank=True, null=True)
-    module_type = models.CharField(max_length=100, blank=True, null=True)
-    parent_type = models.CharField(max_length=255, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_maps'
-
-
-class JjwgMapsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_maps_audit'
-
-
-class JjwgMapsJjwgAreasC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    jjwg_maps_5304wg_maps_ida = models.CharField(max_length=36, blank=True, null=True)
-    jjwg_maps_41f2g_areas_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_maps_jjwg_areas_c'
-
-
-class JjwgMapsJjwgMarkersC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    jjwg_maps_b229wg_maps_ida = models.CharField(max_length=36, blank=True, null=True)
-    jjwg_maps_2e31markers_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_maps_jjwg_markers_c'
-
-
-class JjwgMarkers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    city = models.CharField(max_length=255, blank=True, null=True)
-    state = models.CharField(max_length=255, blank=True, null=True)
-    country = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_lat = models.FloatField(blank=True, null=True)
-    jjwg_maps_lng = models.FloatField(blank=True, null=True)
-    marker_image = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_markers'
-
-
-class JjwgMarkersAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_markers_audit'
-
-
-class JjwgMarkersRaSurvey1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    jjwg_markers_ra_survey_1jjwg_markers_ida = models.CharField(max_length=36, blank=True, null=True)
-    jjwg_markers_ra_survey_1ra_survey_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'jjwg_markers_ra_survey_1_c'
-
-
-class JobQueue(models.Model):
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    scheduler_id = models.CharField(max_length=36, blank=True, null=True)
-    execute_time = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(max_length=20, blank=True, null=True)
-    resolution = models.CharField(max_length=20, blank=True, null=True)
-    message = models.TextField(blank=True, null=True)
-    target = models.CharField(max_length=255, blank=True, null=True)
-    data = models.TextField(blank=True, null=True)
-    requeue = models.IntegerField(blank=True, null=True)
-    retry_count = models.IntegerField(blank=True, null=True)
-    failure_count = models.IntegerField(blank=True, null=True)
-    job_delay = models.IntegerField(blank=True, null=True)
-    client = models.CharField(max_length=255, blank=True, null=True)
-    percent_complete = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'job_queue'
-
-
-class Leads(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    salutation = models.CharField(max_length=255, blank=True, null=True)
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    title = models.CharField(max_length=100, blank=True, null=True)
-    department = models.CharField(max_length=100, blank=True, null=True)
-    do_not_call = models.IntegerField(blank=True, null=True)
-    phone_home = models.CharField(max_length=100, blank=True, null=True)
-    phone_mobile = models.CharField(max_length=100, blank=True, null=True)
-    phone_work = models.CharField(max_length=100, blank=True, null=True)
-    phone_other = models.CharField(max_length=100, blank=True, null=True)
-    phone_fax = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_street = models.CharField(max_length=150, blank=True, null=True)
-    primary_address_city = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_state = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    primary_address_country = models.CharField(max_length=255, blank=True, null=True)
-    alt_address_street = models.CharField(max_length=150, blank=True, null=True)
-    alt_address_city = models.CharField(max_length=100, blank=True, null=True)
-    alt_address_state = models.CharField(max_length=100, blank=True, null=True)
-    alt_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    alt_address_country = models.CharField(max_length=255, blank=True, null=True)
-    assistant = models.CharField(max_length=75, blank=True, null=True)
-    assistant_phone = models.CharField(max_length=100, blank=True, null=True)
-    converted = models.IntegerField(blank=True, null=True)
-    refered_by = models.CharField(max_length=100, blank=True, null=True)
-    lead_source = models.CharField(max_length=100, blank=True, null=True)
-    lead_source_description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    status_description = models.TextField(blank=True, null=True)
-    reports_to_id = models.CharField(max_length=36, blank=True, null=True)
-    account_name = models.CharField(max_length=255, blank=True, null=True)
-    account_description = models.TextField(blank=True, null=True)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_name = models.CharField(max_length=255, blank=True, null=True)
-    opportunity_amount = models.CharField(max_length=50, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    birthdate = models.DateField(blank=True, null=True)
-    portal_name = models.CharField(max_length=255, blank=True, null=True)
-    portal_app = models.CharField(max_length=255, blank=True, null=True)
-    website = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'leads'
-
-
-class LeadsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'leads_audit'
-
-
-class LeadsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'leads_cstm'
-
-
-class LetLetters(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    inputnumber = models.CharField(max_length=255, blank=True, null=True)
-    inputdate = models.DateField(blank=True, null=True)
-    outputnumber = models.CharField(max_length=255, blank=True, null=True)
-    outputdate = models.DateField(blank=True, null=True)
-    organization = models.CharField(max_length=100, blank=True, null=True)
-    let_to = models.CharField(max_length=255, blank=True, null=True)
-    let_from = models.CharField(max_length=255, blank=True, null=True)
-    typeletters = models.CharField(max_length=100, blank=True, null=True)
-    performer = models.CharField(max_length=255, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'let_letters'
-
-
-class LetLettersAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    let_letters_accountslet_letters_ida = models.CharField(max_length=36, blank=True, null=True)
-    let_letters_accountsaccounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'let_letters_accounts_c'
-
-
-class LetLettersAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'let_letters_audit'
-
-
-class LetLettersContactsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    let_letters_contactslet_letters_ida = models.CharField(max_length=36, blank=True, null=True)
-    let_letters_contactscontacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'let_letters_contacts_c'
-
-
-class LetLettersCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    number_kor_c = models.IntegerField(blank=True, null=True)
-    number_kor_new_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'let_letters_cstm'
-
-
-class LetLettersNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    let_letters_noteslet_letters_ida = models.CharField(max_length=36, blank=True, null=True)
-    let_letters_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'let_letters_notes_c'
-
-
-class LinkedDocuments(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-    parent_type = models.CharField(max_length=25, blank=True, null=True)
-    document_id = models.CharField(max_length=36, blank=True, null=True)
-    document_revision_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'linked_documents'
-
-
-class MaMount(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    file_ext = models.CharField(max_length=100, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    active_date = models.DateField(blank=True, null=True)
-    exp_date = models.DateField(blank=True, null=True)
-    category_id = models.CharField(max_length=100, blank=True, null=True)
-    subcategory_id = models.CharField(max_length=100, blank=True, null=True)
-    status_id = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ma_mount'
-
-
-class MaMountAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ma_mount_audit'
-
-
-class MaMountConPConnectionsPlan1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ma_mount_con_p_connections_plan_1ma_mount_ida = models.CharField(max_length=36, blank=True, null=True)
-    ma_mount_con_p_connections_plan_1con_p_connections_plan_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ma_mount_con_p_connections_plan_1_c'
-
-
-class MaMountCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    address_mount_c = models.CharField(max_length=255, blank=True, null=True)
-    contact_mount_c = models.CharField(max_length=255, blank=True, null=True)
-    level_signal_mount_c = models.CharField(max_length=255, blank=True, null=True)
-    mount_photo_c = models.CharField(max_length=255, blank=True, null=True)
-    mount_photo_1_c = models.CharField(max_length=255, blank=True, null=True)
-    mount_photo_2_c = models.CharField(max_length=255, blank=True, null=True)
-    mount_photo_3_c = models.CharField(max_length=255, blank=True, null=True)
-    con_p_connections_plan_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ma_mount_cstm'
-
-
-class MaMountPoPo1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ma_mount_po_po_1ma_mount_ida = models.CharField(max_length=36, blank=True, null=True)
-    ma_mount_po_po_1po_po_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ma_mount_po_po_1_c'
-
-
-class Meetings(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    location = models.CharField(max_length=50, blank=True, null=True)
-    password = models.CharField(max_length=50, blank=True, null=True)
-    join_url = models.CharField(max_length=200, blank=True, null=True)
-    host_url = models.CharField(max_length=400, blank=True, null=True)
-    displayed_url = models.CharField(max_length=400, blank=True, null=True)
-    creator = models.CharField(max_length=50, blank=True, null=True)
-    external_id = models.CharField(max_length=50, blank=True, null=True)
-    duration_hours = models.IntegerField(blank=True, null=True)
-    duration_minutes = models.IntegerField(blank=True, null=True)
-    date_start = models.DateTimeField(blank=True, null=True)
-    date_end = models.DateTimeField(blank=True, null=True)
-    parent_type = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    type = models.CharField(max_length=255, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-    reminder_time = models.IntegerField(blank=True, null=True)
-    email_reminder_time = models.IntegerField(blank=True, null=True)
-    email_reminder_sent = models.IntegerField(blank=True, null=True)
-    outlook_id = models.CharField(max_length=255, blank=True, null=True)
-    sequence = models.IntegerField(blank=True, null=True)
-    repeat_type = models.CharField(max_length=36, blank=True, null=True)
-    repeat_interval = models.IntegerField(blank=True, null=True)
-    repeat_dow = models.CharField(max_length=7, blank=True, null=True)
-    repeat_until = models.DateField(blank=True, null=True)
-    repeat_count = models.IntegerField(blank=True, null=True)
-    repeat_parent_id = models.CharField(max_length=36, blank=True, null=True)
-    recurring_source = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'meetings'
-
-
-class MeetingsContacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    meeting_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    required = models.CharField(max_length=1, blank=True, null=True)
-    accept_status = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'meetings_contacts'
-
-
-class MeetingsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'meetings_cstm'
-
-
-class MeetingsLeads(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    meeting_id = models.CharField(max_length=36, blank=True, null=True)
-    lead_id = models.CharField(max_length=36, blank=True, null=True)
-    required = models.CharField(max_length=1, blank=True, null=True)
-    accept_status = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'meetings_leads'
-
-
-class MeetingsUsers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    meeting_id = models.CharField(max_length=36, blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    required = models.CharField(max_length=1, blank=True, null=True)
-    accept_status = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'meetings_users'
-
-
-class NodeNode(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    organization = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'node_node'
-
-
-class NodeNodeAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'node_node_audit'
-
-
-class NodeNodeDocumentsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    node_node_documentsnode_node_ida = models.CharField(max_length=36, blank=True, null=True)
-    node_node_documentsdocuments_idb = models.CharField(max_length=36, blank=True, null=True)
-    document_revision_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'node_node_documents_c'
-
-
-class NodeNodeNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    node_node_notesnode_node_ida = models.CharField(max_length=36, blank=True, null=True)
-    node_node_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'node_node_notes_c'
-
-
-class NodeNodeProjectC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    node_node_projectnode_node_ida = models.CharField(max_length=36, blank=True, null=True)
-    node_node_projectproject_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'node_node_project_c'
-
-
-class NodeNodeTasksC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    node_node_tasksnode_node_ida = models.CharField(max_length=36, blank=True, null=True)
-    node_node_taskstasks_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'node_node_tasks_c'
-
-
-class Notes(models.Model):
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    parent_type = models.CharField(max_length=255, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    portal_flag = models.IntegerField(blank=True, null=True)
-    embed_flag = models.IntegerField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'notes'
-
-
-class NotesCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    peeve_c = models.IntegerField(blank=True, null=True)
-    move_c = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'notes_cstm'
-
-
-class OauthConsumer(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    c_key = models.CharField(unique=True, max_length=255, blank=True, null=True)
-    c_secret = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'oauth_consumer'
-
-
-class OauthNonce(models.Model):
-    conskey = models.CharField(primary_key=True, max_length=32)
-    nonce = models.CharField(max_length=32)
-    nonce_ts = models.BigIntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'oauth_nonce'
-        unique_together = (('conskey', 'nonce'),)
-
-
-class OauthTokens(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    secret = models.CharField(max_length=32, blank=True, null=True)
-    tstate = models.CharField(max_length=1, blank=True, null=True)
-    consumer = models.CharField(max_length=36)
-    token_ts = models.BigIntegerField(blank=True, null=True)
-    verify = models.CharField(max_length=32, blank=True, null=True)
-    deleted = models.IntegerField()
-    callback_url = models.CharField(max_length=255, blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'oauth_tokens'
-        unique_together = (('id', 'deleted'),)
-
-
-class ObjNNetObj(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj'
-
-
-class ObjNNetObjAccounts1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    obj_n_net_obj_accounts_1obj_n_net_obj_ida = models.CharField(max_length=36, blank=True, null=True)
-    obj_n_net_obj_accounts_1accounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_accounts_1_c'
-
-
-class ObjNNetObjAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_audit'
-
-
-class ObjNNetObjCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    num_obj_c = models.IntegerField(blank=True, null=True)
-    address_obj_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_obj_c = models.CharField(max_length=255, blank=True, null=True)
-    address_map_obj_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_obj2_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_obj3_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_obj4_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_obj5_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_obj6_c = models.CharField(max_length=255, blank=True, null=True)
-    devices_for_audit_c = models.TextField(blank=True, null=True)
-    status_obj_c = models.CharField(max_length=100, blank=True, null=True)
-    photo_others_c = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_cstm'
-
-
-class ObjNNetObjDocuments1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    obj_n_net_obj_documents_1obj_n_net_obj_ida = models.CharField(max_length=36, blank=True, null=True)
-    obj_n_net_obj_documents_1documents_idb = models.CharField(max_length=36, blank=True, null=True)
-    document_revision_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_documents_1_c'
-
-
-class ObjNNetObjPoPo1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    obj_n_net_obj_po_po_1obj_n_net_obj_ida = models.CharField(max_length=36, blank=True, null=True)
-    obj_n_net_obj_po_po_1po_po_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_po_po_1_c'
-
-
-class ObjNNetObjRaActions1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    obj_n_net_obj_ra_actions_1obj_n_net_obj_ida = models.CharField(max_length=36, blank=True, null=True)
-    obj_n_net_obj_ra_actions_1ra_actions_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_ra_actions_1_c'
-
-
-class ObjNNetObjRaClaim1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    obj_n_net_obj_ra_claim_1obj_n_net_obj_ida = models.CharField(max_length=36, blank=True, null=True)
-    obj_n_net_obj_ra_claim_1ra_claim_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_ra_claim_1_c'
-
-
-class ObjNNetObjSecuritygroups1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    obj_n_net_obj_securitygroups_1obj_n_net_obj_ida = models.CharField(max_length=36, blank=True, null=True)
-    obj_n_net_obj_securitygroups_1securitygroups_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'obj_n_net_obj_securitygroups_1_c'
-
-
-class Opportunities(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_type = models.CharField(max_length=255, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    lead_source = models.CharField(max_length=100, blank=True, null=True)
-    amount = models.FloatField(blank=True, null=True)
-    amount_usdollar = models.FloatField(blank=True, null=True)
-    currency_id = models.CharField(max_length=36, blank=True, null=True)
-    date_closed = models.DateField(blank=True, null=True)
-    next_step = models.CharField(max_length=100, blank=True, null=True)
-    sales_stage = models.CharField(max_length=255, blank=True, null=True)
-    probability = models.FloatField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'opportunities'
-
-
-class OpportunitiesAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'opportunities_audit'
-
-
-class OpportunitiesContacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_role = models.CharField(max_length=50, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'opportunities_contacts'
-
-
-class OpportunitiesCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    wifi_bandwidth_opp_c = models.IntegerField(blank=True, null=True)
-    internet_opp_c = models.IntegerField(blank=True, null=True)
-    opp_date_opp_c = models.DateField(blank=True, null=True)
-    phone_opp_c = models.IntegerField(blank=True, null=True)
-    pdcpgi_opp_c = models.IntegerField(blank=True, null=True)
-    pvk_opp_c = models.IntegerField(blank=True, null=True)
-    inet_bandwidth_opp_c = models.FloatField(blank=True, null=True)
-    packet_opp_c = models.IntegerField(blank=True, null=True)
-    vats_opp_c = models.IntegerField(blank=True, null=True)
-    tv_opp_c = models.IntegerField(blank=True, null=True)
-    cctv_opp_c = models.IntegerField(blank=True, null=True)
-    ip_cost_opp_c = models.IntegerField(blank=True, null=True)
-    closed_opp_c = models.IntegerField(blank=True, null=True)
-    blockletter_opp_c = models.IntegerField(blank=True, null=True)
-    date_blockletter_opp_c = models.DateField(blank=True, null=True)
-    close_date_c = models.DateField(blank=True, null=True)
-    date_apply_c = models.DateField(blank=True, null=True)
-    organization_opp_c = models.CharField(max_length=100, blank=True, null=True)
-    code_fineko_c = models.IntegerField(blank=True, null=True)
-    type_cost_opp_c = models.CharField(max_length=100, blank=True, null=True)
-    billing_id_opp_c = models.IntegerField(blank=True, null=True)
-    cost_pdcpgi_opp_c = models.IntegerField(blank=True, null=True)
-    quantity_phone_lines_c = models.IntegerField(blank=True, null=True)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'opportunities_cstm'
-
-
-class OutboundEmail(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    type = models.CharField(max_length=15, blank=True, null=True)
-    user_id = models.CharField(max_length=36)
-    mail_sendtype = models.CharField(max_length=8, blank=True, null=True)
-    mail_smtptype = models.CharField(max_length=20, blank=True, null=True)
-    mail_smtpserver = models.CharField(max_length=100, blank=True, null=True)
-    mail_smtpport = models.IntegerField(blank=True, null=True)
-    mail_smtpuser = models.CharField(max_length=100, blank=True, null=True)
-    mail_smtppass = models.CharField(max_length=100, blank=True, null=True)
-    mail_smtpauth_req = models.IntegerField(blank=True, null=True)
-    mail_smtpssl = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'outbound_email'
-
-
-class PaPlanAccess(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_plan = models.DateField(blank=True, null=True)
-    date_complete = models.DateField(blank=True, null=True)
-    status_plan_access = models.CharField(max_length=100, blank=True, null=True)
-    type_plan_access = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access'
-
-
-class PaPlanAccessAccFacilityC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    pa_plan_access_acc_facilitypa_plan_access_ida = models.CharField(max_length=36, blank=True, null=True)
-    pa_plan_access_acc_facilityacc_facility_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access_acc_facility_c'
-
-
-class PaPlanAccessAccRequisitionC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    pa_plan_access_acc_requisitionpa_plan_access_ida = models.CharField(max_length=36, blank=True, null=True)
-    pa_plan_access_acc_requisitionacc_requisition_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access_acc_requisition_c'
-
-
-class PaPlanAccessAccUkC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    pa_plan_access_acc_ukpa_plan_access_ida = models.CharField(max_length=36, blank=True, null=True)
-    pa_plan_access_acc_ukacc_uk_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access_acc_uk_c'
-
-
-class PaPlanAccessAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access_audit'
-
-
-class PaPlanAccessCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    type_request_c = models.CharField(max_length=100, blank=True, null=True)
-    area_c = models.CharField(max_length=255, blank=True, null=True)
-    type_account_c = models.CharField(max_length=100, blank=True, null=True)
-    acc_uk_id_c = models.CharField(max_length=36, blank=True, null=True)
-    acc_requisition_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access_cstm'
-
-
-class PaPlanAccessNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    pa_plan_access_notespa_plan_access_ida = models.CharField(max_length=36, blank=True, null=True)
-    pa_plan_access_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pa_plan_access_notes_c'
-
-
-class PhmoPhoto(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    file_ext = models.CharField(max_length=100, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    active_date = models.DateField(blank=True, null=True)
-    exp_date = models.DateField(blank=True, null=True)
-    category_id = models.CharField(max_length=100, blank=True, null=True)
-    subcategory_id = models.CharField(max_length=100, blank=True, null=True)
-    status_id = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'phmo_photo'
-
-
-class PhmoPhotoAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'phmo_photo_audit'
-
-
-class PhmoPhotoCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    photo_ph_mounts_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'phmo_photo_cstm'
-
-
-class PhysiCasesP(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    case_numb = models.IntegerField(blank=True, null=True)
-    date_case = models.DateTimeField(blank=True, null=True)
-    date_close = models.DateTimeField(blank=True, null=True)
-    resolution = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    priority = models.CharField(max_length=100, blank=True, null=True)
-    physi_phisic_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_cases_p'
-
-
-class PhysiCasesPAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_cases_p_audit'
-
-
-class PhysiCasesPNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_cases_p_notesphysi_cases_p_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_cases_p_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_cases_p_notes_c'
-
-
-class PhysiContractNetwork(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_contr = models.DateField(blank=True, null=True)
-    organization = models.CharField(max_length=100, blank=True, null=True)
-    bandwidth = models.CharField(max_length=255, blank=True, null=True)
-    cost = models.IntegerField(blank=True, null=True)
-    block = models.IntegerField(blank=True, null=True)
-    tarif = models.TextField(blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_contract_network'
-
-
-class PhysiContractNetworkAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_contract_network_audit'
-
-
-class PhysiContractNetworkNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_contract_network_notesphysi_contract_network_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_contract_network_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_contract_network_notes_c'
-
-
-class PhysiContractPhone(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_contr = models.DateField(blank=True, null=True)
-    cost = models.CharField(max_length=255, blank=True, null=True)
-    tarif = models.TextField(blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_contract_phone'
-
-
-class PhysiContractPhoneAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_contract_phone_audit'
-
-
-class PhysiContractPhoneNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_contract_phone_notesphysi_contract_phone_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_contract_phone_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_contract_phone_notes_c'
-
-
-class PhysiPhisic(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    phone = models.CharField(max_length=255, blank=True, null=True)
-    mobile = models.CharField(max_length=255, blank=True, null=True)
-    email = models.CharField(max_length=255, blank=True, null=True)
-    serial_passport = models.CharField(max_length=5, blank=True, null=True)
-    number_passport = models.CharField(max_length=6, blank=True, null=True)
-    issue_passport = models.CharField(max_length=255, blank=True, null=True)
-    date_passport = models.DateField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic'
-
-
-class PhysiPhisicAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic_audit'
-
-
-class PhysiPhisicCallsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_phisic_callsphysi_phisic_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_phisic_callscalls_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic_calls_c'
-
-
-class PhysiPhisicNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_phisic_notesphysi_phisic_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_phisic_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic_notes_c'
-
-
-class PhysiPhisicPhysiCasesPC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_phisic_physi_cases_pphysi_phisic_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_phisic_physi_cases_pphysi_cases_p_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic_physi_cases_p_c'
-
-
-class PhysiPhisicPhysiContractNetworkC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_phisic_physi_contract_networkphysi_phisic_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_phisic_physi_contract_networkphysi_contract_network_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic_physi_contract_network_c'
-
-
-class PhysiPhisicPhysiContractPhoneC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    physi_phisic_physi_contract_phonephysi_phisic_ida = models.CharField(max_length=36, blank=True, null=True)
-    physi_phisic_physi_contract_phonephysi_contract_phone_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_phisic_physi_contract_phone_c'
-
-
-class PhysiRequest(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    file_ext = models.CharField(max_length=100, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    active_date = models.DateField(blank=True, null=True)
-    exp_date = models.DateField(blank=True, null=True)
-    category_id = models.CharField(max_length=100, blank=True, null=True)
-    subcategory_id = models.CharField(max_length=100, blank=True, null=True)
-    status_id = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_request'
-
-
-class PhysiRequestAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'physi_request_audit'
-
-
-class PoPo(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    parent_type = models.CharField(max_length=255, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'po_po'
-
-
-class PoPoAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'po_po_audit'
-
-
-class PoPoConPConnectionsPlan1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    po_po_con_p_connections_plan_1po_po_ida = models.CharField(max_length=36, blank=True, null=True)
-    po_po_con_p_connections_plan_1con_p_connections_plan_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'po_po_con_p_connections_plan_1_c'
-
-
-class PoPoCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    invnum_c = models.CharField(max_length=255, blank=True, null=True)
-    status_c = models.CharField(max_length=100, blank=True, null=True)
-    hardware_types_c = models.CharField(max_length=100, blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'po_po_cstm'
-
-
-class PoPoNotes1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    po_po_notes_1po_po_ida = models.CharField(max_length=36, blank=True, null=True)
-    po_po_notes_1notes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'po_po_notes_1_c'
-
-
-class PoPoRepRepairs1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    po_po_rep_repairs_1po_po_ida = models.CharField(max_length=36, blank=True, null=True)
-    po_po_rep_repairs_1rep_repairs_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'po_po_rep_repairs_1_c'
-
-
-class Project(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    estimated_start_date = models.DateField(blank=True, null=True)
-    estimated_end_date = models.DateField(blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    priority = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'project'
-
-
-class ProjectCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    date_close_c = models.DateField(blank=True, null=True)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'project_cstm'
-
-
-class ProjectTask(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    project_id = models.CharField(max_length=36)
-    project_task_id = models.IntegerField(blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    status = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    predecessors = models.TextField(blank=True, null=True)
-    date_start = models.DateField(blank=True, null=True)
-    time_start = models.IntegerField(blank=True, null=True)
-    time_finish = models.IntegerField(blank=True, null=True)
-    date_finish = models.DateField(blank=True, null=True)
-    duration = models.IntegerField(blank=True, null=True)
-    duration_unit = models.TextField(blank=True, null=True)
-    actual_duration = models.IntegerField(blank=True, null=True)
-    percent_complete = models.IntegerField(blank=True, null=True)
-    date_due = models.DateField(blank=True, null=True)
-    time_due = models.TimeField(blank=True, null=True)
-    parent_task_id = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    priority = models.CharField(max_length=255, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    milestone_flag = models.IntegerField(blank=True, null=True)
-    order_number = models.IntegerField(blank=True, null=True)
-    task_number = models.IntegerField(blank=True, null=True)
-    estimated_effort = models.IntegerField(blank=True, null=True)
-    actual_effort = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    utilization = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'project_task'
-
-
-class ProjectTaskAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'project_task_audit'
-
-
-class ProjectsAccounts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    account_id = models.CharField(max_length=36, blank=True, null=True)
-    project_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projects_accounts'
-
-
-class ProjectsBugs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    bug_id = models.CharField(max_length=36, blank=True, null=True)
-    project_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projects_bugs'
-
-
-class ProjectsCases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    case_id = models.CharField(max_length=36, blank=True, null=True)
-    project_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projects_cases'
-
-
-class ProjectsContacts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    project_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projects_contacts'
-
-
-class ProjectsOpportunities(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    opportunity_id = models.CharField(max_length=36, blank=True, null=True)
-    project_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projects_opportunities'
-
-
-class ProjectsProducts(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    product_id = models.CharField(max_length=36, blank=True, null=True)
-    project_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projects_products'
-
-
-class ProjecttaskContacts1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    projecttask_contacts_1projecttask_ida = models.CharField(max_length=36, blank=True, null=True)
-    projecttask_contacts_1contacts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'projecttask_contacts_1_c'
-
-
-class ProspectListCampaigns(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    prospect_list_id = models.CharField(max_length=36, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'prospect_list_campaigns'
-
-
-class ProspectLists(models.Model):
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    list_type = models.CharField(max_length=100, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    domain_name = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'prospect_lists'
-
-
-class ProspectListsProspects(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    prospect_list_id = models.CharField(max_length=36, blank=True, null=True)
-    related_id = models.CharField(max_length=36, blank=True, null=True)
-    related_type = models.CharField(max_length=25, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'prospect_lists_prospects'
-
-
-class Prospects(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    salutation = models.CharField(max_length=255, blank=True, null=True)
-    first_name = models.CharField(max_length=100, blank=True, null=True)
-    last_name = models.CharField(max_length=100, blank=True, null=True)
-    title = models.CharField(max_length=100, blank=True, null=True)
-    department = models.CharField(max_length=255, blank=True, null=True)
-    do_not_call = models.IntegerField(blank=True, null=True)
-    phone_home = models.CharField(max_length=100, blank=True, null=True)
-    phone_mobile = models.CharField(max_length=100, blank=True, null=True)
-    phone_work = models.CharField(max_length=100, blank=True, null=True)
-    phone_other = models.CharField(max_length=100, blank=True, null=True)
-    phone_fax = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_street = models.CharField(max_length=150, blank=True, null=True)
-    primary_address_city = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_state = models.CharField(max_length=100, blank=True, null=True)
-    primary_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    primary_address_country = models.CharField(max_length=255, blank=True, null=True)
-    alt_address_street = models.CharField(max_length=150, blank=True, null=True)
-    alt_address_city = models.CharField(max_length=100, blank=True, null=True)
-    alt_address_state = models.CharField(max_length=100, blank=True, null=True)
-    alt_address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    alt_address_country = models.CharField(max_length=255, blank=True, null=True)
-    assistant = models.CharField(max_length=75, blank=True, null=True)
-    assistant_phone = models.CharField(max_length=100, blank=True, null=True)
-    tracker_key = models.IntegerField()
-    birthdate = models.DateField(blank=True, null=True)
-    lead_id = models.CharField(max_length=36, blank=True, null=True)
-    account_name = models.CharField(max_length=150, blank=True, null=True)
-    campaign_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'prospects'
-
-
-class ProspectsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    jjwg_maps_lng_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_lat_c = models.FloatField(blank=True, null=True)
-    jjwg_maps_geocode_status_c = models.CharField(max_length=255, blank=True, null=True)
-    jjwg_maps_address_c = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'prospects_cstm'
-
-
-class PurPurchases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    grouppur = models.CharField(max_length=100, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    date_pur = models.DateField(blank=True, null=True)
-    purpose = models.TextField(blank=True, null=True)
-    cost = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pur_purchases'
-
-
-class PurPurchasesAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pur_purchases_audit'
-
-
-class PurPurchasesNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    pur_purchases_notespur_purchases_ida = models.CharField(max_length=36, blank=True, null=True)
-    pur_purchases_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'pur_purchases_notes_c'
-
-
-class QuQuestion(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-    date_question = models.DateField(blank=True, null=True)
-    user_accounts = models.CharField(max_length=255, blank=True, null=True)
-    service_problem = models.TextField(blank=True, null=True)
-    support_calls = models.CharField(max_length=100, blank=True, null=True)
-    support = models.CharField(max_length=100, blank=True, null=True)
-    install = models.CharField(max_length=100, blank=True, null=True)
-    sell = models.CharField(max_length=100, blank=True, null=True)
-    quality_client = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'qu_question'
-
-
-class QuQuestionAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    qu_question_accountsqu_question_ida = models.CharField(max_length=36, blank=True, null=True)
-    qu_question_accountsaccounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'qu_question_accounts_c'
-
-
-class QuQuestionAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'qu_question_audit'
-
-
-class RaActions(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    planactiondate = models.DateTimeField(blank=True, null=True)
-    actiondate = models.DateTimeField(blank=True, null=True)
-    planduration = models.IntegerField(blank=True, null=True)
-    duration = models.IntegerField(blank=True, null=True)
-    noservice = models.IntegerField(blank=True, null=True)
-    plannoservice = models.IntegerField(blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    goal = models.TextField(blank=True, null=True)
-    comment = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions'
-
-
-class RaActionsAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_actions_accountsra_actions_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_actions_accountsaccounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions_accounts_c'
-
-
-class RaActionsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions_audit'
-
-
-class RaActionsCasesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_actions_casesra_actions_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_actions_casescases_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions_cases_c'
-
-
-class RaActionsNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_actions_notesra_actions_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_actions_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions_notes_c'
-
-
-class RaActionsSecuritygroups1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_actions_securitygroups_1ra_actions_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_actions_securitygroups_1securitygroups_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions_securitygroups_1_c'
-
-
-class RaActionsTasksC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_actions_tasksra_actions_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_actions_taskstasks_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_actions_tasks_c'
-
-
-class RaClaim(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_event = models.DateField(blank=True, null=True)
-    group_onus = models.CharField(max_length=100, blank=True, null=True)
-    volume = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim'
-
-
-class RaClaimAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim_audit'
-
-
-class RaClaimBugs1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_claim_bugs_1ra_claim_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_claim_bugs_1bugs_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim_bugs_1_c'
-
-
-class RaClaimCasesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_claim_casesra_claim_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_claim_casescases_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim_cases_c'
-
-
-class RaClaimNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_claim_notesra_claim_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_claim_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim_notes_c'
-
-
-class RaClaimPhysiCasesPC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_claim_physi_cases_pra_claim_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_claim_physi_cases_pphysi_cases_p_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim_physi_cases_p_c'
-
-
-class RaClaimRaActionsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_claim_ra_actionsra_claim_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_claim_ra_actionsra_actions_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_claim_ra_actions_c'
-
-
-class RaSurvey(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    contact = models.CharField(max_length=255, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    description_survey = models.TextField(blank=True, null=True)
-    date_request = models.DateField(blank=True, null=True)
-    addressmap = models.CharField(max_length=255, blank=True, null=True)
-    date_survey = models.DateField(blank=True, null=True)
-    resolution = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey'
-
-
-class RaSurveyAccRequisition1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_survey_acc_requisition_1ra_survey_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_survey_acc_requisition_1acc_requisition_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey_acc_requisition_1_c'
-
-
-class RaSurveyAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_survey_accountsra_survey_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_survey_accountsaccounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey_accounts_c'
-
-
-class RaSurveyAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey_audit'
-
-
-class RaSurveyCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    source_inf_c = models.TextField(blank=True, null=True)
-    permit_installation_c = models.CharField(max_length=100, blank=True, null=True)
-    ess_comment_c = models.TextField(blank=True, null=True)
-    date_installation_c = models.DateField(blank=True, null=True)
-    position_c = models.CharField(max_length=50, blank=True, null=True)
-    maps_pos_c = models.CharField(max_length=255, blank=True, null=True)
-    status_rs_c = models.CharField(max_length=100, blank=True, null=True)
-    comment_rs_c = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey_cstm'
-
-
-class RaSurveyNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_survey_notesra_survey_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_survey_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey_notes_c'
-
-
-class RaSurveyPhysiPhisicC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    ra_survey_physi_phisicra_survey_ida = models.CharField(max_length=36, blank=True, null=True)
-    ra_survey_physi_phisicphysi_phisic_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ra_survey_physi_phisic_c'
-
-
-class Relationships(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    relationship_name = models.CharField(max_length=150, blank=True, null=True)
-    lhs_module = models.CharField(max_length=100, blank=True, null=True)
-    lhs_table = models.CharField(max_length=64, blank=True, null=True)
-    lhs_key = models.CharField(max_length=64, blank=True, null=True)
-    rhs_module = models.CharField(max_length=100, blank=True, null=True)
-    rhs_table = models.CharField(max_length=64, blank=True, null=True)
-    rhs_key = models.CharField(max_length=64, blank=True, null=True)
-    join_table = models.CharField(max_length=128, blank=True, null=True)
-    join_key_lhs = models.CharField(max_length=128, blank=True, null=True)
-    join_key_rhs = models.CharField(max_length=128, blank=True, null=True)
-    relationship_type = models.CharField(max_length=64, blank=True, null=True)
-    relationship_role_column = models.CharField(max_length=64, blank=True, null=True)
-    relationship_role_column_value = models.CharField(max_length=50, blank=True, null=True)
-    reverse = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'relationships'
-
-
-class Releases(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    list_order = models.IntegerField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'releases'
-
-
-class RepRepairs(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_repairs'
-
-
-class RepRepairsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_repairs_audit'
-
-
-class RepRepairsBugs1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    rep_repairs_bugs_1rep_repairs_ida = models.CharField(max_length=36, blank=True, null=True)
-    rep_repairs_bugs_1bugs_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_repairs_bugs_1_c'
-
-
-class RepRepairsCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-    user_id1_c = models.CharField(max_length=36, blank=True, null=True)
-    date_of_completion_c = models.DateField(blank=True, null=True)
-    cat_work_c = models.CharField(max_length=100, blank=True, null=True)
-    account_id_c = models.CharField(max_length=36, blank=True, null=True)
-    address_c = models.CharField(max_length=255, blank=True, null=True)
-    check_ovm_c = models.IntegerField(blank=True, null=True)
-    photo_one_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_two_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_three_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_four_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_five_c = models.CharField(max_length=255, blank=True, null=True)
-    photo_six_c = models.CharField(max_length=255, blank=True, null=True)
-    contacts_c = models.CharField(max_length=255, blank=True, null=True)
-    time_c = models.CharField(max_length=255, blank=True, null=True)
-    user_id2_c = models.CharField(max_length=36, blank=True, null=True)
-    status_c = models.CharField(max_length=100, blank=True, null=True)
-    comment_c = models.TextField(blank=True, null=True)
-    new_cat_work_c = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_repairs_cstm'
-
-
-class RepRepairsNotes1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    rep_repairs_notes_1rep_repairs_ida = models.CharField(max_length=36, blank=True, null=True)
-    rep_repairs_notes_1notes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_repairs_notes_1_c'
-
-
-class RepTechnicalConnections(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_work = models.DateField(blank=True, null=True)
-    type = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_technical_connections'
-
-
-class RepTechnicalConnectionsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'rep_technical_connections_audit'
-
-
-class Roles(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=150, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    modules = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'roles'
-
-
-class RolesModules(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    role_id = models.CharField(max_length=36, blank=True, null=True)
-    module_id = models.CharField(max_length=36, blank=True, null=True)
-    allow = models.IntegerField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'roles_modules'
-
-
-class RolesUsers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    role_id = models.CharField(max_length=36, blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'roles_users'
-
-
-class SavedSearch(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=150, blank=True, null=True)
-    search_module = models.CharField(max_length=150, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    contents = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'saved_search'
-
-
-class Schedulers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    job = models.CharField(max_length=255, blank=True, null=True)
-    date_time_start = models.DateTimeField(blank=True, null=True)
-    date_time_end = models.DateTimeField(blank=True, null=True)
-    job_interval = models.CharField(max_length=100, blank=True, null=True)
-    time_from = models.TimeField(blank=True, null=True)
-    time_to = models.TimeField(blank=True, null=True)
-    last_run = models.DateTimeField(blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    catch_up = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'schedulers'
-
-
-class Securitygroups(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    noninheritable = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'securitygroups'
-
-
-class SecuritygroupsAclRoles(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    securitygroup_id = models.CharField(max_length=36, blank=True, null=True)
-    role_id = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'securitygroups_acl_roles'
-
-
-class SecuritygroupsAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'securitygroups_audit'
-
-
-class SecuritygroupsDefault(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    securitygroup_id = models.CharField(max_length=36, blank=True, null=True)
-    module = models.CharField(max_length=50, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'securitygroups_default'
-
-
-class SecuritygroupsRecords(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    securitygroup_id = models.CharField(max_length=36, blank=True, null=True)
-    record_id = models.CharField(max_length=36, blank=True, null=True)
-    module = models.CharField(max_length=36, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'securitygroups_records'
-
-
-class SecuritygroupsUsers(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    securitygroup_id = models.CharField(max_length=36, blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    noninheritable = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'securitygroups_users'
-
-
-class SkSketch(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    document_name = models.CharField(max_length=255, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    file_ext = models.CharField(max_length=100, blank=True, null=True)
-    file_mime_type = models.CharField(max_length=100, blank=True, null=True)
-    active_date = models.DateField(blank=True, null=True)
-    exp_date = models.DateField(blank=True, null=True)
-    category_id = models.CharField(max_length=100, blank=True, null=True)
-    subcategory_id = models.CharField(max_length=100, blank=True, null=True)
-    status_id = models.CharField(max_length=100, blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
-    status_requisition = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sk_sketch'
-
-
-class SkSketchAccRequisitionC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    sk_sketch_acc_requisitionsk_sketch_ida = models.CharField(max_length=36, blank=True, null=True)
-    sk_sketch_acc_requisitionacc_requisition_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sk_sketch_acc_requisition_c'
-
-
-class SkSketchAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sk_sketch_audit'
-
-
-class SkSketchRaSurveyC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    sk_sketch_ra_surveysk_sketch_ida = models.CharField(max_length=36, blank=True, null=True)
-    sk_sketch_ra_surveyra_survey_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sk_sketch_ra_survey_c'
-
-
-class Sugarfeed(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.CharField(max_length=255, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    related_module = models.CharField(max_length=100, blank=True, null=True)
-    related_id = models.CharField(max_length=36, blank=True, null=True)
-    link_url = models.CharField(max_length=255, blank=True, null=True)
-    link_type = models.CharField(max_length=30, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'sugarfeed'
-
-
-class Tasks(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    date_due_flag = models.IntegerField(blank=True, null=True)
-    date_due = models.DateTimeField(blank=True, null=True)
-    date_start_flag = models.IntegerField(blank=True, null=True)
-    date_start = models.DateTimeField(blank=True, null=True)
-    parent_type = models.CharField(max_length=255, blank=True, null=True)
-    parent_id = models.CharField(max_length=36, blank=True, null=True)
-    contact_id = models.CharField(max_length=36, blank=True, null=True)
-    priority = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tasks'
-
-
-class TasksAccounts1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tasks_accounts_1tasks_ida = models.CharField(max_length=36, blank=True, null=True)
-    tasks_accounts_1accounts_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tasks_accounts_1_c'
-
-
-class TasksCalls1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tasks_calls_1tasks_ida = models.CharField(max_length=36, blank=True, null=True)
-    tasks_calls_1calls_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tasks_calls_1_c'
-
-
-class TcClosecontract(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    dateclose = models.DateField(blank=True, null=True)
-    dateperform = models.DateField(blank=True, null=True)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id_c = models.CharField(max_length=36, blank=True, null=True)
-    note_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_closecontract'
-
-
-class TcClosecontractAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_closecontract_audit'
-
-
-class TcClosecontractNotesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_closecontract_notestc_closecontract_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_closecontract_notesnotes_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_closecontract_notes_c'
-
-
-class TcRenamecontract(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    daterename = models.DateField(blank=True, null=True)
-    dateperform = models.DateField(blank=True, null=True)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract'
-
-
-class TcRenamecontractAccounts1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_renamecontract_accounts_1accounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_renamecontract_accounts_1tc_renamecontract_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_accounts_1_c'
-
-
-class TcRenamecontractAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_renamecontract_accountsaccounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_renamecontract_accountstc_renamecontract_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_accounts_c'
-
-
-class TcRenamecontractAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_audit'
-
-
-class TcRenamecontractCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    status_c = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_cstm'
-
-
-class TcRenamecontractOpportunities1C(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_renamecontract_opportunities_1opportunities_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_renamecontract_opportunities_1tc_renamecontract_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_opportunities_1_c'
-
-
-class TcRenamecontractOpportunitiesC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_renamecontract_opportunitiesopportunities_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_renamecontract_opportunitiestc_renamecontract_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_opportunities_c'
-
-
-class TcRenamecontractTcTarifchangephoneC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_renamecontract_tc_tarifchangephonetc_renamecontract_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_renamecontract_tc_tarifchangephonetc_tarifchangephone_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_tc_tarifchangephone_c'
-
-
-class TcRenamecontractTcTariffchangeinetC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_renamecontract_tc_tariffchangeinettc_renamecontract_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_renamecontract_tc_tariffchangeinettc_tariffchangeinet_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_renamecontract_tc_tariffchangeinet_c'
-
-
-class TcTarifchangephone(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    datechange = models.DateField(blank=True, null=True)
-    dateperform = models.DateField(blank=True, null=True)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-    oldservice = models.TextField(blank=True, null=True)
-    newservice = models.TextField(blank=True, null=True)
-    opportunity_id_c = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id1_c = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tarifchangephone'
-
-
-class TcTarifchangephoneAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_tarifchangephone_accountsaccounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_tarifchangephone_accountstc_tarifchangephone_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tarifchangephone_accounts_c'
-
-
-class TcTarifchangephoneAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tarifchangephone_audit'
-
-
-class TcTarifchangephoneCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    status_c = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tarifchangephone_cstm'
-
-
-class TcTariffchangeinet(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    oldbandwith = models.FloatField(blank=True, null=True)
-    newbandwith = models.FloatField(blank=True, null=True)
-    oldcost = models.IntegerField(blank=True, null=True)
-    newcost = models.IntegerField(blank=True, null=True)
-    datechange = models.DateField(blank=True, null=True)
-    daterealchange = models.DateField(blank=True, null=True)
-    checked = models.IntegerField(blank=True, null=True)
-    datechecked = models.DateField(blank=True, null=True)
-    user_id_c = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id_c = models.CharField(max_length=36, blank=True, null=True)
-    opportunity_id1_c = models.CharField(max_length=36, blank=True, null=True)
-    checkcomment = models.TextField(blank=True, null=True)
-    user_id1_c = models.CharField(max_length=36, blank=True, null=True)
-    oldlimit = models.IntegerField(blank=True, null=True)
-    newlimit = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tariffchangeinet'
-
-
-class TcTariffchangeinetAccountsC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    tc_tariffchangeinet_accountsaccounts_ida = models.CharField(max_length=36, blank=True, null=True)
-    tc_tariffchangeinet_accountstc_tariffchangeinet_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tariffchangeinet_accounts_c'
-
-
-class TcTariffchangeinetAudit(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    parent_id = models.CharField(max_length=36)
-    date_created = models.DateTimeField(blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    field_name = models.CharField(max_length=100, blank=True, null=True)
-    data_type = models.CharField(max_length=100, blank=True, null=True)
-    before_value_string = models.CharField(max_length=255, blank=True, null=True)
-    after_value_string = models.CharField(max_length=255, blank=True, null=True)
-    before_value_text = models.TextField(blank=True, null=True)
-    after_value_text = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tariffchangeinet_audit'
-
-
-class TcTariffchangeinetCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    status_c = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tc_tariffchangeinet_cstm'
-
-
-class Tracker(models.Model):
-    monitor_id = models.CharField(max_length=36)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    module_name = models.CharField(max_length=255, blank=True, null=True)
-    item_id = models.CharField(max_length=36, blank=True, null=True)
-    item_summary = models.CharField(max_length=255, blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    action = models.CharField(max_length=255, blank=True, null=True)
-    session_id = models.CharField(max_length=36, blank=True, null=True)
-    visible = models.IntegerField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tracker'
-
-
-class UpgradeHistory(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    md5sum = models.CharField(unique=True, max_length=32, blank=True, null=True)
-    type = models.CharField(max_length=30, blank=True, null=True)
-    status = models.CharField(max_length=50, blank=True, null=True)
-    version = models.CharField(max_length=64, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    id_name = models.CharField(max_length=255, blank=True, null=True)
-    manifest = models.TextField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    enabled = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'upgrade_history'
-
-
-class UserPreferences(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    category = models.CharField(max_length=50, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    contents = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'user_preferences'
-
-
-class Users(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    user_name = models.CharField(max_length=60, blank=True, null=True)
-    user_hash = models.CharField(max_length=255, blank=True, null=True)
-    system_generated_password = models.IntegerField(blank=True, null=True)
-    pwd_last_changed = models.DateTimeField(blank=True, null=True)
-    authenticate_id = models.CharField(max_length=100, blank=True, null=True)
-    sugar_login = models.IntegerField(blank=True, null=True)
-    first_name = models.CharField(max_length=30, blank=True, null=True)
-    last_name = models.CharField(max_length=30, blank=True, null=True)
-    is_admin = models.IntegerField(blank=True, null=True)
-    external_auth_only = models.IntegerField(blank=True, null=True)
-    receive_notifications = models.IntegerField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    title = models.CharField(max_length=50, blank=True, null=True)
-    department = models.CharField(max_length=50, blank=True, null=True)
-    phone_home = models.CharField(max_length=50, blank=True, null=True)
-    phone_mobile = models.CharField(max_length=50, blank=True, null=True)
-    phone_work = models.CharField(max_length=50, blank=True, null=True)
-    phone_other = models.CharField(max_length=50, blank=True, null=True)
-    phone_fax = models.CharField(max_length=50, blank=True, null=True)
-    status = models.CharField(max_length=100, blank=True, null=True)
-    address_street = models.CharField(max_length=150, blank=True, null=True)
-    address_city = models.CharField(max_length=100, blank=True, null=True)
-    address_state = models.CharField(max_length=100, blank=True, null=True)
-    address_country = models.CharField(max_length=100, blank=True, null=True)
-    address_postalcode = models.CharField(max_length=20, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    portal_only = models.IntegerField(blank=True, null=True)
-    show_on_employees = models.IntegerField(blank=True, null=True)
-    employee_status = models.CharField(max_length=100, blank=True, null=True)
-    messenger_id = models.CharField(max_length=100, blank=True, null=True)
-    messenger_type = models.CharField(max_length=100, blank=True, null=True)
-    reports_to_id = models.CharField(max_length=36, blank=True, null=True)
-    is_group = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'users'
-
-
-class UsersCstm(models.Model):
-    id_c = models.CharField(primary_key=True, max_length=36)
-    dept_c = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'users_cstm'
-
-
-class UsersFeeds(models.Model):
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    feed_id = models.CharField(max_length=36, blank=True, null=True)
-    rank = models.IntegerField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'users_feeds'
-
-
-class UsersLastImport(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    import_module = models.CharField(max_length=36, blank=True, null=True)
-    bean_type = models.CharField(max_length=36, blank=True, null=True)
-    bean_id = models.CharField(max_length=36, blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'users_last_import'
-
-
-class UsersPasswordLink(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    username = models.CharField(max_length=36, blank=True, null=True)
-    date_generated = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'users_password_link'
-
-
-class UsersSignatures(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    user_id = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    signature = models.TextField(blank=True, null=True)
-    signature_html = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'users_signatures'
-
-
-class Vcals(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    user_id = models.CharField(max_length=36)
-    type = models.CharField(max_length=100, blank=True, null=True)
-    source = models.CharField(max_length=100, blank=True, null=True)
-    content = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'vcals'
-
-
-class Versions(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    deleted = models.IntegerField(blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    file_version = models.CharField(max_length=255, blank=True, null=True)
-    db_version = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'versions'
-
-
-class Zr2Querytemplate(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    sql1 = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_querytemplate'
-
-
-class Zr2Report(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_report'
-
-
-class Zr2Reportcontainer(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportcontainer'
-
-
-class Zr2ReportcontainerZr2ReportC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    zr2_reportcontainer_zr2_reportzr2_reportcontainer_ida = models.CharField(max_length=36, blank=True, null=True)
-    zr2_reportcontainer_zr2_reportzr2_report_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportcontainer_zr2_report_c'
-
-
-class Zr2Reportparameter(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    friendly_name = models.CharField(max_length=255, blank=True, null=True)
-    default_name = models.CharField(max_length=255, blank=True, null=True)
-    default_value = models.CharField(max_length=255, blank=True, null=True)
-    range_name = models.CharField(max_length=255, blank=True, null=True)
-    range_options = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportparameter'
-
-
-class Zr2Reportparameterlink(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    default_value = models.CharField(max_length=255, blank=True, null=True)
-    bind_to_module_name = models.CharField(max_length=255, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportparameterlink'
-
-
-class Zr2ReportparameterlinkZr2QuerytemplateC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    zr2_query313cemplate_ida = models.CharField(max_length=36, blank=True, null=True)
-    zr2_report0ed1terlink_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportparameterlink_zr2_querytemplate_c'
-
-
-class Zr2ReportparameterlinkZr2ReportparameterC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    zr2_report29aerameter_ida = models.CharField(max_length=36, blank=True, null=True)
-    zr2_report53a6terlink_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportparameterlink_zr2_reportparameter_c'
-
-
-class Zr2ReportparameterlinkZr2ReporttemplateC(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    zr2_report313cemplate_ida = models.CharField(max_length=36, blank=True, null=True)
-    zr2_report0ed1terlink_idb = models.CharField(max_length=36, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reportparameterlink_zr2_reporttemplate_c'
-
-
-class Zr2Reporttemplate(models.Model):
-    id = models.CharField(primary_key=True, max_length=36)
-    name = models.CharField(max_length=255, blank=True, null=True)
-    date_entered = models.DateTimeField(blank=True, null=True)
-    date_modified = models.DateTimeField(blank=True, null=True)
-    modified_user_id = models.CharField(max_length=36, blank=True, null=True)
-    created_by = models.CharField(max_length=36, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    deleted = models.IntegerField(blank=True, null=True)
-    assigned_user_id = models.CharField(max_length=36, blank=True, null=True)
-    filename = models.CharField(max_length=255, blank=True, null=True)
-    export_as = models.CharField(max_length=255, blank=True, null=True)
-    error_message = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'zr2_reporttemplate'
+from sqlalchemy import CHAR, Column, Date, DateTime, Float, Index, String, Table, Text, Time, text
+from sqlalchemy.dialects.mysql import BIGINT, INTEGER, LONGTEXT, SMALLINT, TINYINT
+from sqlalchemy.ext.declarative import declarative_base
+
+from .database import Session_crm
+
+
+Base = declarative_base()
+metadata = Base.metadata
+Base.query = Session_crm.query_property()
+
+
+class A0001Note(Base):
+    __tablename__ = 'a0001_notes'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    notes = Column(Text)
+
+
+class A0001NotesAudit(Base):
+    __tablename__ = 'a0001_notes_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccAccesscontract(Base):
+    __tablename__ = 'acc_accesscontract'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    cost = Column(INTEGER(255))
+    inet = Column(TINYINT(1), server_default=text("'0'"))
+    typecontract = Column(String(100), server_default=text("'contract'"))
+
+
+class AccAccesscontractAudit(Base):
+    __tablename__ = 'acc_accesscontract_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccAccesscontractContactsC(Base):
+    __tablename__ = 'acc_accesscontract_contacts_c'
+    __table_args__ = (
+        Index('acc_accesscontract_contacts_alt', 'acc_accesscontract_contactsacc_accesscontract_ida', 'acc_accesscontract_contactscontacts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_accesscontract_contactsacc_accesscontract_ida = Column(String(36))
+    acc_accesscontract_contactscontacts_idb = Column(String(36))
+
+
+class AccAccesscontractNotesC(Base):
+    __tablename__ = 'acc_accesscontract_notes_c'
+    __table_args__ = (
+        Index('acc_accesscontract_notes_alt', 'acc_accesscontract_notesacc_accesscontract_ida', 'acc_accesscontract_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_accesscontract_notesacc_accesscontract_ida = Column(String(36))
+    acc_accesscontract_notesnotes_idb = Column(String(36))
+
+
+class AccAccessdocument(Base):
+    __tablename__ = 'acc_accessdocuments'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    document_name = Column(String(255))
+    filename = Column(String(255))
+    file_ext = Column(String(100))
+    file_mime_type = Column(String(100))
+    active_date = Column(Date)
+    exp_date = Column(Date)
+    category_id = Column(String(100))
+    subcategory_id = Column(String(100))
+    status_id = Column(String(100))
+    teypedoc = Column(String(100), server_default=text("'contract'"))
+
+
+class AccAccessdocumentsAudit(Base):
+    __tablename__ = 'acc_accessdocuments_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccAccessdocumentsNotes1C(Base):
+    __tablename__ = 'acc_accessdocuments_notes_1_c'
+    __table_args__ = (
+        Index('acc_accessdocuments_notes_1_alt', 'acc_accessdocuments_notes_1acc_accessdocuments_ida', 'acc_accessdocuments_notes_1notes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_accessdocuments_notes_1acc_accessdocuments_ida = Column(String(36))
+    acc_accessdocuments_notes_1notes_idb = Column(String(36))
+
+
+class AccAccessdocumentsNotesC(Base):
+    __tablename__ = 'acc_accessdocuments_notes_c'
+    __table_args__ = (
+        Index('acc_accessdocuments_notes_alt', 'acc_accessdocuments_notesacc_accessdocuments_ida', 'acc_accessdocuments_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_accessdocuments_notesacc_accessdocuments_ida = Column(String(36))
+    acc_accessdocuments_notesnotes_idb = Column(String(36))
+
+
+class AccAccesserror(Base):
+    __tablename__ = 'acc_accesserror'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    status = Column(String(100), server_default=text("'analysis'"))
+    dateerror = Column(Date)
+    dateaccess = Column(Date)
+
+
+class AccAccesserrorAccFacilityC(Base):
+    __tablename__ = 'acc_accesserror_acc_facility_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_accesserror_acc_facilityacc_facility_ida = Column(String(36), index=True)
+    acc_accesserror_acc_facilityacc_accesserror_idb = Column(String(36), index=True)
+
+
+class AccAccesserrorAudit(Base):
+    __tablename__ = 'acc_accesserror_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccAccesserrorNotesC(Base):
+    __tablename__ = 'acc_accesserror_notes_c'
+    __table_args__ = (
+        Index('acc_accesserror_notes_alt', 'acc_accesserror_notesacc_accesserror_ida', 'acc_accesserror_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_accesserror_notesacc_accesserror_ida = Column(String(36))
+    acc_accesserror_notesnotes_idb = Column(String(36))
+
+
+class AccFacility(Base):
+    __tablename__ = 'acc_facility'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    accessmode = Column(Text)
+    presencekey = Column(TINYINT(1), server_default=text("'0'"))
+    status = Column(String(100), server_default=text("'bs'"))
+    facilitymap = Column(String(255), server_default=text("'maps.google.com?q=Kirov {name}&output=embed'"))
+
+
+class AccFacilityAccAccesscontractC(Base):
+    __tablename__ = 'acc_facility_acc_accesscontract_c'
+    __table_args__ = (
+        Index('acc_facility_acc_accesscontract_alt', 'acc_facility_acc_accesscontractacc_facility_ida', 'acc_facility_acc_accesscontractacc_accesscontract_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_facility_acc_accesscontractacc_facility_ida = Column(String(36))
+    acc_facility_acc_accesscontractacc_accesscontract_idb = Column(String(36))
+
+
+class AccFacilityAccAccessdocumentsC(Base):
+    __tablename__ = 'acc_facility_acc_accessdocuments_c'
+    __table_args__ = (
+        Index('acc_facility_acc_accessdocuments_alt', 'acc_facility_acc_accessdocumentsacc_facility_ida', 'acc_facility_acc_accessdocumentsacc_accessdocuments_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_facility_acc_accessdocumentsacc_facility_ida = Column(String(36))
+    acc_facility_acc_accessdocumentsacc_accessdocuments_idb = Column(String(36))
+
+
+class AccFacilityAudit(Base):
+    __tablename__ = 'acc_facility_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccFacilityContactsC(Base):
+    __tablename__ = 'acc_facility_contacts_c'
+    __table_args__ = (
+        Index('acc_facility_contacts_alt', 'acc_facility_contactsacc_facility_ida', 'acc_facility_contactscontacts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_facility_contactsacc_facility_ida = Column(String(36))
+    acc_facility_contactscontacts_idb = Column(String(36))
+
+
+class AccFacilityCstm(Base):
+    __tablename__ = 'acc_facility_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    district_c = Column(String(255))
+
+
+class AccFacilityNotesC(Base):
+    __tablename__ = 'acc_facility_notes_c'
+    __table_args__ = (
+        Index('acc_facility_notes_alt', 'acc_facility_notesacc_facility_ida', 'acc_facility_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_facility_notesacc_facility_ida = Column(String(36))
+    acc_facility_notesnotes_idb = Column(String(36))
+
+
+class AccRequisition(Base):
+    __tablename__ = 'acc_requisition'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    status = Column(String(100), server_default=text("'planed'"))
+    accessmode = Column(Text)
+
+
+class AccRequisitionAccAccessdocumentsC(Base):
+    __tablename__ = 'acc_requisition_acc_accessdocuments_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_requisition_acc_accessdocumentsacc_requisition_ida = Column(String(36), index=True)
+    acc_requisition_acc_accessdocumentsacc_accessdocuments_idb = Column(String(36), index=True)
+
+
+class AccRequisitionAccFacilityC(Base):
+    __tablename__ = 'acc_requisition_acc_facility_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_requisition_acc_facilityacc_requisition_ida = Column(String(36), index=True)
+    acc_requisition_acc_facilityacc_facility_idb = Column(String(36), index=True)
+
+
+class AccRequisitionAudit(Base):
+    __tablename__ = 'acc_requisition_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccRequisitionCstm(Base):
+    __tablename__ = 'acc_requisition_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    accessmodecheck_c = Column(String(100), server_default=text("'24'"))
+    equipment_c = Column(String(255))
+    address_sogl_c = Column(String(255))
+
+
+class AccRequisitionNotesC(Base):
+    __tablename__ = 'acc_requisition_notes_c'
+    __table_args__ = (
+        Index('acc_requisition_notes_alt', 'acc_requisition_notesacc_requisition_ida', 'acc_requisition_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_requisition_notesacc_requisition_ida = Column(String(36))
+    acc_requisition_notesnotes_idb = Column(String(36))
+
+
+class AccUk(Base):
+    __tablename__ = 'acc_uk'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    address = Column(String(255))
+    status = Column(String(100), server_default=text("'uk'"))
+    phone = Column(String(255))
+    fax = Column(String(255))
+
+
+class AccUkAccAccesscontractC(Base):
+    __tablename__ = 'acc_uk_acc_accesscontract_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_uk_acc_accesscontractacc_uk_ida = Column(String(36), index=True)
+    acc_uk_acc_accesscontractacc_accesscontract_idb = Column(String(36), index=True)
+
+
+class AccUkAccAccessdocumentsC(Base):
+    __tablename__ = 'acc_uk_acc_accessdocuments_c'
+    __table_args__ = (
+        Index('acc_uk_acc_accessdocuments_alt', 'acc_uk_acc_accessdocumentsacc_uk_ida', 'acc_uk_acc_accessdocumentsacc_accessdocuments_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_uk_acc_accessdocumentsacc_uk_ida = Column(String(36))
+    acc_uk_acc_accessdocumentsacc_accessdocuments_idb = Column(String(36))
+
+
+class AccUkAccFacilityC(Base):
+    __tablename__ = 'acc_uk_acc_facility_c'
+    __table_args__ = (
+        Index('acc_uk_acc_facility_alt', 'acc_uk_acc_facilityacc_uk_ida', 'acc_uk_acc_facilityacc_facility_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_uk_acc_facilityacc_uk_ida = Column(String(36))
+    acc_uk_acc_facilityacc_facility_idb = Column(String(36))
+
+
+class AccUkAudit(Base):
+    __tablename__ = 'acc_uk_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccUkContactsC(Base):
+    __tablename__ = 'acc_uk_contacts_c'
+    __table_args__ = (
+        Index('acc_uk_contacts_alt', 'acc_uk_contactsacc_uk_ida', 'acc_uk_contactscontacts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_uk_contactsacc_uk_ida = Column(String(36))
+    acc_uk_contactscontacts_idb = Column(String(36))
+
+
+class AccUkNotesC(Base):
+    __tablename__ = 'acc_uk_notes_c'
+    __table_args__ = (
+        Index('acc_uk_notes_alt', 'acc_uk_notesacc_uk_ida', 'acc_uk_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    acc_uk_notesacc_uk_ida = Column(String(36))
+    acc_uk_notesnotes_idb = Column(String(36))
+
+
+class Account(Base):
+    __tablename__ = 'accounts'
+    __table_args__ = (
+        Index('idx_accnt_assigned_del', 'deleted', 'assigned_user_id'),
+        Index('idx_accnt_name_del', 'name', 'deleted'),
+        Index('idx_accnt_id_del', 'id', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(150))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    account_type = Column(String(100))
+    industry = Column(String(100))
+    annual_revenue = Column(String(100))
+    phone_fax = Column(String(100))
+    billing_address_street = Column(String(150))
+    billing_address_city = Column(String(100))
+    billing_address_state = Column(String(100))
+    billing_address_postalcode = Column(String(20))
+    billing_address_country = Column(String(255))
+    rating = Column(String(100))
+    phone_office = Column(String(100))
+    phone_alternate = Column(String(100))
+    website = Column(String(255))
+    ownership = Column(String(100))
+    employees = Column(String(10))
+    ticker_symbol = Column(String(10))
+    shipping_address_street = Column(String(150))
+    shipping_address_city = Column(String(100))
+    shipping_address_state = Column(String(100))
+    shipping_address_postalcode = Column(String(20))
+    shipping_address_country = Column(String(255))
+    parent_id = Column(CHAR(36), index=True)
+    sic_code = Column(String(10))
+    campaign_id = Column(CHAR(36))
+
+
+class AccountsAudit(Base):
+    __tablename__ = 'accounts_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class AccountsBug(Base):
+    __tablename__ = 'accounts_bugs'
+    __table_args__ = (
+        Index('idx_account_bug', 'account_id', 'bug_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    account_id = Column(String(36), index=True)
+    bug_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class AccountsCalls1C(Base):
+    __tablename__ = 'accounts_calls_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    accounts_calls_1accounts_ida = Column(String(36), index=True)
+    accounts_calls_1calls_idb = Column(String(36), index=True)
+
+
+class AccountsCase(Base):
+    __tablename__ = 'accounts_cases'
+
+    id = Column(String(36), primary_key=True)
+    account_id = Column(String(36), index=True)
+    case_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class AccountsConPConnectionsPlan1C(Base):
+    __tablename__ = 'accounts_con_p_connections_plan_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    accounts_con_p_connections_plan_1accounts_ida = Column(String(36), index=True)
+    accounts_con_p_connections_plan_1con_p_connections_plan_idb = Column(String(36), index=True)
+
+
+class AccountsContact(Base):
+    __tablename__ = 'accounts_contacts'
+    __table_args__ = (
+        Index('idx_contid_del_accid', 'contact_id', 'deleted', 'account_id'),
+        Index('idx_account_contact', 'account_id', 'contact_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    contact_id = Column(String(36))
+    account_id = Column(String(36))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class AccountsCstm(Base):
+    __tablename__ = 'accounts_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    internet_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    phone_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    pdcpgi_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    inet_pvk_acc_c = Column(INTEGER(255))
+    inet_ip_acc_c = Column(INTEGER(255))
+    month_profit_acc_c = Column(INTEGER(255))
+    packet_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    block_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    vats_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    tv_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    inet_date_acc_c = Column(Date)
+    phone_date_acc_c = Column(Date)
+    closed_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    date_close_acc_c = Column(Date)
+    blockletter_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    date_blockletter_acc_c = Column(Date)
+    close_couse_acc_c = Column(String(100), server_default=text("'zero'"))
+    close_comment_acc_c = Column(Text)
+    status_acc_c = Column(String(100), server_default=text("'active'"))
+    priority_acc_c = Column(String(100), server_default=text("'low'"))
+    debtor_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    address_map_acc_c = Column(String(255), server_default=text("'maps.google.com?q= Russia, Kirov, {billing_address_street}&output=embed'"))
+    cctv_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    cost_pdcpgi_acc_c = Column(INTEGER(255))
+    company_acc_c = Column(TINYINT(1), server_default=text("'0'"))
+    bandwidth_c = Column(Float(18))
+    login_ph_c = Column(String(255), index=True)
+    phone_new_c = Column(String(255))
+    phone_from_bug_c = Column(String(255))
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class AccountsMaMount1C(Base):
+    __tablename__ = 'accounts_ma_mount_1_c'
+    __table_args__ = (
+        Index('accounts_ma_mount_1_alt', 'accounts_ma_mount_1accounts_ida', 'accounts_ma_mount_1ma_mount_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    accounts_ma_mount_1accounts_ida = Column(String(36))
+    accounts_ma_mount_1ma_mount_idb = Column(String(36))
+
+
+class AccountsNotes1C(Base):
+    __tablename__ = 'accounts_notes_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    accounts_notes_1accounts_ida = Column(String(36), index=True)
+    accounts_notes_1notes_idb = Column(String(36), index=True)
+
+
+class AccountsOpportunity(Base):
+    __tablename__ = 'accounts_opportunities'
+    __table_args__ = (
+        Index('idx_oppid_del_accid', 'opportunity_id', 'deleted', 'account_id'),
+        Index('idx_account_opportunity', 'account_id', 'opportunity_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    opportunity_id = Column(String(36))
+    account_id = Column(String(36))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class AccountsPoPo1C(Base):
+    __tablename__ = 'accounts_po_po_1_c'
+    __table_args__ = (
+        Index('accounts_po_po_1_alt', 'accounts_po_po_1accounts_ida', 'accounts_po_po_1po_po_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    accounts_po_po_1accounts_ida = Column(String(36))
+    accounts_po_po_1po_po_idb = Column(String(36))
+
+
+class AccountsTcTariffchangeinet1C(Base):
+    __tablename__ = 'accounts_tc_tariffchangeinet_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    accounts_tc_tariffchangeinet_1accounts_ida = Column(String(36), index=True)
+    accounts_tc_tariffchangeinet_1tc_tariffchangeinet_idb = Column(String(36), index=True)
+
+
+class AclAction(Base):
+    __tablename__ = 'acl_actions'
+    __table_args__ = (
+        Index('idx_aclaction_id_del', 'id', 'deleted'),
+        Index('idx_category_name', 'category', 'name')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(150))
+    category = Column(String(100))
+    acltype = Column(String(100))
+    aclaccess = Column(INTEGER(3))
+    deleted = Column(TINYINT(1))
+
+
+class AclRole(Base):
+    __tablename__ = 'acl_roles'
+    __table_args__ = (
+        Index('idx_aclrole_id_del', 'id', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(150))
+    description = Column(Text)
+    deleted = Column(TINYINT(1))
+
+
+class AclRolesAction(Base):
+    __tablename__ = 'acl_roles_actions'
+    __table_args__ = (
+        Index('idx_aclrole_action', 'role_id', 'action_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    role_id = Column(String(36), index=True)
+    action_id = Column(String(36), index=True)
+    access_override = Column(INTEGER(3))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class AclRolesUser(Base):
+    __tablename__ = 'acl_roles_users'
+    __table_args__ = (
+        Index('idx_aclrole_user', 'role_id', 'user_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    role_id = Column(String(36), index=True)
+    user_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+t_address_book = Table(
+    'address_book', metadata,
+    Column('assigned_user_id', CHAR(36), nullable=False),
+    Column('bean', String(50)),
+    Column('bean_id', CHAR(36), nullable=False),
+    Index('ab_user_bean_idx', 'assigned_user_id', 'bean')
+)
+
+
+class Bug(Base):
+    __tablename__ = 'bugs'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36), index=True)
+    bug_number = Column(INTEGER(11), nullable=False, unique=True)
+    type = Column(String(255))
+    status = Column(String(100))
+    priority = Column(String(100))
+    resolution = Column(String(255))
+    work_log = Column(Text)
+    found_in_release = Column(String(255))
+    fixed_in_release = Column(String(255))
+    source = Column(String(255))
+    product_category = Column(String(255))
+
+
+class BugsAudit(Base):
+    __tablename__ = 'bugs_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class BugsCBugComments1C(Base):
+    __tablename__ = 'bugs_c_bug_comments_1_c'
+    __table_args__ = (
+        Index('bugs_c_bug_comments_1_alt', 'bugs_c_bug_comments_1bugs_ida', 'bugs_c_bug_comments_1c_bug_comments_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    bugs_c_bug_comments_1bugs_ida = Column(String(36))
+    bugs_c_bug_comments_1c_bug_comments_idb = Column(String(36))
+
+
+class BugsCalls1C(Base):
+    __tablename__ = 'bugs_calls_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    bugs_calls_1bugs_ida = Column(String(36), index=True)
+    bugs_calls_1calls_idb = Column(String(36), index=True)
+
+
+class BugsCstm(Base):
+    __tablename__ = 'bugs_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    phone_bugs_c = Column(String(255))
+    department_bugs_c = Column(String(100), server_default=text("'tp'"))
+    reason_for_closure_bugs_c = Column(String(255))
+    type_bugs_c = Column(String(100), server_default=text("'null'"))
+    status_bugs_c = Column(String(100), server_default=text("'open'"))
+    address_bugs_c = Column(String(255))
+    account_id_c = Column(CHAR(36))
+    bug_id_c = Column(CHAR(36))
+    date_close_c = Column(DateTime)
+    priority_bugs_c = Column(String(255))
+    departure_bugs_c = Column(TINYINT(1), server_default=text("'0'"))
+    new_reason_for_closure_bugs_c = Column(Text)
+    new_priority_bugs_c = Column(String(100), server_default=text("'one'"))
+    service_is_delivered_c = Column(String(255))
+    duration_bug_c = Column(Float(18))
+    perform_c = Column(Text)
+    localisation_c = Column(Text)
+    todo_c = Column(String(255))
+    duration_min_c = Column(INTEGER(255))
+
+
+class CBugComment(Base):
+    __tablename__ = 'c_bug_comments'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+
+
+class CBugCommentsAudit(Base):
+    __tablename__ = 'c_bug_comments_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class CBugCommentsCstm(Base):
+    __tablename__ = 'c_bug_comments_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+
+
+class Call(Base):
+    __tablename__ = 'calls'
+    __table_args__ = (
+        Index('idx_calls_par_del', 'parent_id', 'parent_type', 'deleted'),
+        Index('idx_calls_assigned_del', 'deleted', 'assigned_user_id')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    duration_hours = Column(INTEGER(2))
+    duration_minutes = Column(INTEGER(2))
+    date_start = Column(DateTime, index=True)
+    date_end = Column(DateTime)
+    parent_type = Column(String(255))
+    status = Column(String(100), index=True, server_default=text("'Planned'"))
+    direction = Column(String(100))
+    parent_id = Column(CHAR(36))
+    reminder_time = Column(INTEGER(11), server_default=text("'60'"))
+    email_reminder_time = Column(INTEGER(11), server_default=text("'60'"))
+    email_reminder_sent = Column(TINYINT(1), server_default=text("'0'"))
+    outlook_id = Column(String(255))
+    repeat_type = Column(String(36))
+    repeat_interval = Column(INTEGER(3), server_default=text("'1'"))
+    repeat_dow = Column(String(7))
+    repeat_until = Column(Date)
+    repeat_count = Column(INTEGER(7))
+    repeat_parent_id = Column(CHAR(36))
+    recurring_source = Column(String(36))
+
+
+class CallsContact(Base):
+    __tablename__ = 'calls_contacts'
+    __table_args__ = (
+        Index('idx_call_contact', 'call_id', 'contact_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    call_id = Column(String(36), index=True)
+    contact_id = Column(String(36), index=True)
+    required = Column(String(1), server_default=text("'1'"))
+    accept_status = Column(String(25), server_default=text("'none'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class CallsCstm(Base):
+    __tablename__ = 'calls_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    number_call_c = Column(INTEGER(255))
+    check_call_c = Column(TINYINT(1), server_default=text("'0'"))
+    input_number_c = Column(String(255))
+
+
+class CallsLead(Base):
+    __tablename__ = 'calls_leads'
+    __table_args__ = (
+        Index('idx_call_lead', 'call_id', 'lead_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    call_id = Column(String(36), index=True)
+    lead_id = Column(String(36), index=True)
+    required = Column(String(1), server_default=text("'1'"))
+    accept_status = Column(String(25), server_default=text("'none'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class CallsNumber(Base):
+    __tablename__ = 'calls_numbers'
+
+    id_c = Column(CHAR(36), primary_key=True, unique=True)
+    input_number = Column(CHAR(20))
+    date_call = Column(DateTime)
+    output_number = Column(CHAR(20))
+    not_received_number = Column(CHAR(20))
+
+
+class CallsUser(Base):
+    __tablename__ = 'calls_users'
+    __table_args__ = (
+        Index('idx_call_users', 'call_id', 'user_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    call_id = Column(String(36), index=True)
+    user_id = Column(String(36), index=True)
+    required = Column(String(1), server_default=text("'1'"))
+    accept_status = Column(String(25), server_default=text("'none'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class CampaignLog(Base):
+    __tablename__ = 'campaign_log'
+    __table_args__ = (
+        Index('idx_target_id_deleted', 'target_id', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    campaign_id = Column(CHAR(36), index=True)
+    target_tracker_key = Column(String(36), index=True)
+    target_id = Column(String(36), index=True)
+    target_type = Column(String(100))
+    activity_type = Column(String(100))
+    activity_date = Column(DateTime)
+    related_id = Column(String(36))
+    related_type = Column(String(100))
+    archived = Column(TINYINT(1), server_default=text("'0'"))
+    hits = Column(INTEGER(11), server_default=text("'0'"))
+    list_id = Column(CHAR(36))
+    deleted = Column(TINYINT(1))
+    date_modified = Column(DateTime)
+    more_information = Column(String(100), index=True)
+    marketing_id = Column(CHAR(36))
+
+
+class CampaignTrkr(Base):
+    __tablename__ = 'campaign_trkrs'
+
+    id = Column(CHAR(36), primary_key=True)
+    tracker_name = Column(String(30))
+    tracker_url = Column(String(255), server_default=text("'http://'"))
+    tracker_key = Column(INTEGER(11), nullable=False, index=True)
+    campaign_id = Column(CHAR(36))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    is_optout = Column(TINYINT(1), server_default=text("'0'"))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class Campaign(Base):
+    __tablename__ = 'campaigns'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    tracker_key = Column(INTEGER(11), nullable=False, index=True)
+    tracker_count = Column(INTEGER(11), server_default=text("'0'"))
+    refer_url = Column(String(255), server_default=text("'http://'"))
+    tracker_text = Column(String(255))
+    start_date = Column(Date)
+    end_date = Column(Date)
+    status = Column(String(100))
+    impressions = Column(INTEGER(11), server_default=text("'0'"))
+    currency_id = Column(CHAR(36))
+    budget = Column(Float(asdecimal=True))
+    expected_cost = Column(Float(asdecimal=True))
+    actual_cost = Column(Float(asdecimal=True))
+    expected_revenue = Column(Float(asdecimal=True))
+    campaign_type = Column(String(100))
+    objective = Column(Text)
+    content = Column(Text)
+    frequency = Column(String(100))
+
+
+class CampaignsAudit(Base):
+    __tablename__ = 'campaigns_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class Case(Base):
+    __tablename__ = 'cases'
+    __table_args__ = (
+        Index('idx_cases_stat_del', 'assigned_user_id', 'status', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    case_number = Column(INTEGER(11), nullable=False, unique=True)
+    type = Column(String(255))
+    status = Column(String(100))
+    priority = Column(String(100))
+    resolution = Column(Text)
+    work_log = Column(Text)
+    account_id = Column(CHAR(36), index=True)
+
+
+class CasesAudit(Base):
+    __tablename__ = 'cases_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class CasesBug(Base):
+    __tablename__ = 'cases_bugs'
+    __table_args__ = (
+        Index('idx_case_bug', 'case_id', 'bug_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    case_id = Column(String(36), index=True)
+    bug_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class CasesCstm(Base):
+    __tablename__ = 'cases_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class CatRepairsList(Base):
+    __tablename__ = 'cat_repairs_list'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+
+
+class CatWorkList(Base):
+    __tablename__ = 'cat_work_list'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+
+
+class ConPConnectionsPlan(Base):
+    __tablename__ = 'con_p_connections_plan'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+
+
+class ConPConnectionsPlanAudit(Base):
+    __tablename__ = 'con_p_connections_plan_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class ConPConnectionsPlanCstm(Base):
+    __tablename__ = 'con_p_connections_plan_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    address_plan_c = Column(String(255))
+    time_connection_c = Column(String(255))
+    date_connection_c = Column(Date)
+    contacts_c = Column(String(255))
+    account_id_c = Column(CHAR(36))
+    number_opp_c = Column(String(255))
+    tariff_plan_c = Column(String(255))
+    issued_hard_c = Column(TINYINT(1), server_default=text("'0'"))
+    user_id_c = Column(CHAR(36))
+    base_station_c = Column(Text)
+    level_signal_c = Column(String(255))
+    enter_roof_c = Column(Text)
+    type_conn_c = Column(String(100), server_default=text("'ur'"))
+    type_hard_c = Column(Text)
+    radio_c = Column(TINYINT(1), server_default=text("'0'"))
+    point_address_c = Column(String(255))
+    ip_address_c = Column(String(255))
+    brigada_c = Column(String(100))
+    gps_check_c = Column(TINYINT(1), server_default=text("'0'"))
+    ra_survey_id_c = Column(CHAR(36))
+    comment_mount_c = Column(Text)
+    check_mount_c = Column(TINYINT(1), server_default=text("'0'"))
+    call_pl_c = Column(TINYINT(1), server_default=text("'0'"))
+    user_id1_c = Column(CHAR(36))
+    call_comment_c = Column(Text)
+    start_time_c = Column(DateTime)
+    end_time_c = Column(DateTime)
+    user_id2_c = Column(CHAR(36))
+    user_id3_c = Column(CHAR(36))
+    job_list_c = Column(Text)
+    cat_work_c = Column(String(100))
+    remarks_c = Column(String(255))
+    photo_one_c = Column(String(255))
+    photo_two_c = Column(String(255))
+    photo_three_c = Column(String(255))
+    photo_four_c = Column(String(255))
+    user_id4_c = Column(CHAR(36))
+    acc_requisition_id_c = Column(CHAR(36))
+    call_date_c = Column(Date)
+    status_mount_c = Column(String(100), server_default=text("'1'"))
+    channel_speed_c = Column(String(255))
+
+
+class ConPConnectionsPlanNotes1C(Base):
+    __tablename__ = 'con_p_connections_plan_notes_1_c'
+    __table_args__ = (
+        Index('con_p_connections_plan_notes_1_alt', 'con_p_connections_plan_notes_1con_p_connections_plan_ida', 'con_p_connections_plan_notes_1notes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    con_p_connections_plan_notes_1con_p_connections_plan_ida = Column(String(36))
+    con_p_connections_plan_notes_1notes_idb = Column(String(36))
+
+
+t_config = Table(
+    'config', metadata,
+    Column('category', String(32), index=True),
+    Column('name', String(32)),
+    Column('value', Text)
+)
+
+
+class Contact(Base):
+    __tablename__ = 'contacts'
+    __table_args__ = (
+        Index('idx_contacts_del_last', 'deleted', 'last_name'),
+        Index('idx_cont_del_reports', 'deleted', 'reports_to_id', 'last_name'),
+        Index('idx_del_id_user', 'deleted', 'id', 'assigned_user_id'),
+        Index('idx_cont_last_first', 'last_name', 'first_name', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36), index=True)
+    salutation = Column(String(255))
+    first_name = Column(String(100))
+    last_name = Column(String(100))
+    title = Column(String(100))
+    department = Column(String(255))
+    do_not_call = Column(TINYINT(1), server_default=text("'0'"))
+    phone_home = Column(String(100))
+    phone_mobile = Column(String(100))
+    phone_work = Column(String(100))
+    phone_other = Column(String(100))
+    phone_fax = Column(String(100))
+    primary_address_street = Column(String(150))
+    primary_address_city = Column(String(100))
+    primary_address_state = Column(String(100))
+    primary_address_postalcode = Column(String(20))
+    primary_address_country = Column(String(255))
+    alt_address_street = Column(String(150))
+    alt_address_city = Column(String(100))
+    alt_address_state = Column(String(100))
+    alt_address_postalcode = Column(String(20))
+    alt_address_country = Column(String(255))
+    assistant = Column(String(75))
+    assistant_phone = Column(String(100))
+    lead_source = Column(String(255))
+    reports_to_id = Column(CHAR(36), index=True)
+    birthdate = Column(Date)
+    campaign_id = Column(CHAR(36))
+
+
+class ContactsAudit(Base):
+    __tablename__ = 'contacts_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class ContactsBug(Base):
+    __tablename__ = 'contacts_bugs'
+    __table_args__ = (
+        Index('idx_contact_bug', 'contact_id', 'bug_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    contact_id = Column(String(36), index=True)
+    bug_id = Column(String(36), index=True)
+    contact_role = Column(String(50))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ContactsCase(Base):
+    __tablename__ = 'contacts_cases'
+    __table_args__ = (
+        Index('idx_contacts_cases', 'contact_id', 'case_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    contact_id = Column(String(36), index=True)
+    case_id = Column(String(36), index=True)
+    contact_role = Column(String(50))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ContactsCstm(Base):
+    __tablename__ = 'contacts_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class ContactsUser(Base):
+    __tablename__ = 'contacts_users'
+    __table_args__ = (
+        Index('idx_contacts_users', 'contact_id', 'user_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    contact_id = Column(String(36), index=True)
+    user_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class CronRemoveDocument(Base):
+    __tablename__ = 'cron_remove_documents'
+
+    id = Column(String(36), primary_key=True)
+    bean_id = Column(String(36), index=True)
+    module = Column(String(25))
+    date_modified = Column(DateTime, index=True)
+
+
+class Currency(Base):
+    __tablename__ = 'currencies'
+    __table_args__ = (
+        Index('idx_currency_name', 'name', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(36))
+    symbol = Column(String(36))
+    iso4217 = Column(String(3))
+    conversion_rate = Column(Float(asdecimal=True), server_default=text("'0'"))
+    status = Column(String(100))
+    deleted = Column(TINYINT(1))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    created_by = Column(CHAR(36), nullable=False)
+
+
+t_custom_fields = Table(
+    'custom_fields', metadata,
+    Column('bean_id', String(36)),
+    Column('set_num', INTEGER(11), server_default=text("'0'")),
+    Column('field0', String(255)),
+    Column('field1', String(255)),
+    Column('field2', String(255)),
+    Column('field3', String(255)),
+    Column('field4', String(255)),
+    Column('field5', String(255)),
+    Column('field6', String(255)),
+    Column('field7', String(255)),
+    Column('field8', String(255)),
+    Column('field9', String(255)),
+    Column('deleted', TINYINT(1), server_default=text("'0'")),
+    Index('idx_beanid_set_num', 'bean_id', 'set_num')
+)
+
+
+class DevDevelopment(Base):
+    __tablename__ = 'dev_development'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    status = Column(String(100), server_default=text("'1'"))
+    finish = Column(Date)
+
+
+class DevDevelopmentAccRequisitionC(Base):
+    __tablename__ = 'dev_development_acc_requisition_c'
+    __table_args__ = (
+        Index('dev_development_acc_requisition_alt', 'dev_development_acc_requisitiondev_development_ida', 'dev_development_acc_requisitionacc_requisition_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    dev_development_acc_requisitiondev_development_ida = Column(String(36))
+    dev_development_acc_requisitionacc_requisition_idb = Column(String(36))
+
+
+class DevDevelopmentAudit(Base):
+    __tablename__ = 'dev_development_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class DevDevelopmentNotesC(Base):
+    __tablename__ = 'dev_development_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    dev_development_notesdev_development_ida = Column(String(36), index=True)
+    dev_development_notesnotes_idb = Column(String(36), index=True)
+
+
+class DevDevelopmentRaSurveyC(Base):
+    __tablename__ = 'dev_development_ra_survey_c'
+    __table_args__ = (
+        Index('dev_development_ra_survey_alt', 'dev_development_ra_surveydev_development_ida', 'dev_development_ra_surveyra_survey_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    dev_development_ra_surveydev_development_ida = Column(String(36))
+    dev_development_ra_surveyra_survey_idb = Column(String(36))
+
+
+class DevDevelopmentSkSketchC(Base):
+    __tablename__ = 'dev_development_sk_sketch_c'
+    __table_args__ = (
+        Index('dev_development_sk_sketch_alt', 'dev_development_sk_sketchdev_development_ida', 'dev_development_sk_sketchsk_sketch_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    dev_development_sk_sketchdev_development_ida = Column(String(36))
+    dev_development_sk_sketchsk_sketch_idb = Column(String(36))
+
+
+class DocumentRevision(Base):
+    __tablename__ = 'document_revisions'
+
+    id = Column(String(36), primary_key=True)
+    change_log = Column(String(255))
+    document_id = Column(String(36))
+    doc_id = Column(String(100))
+    doc_type = Column(String(100))
+    doc_url = Column(String(255))
+    date_entered = Column(DateTime)
+    created_by = Column(CHAR(36))
+    filename = Column(String(255))
+    file_ext = Column(String(100))
+    file_mime_type = Column(String(100), index=True)
+    revision = Column(String(100))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    date_modified = Column(DateTime)
+
+
+class Document(Base):
+    __tablename__ = 'documents'
+    __table_args__ = (
+        Index('idx_doc_cat', 'category_id', 'subcategory_id'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    document_name = Column(String(255))
+    doc_id = Column(String(100))
+    doc_type = Column(String(100), server_default=text("'Sugar'"))
+    doc_url = Column(String(255))
+    active_date = Column(Date)
+    exp_date = Column(Date)
+    category_id = Column(String(100))
+    subcategory_id = Column(String(100))
+    status_id = Column(String(100))
+    document_revision_id = Column(String(36))
+    related_doc_id = Column(CHAR(36))
+    related_doc_rev_id = Column(CHAR(36))
+    is_template = Column(TINYINT(1), server_default=text("'0'"))
+    template_type = Column(String(100))
+
+
+class DocumentsAccount(Base):
+    __tablename__ = 'documents_accounts'
+    __table_args__ = (
+        Index('documents_accounts_document_id', 'document_id', 'account_id'),
+        Index('documents_accounts_account_id', 'account_id', 'document_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    document_id = Column(String(36))
+    account_id = Column(String(36))
+
+
+class DocumentsBug(Base):
+    __tablename__ = 'documents_bugs'
+    __table_args__ = (
+        Index('documents_bugs_document_id', 'document_id', 'bug_id'),
+        Index('documents_bugs_bug_id', 'bug_id', 'document_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    document_id = Column(String(36))
+    bug_id = Column(String(36))
+
+
+class DocumentsCase(Base):
+    __tablename__ = 'documents_cases'
+    __table_args__ = (
+        Index('documents_cases_document_id', 'document_id', 'case_id'),
+        Index('documents_cases_case_id', 'case_id', 'document_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    document_id = Column(String(36))
+    case_id = Column(String(36))
+
+
+class DocumentsContact(Base):
+    __tablename__ = 'documents_contacts'
+    __table_args__ = (
+        Index('documents_contacts_document_id', 'document_id', 'contact_id'),
+        Index('documents_contacts_contact_id', 'contact_id', 'document_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    document_id = Column(String(36))
+    contact_id = Column(String(36))
+
+
+class DocumentsOpportunity(Base):
+    __tablename__ = 'documents_opportunities'
+    __table_args__ = (
+        Index('idx_docu_oppo_docu_id', 'document_id', 'opportunity_id'),
+        Index('idx_docu_opps_oppo_id', 'opportunity_id', 'document_id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    document_id = Column(String(36))
+    opportunity_id = Column(String(36))
+
+
+class EaddrAction(Base):
+    __tablename__ = 'eaddr_action'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    type_action = Column(String(100), server_default=text("'call'"))
+    date_action = Column(Date)
+    status = Column(String(100), server_default=text("'plan'"))
+
+
+class EaddrActionAudit(Base):
+    __tablename__ = 'eaddr_action_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class EaddrActionEaddrEmptyAddressC(Base):
+    __tablename__ = 'eaddr_action_eaddr_empty_address_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    eaddr_action_eaddr_empty_addresseaddr_empty_address_ida = Column(String(36), index=True)
+    eaddr_action_eaddr_empty_addresseaddr_action_idb = Column(String(36), index=True)
+
+
+class EaddrEmptyAddres(Base):
+    __tablename__ = 'eaddr_empty_address'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    type_address = Column(String(100), server_default=text("'none'"))
+
+
+class EaddrEmptyAddressAccountsC(Base):
+    __tablename__ = 'eaddr_empty_address_accounts_c'
+    __table_args__ = (
+        Index('eaddr_empty_address_accounts_alt', 'eaddr_empty_address_accountseaddr_empty_address_ida', 'eaddr_empty_address_accountsaccounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    eaddr_empty_address_accountseaddr_empty_address_ida = Column(String(36))
+    eaddr_empty_address_accountsaccounts_idb = Column(String(36))
+
+
+class EaddrEmptyAddressAudit(Base):
+    __tablename__ = 'eaddr_empty_address_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class Eapm(Base):
+    __tablename__ = 'eapm'
+    __table_args__ = (
+        Index('idx_app_active', 'assigned_user_id', 'application', 'validated'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    password = Column(String(255))
+    url = Column(String(255))
+    application = Column(String(100), server_default=text("'webex'"))
+    api_data = Column(Text)
+    consumer_key = Column(String(255))
+    consumer_secret = Column(String(255))
+    oauth_token = Column(String(255))
+    oauth_secret = Column(String(255))
+    validated = Column(TINYINT(1))
+
+
+class EmElectricMeter(Base):
+    __tablename__ = 'em_electric_meters'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    address = Column(String(255))
+    date_install = Column(Date)
+
+
+class EmElectricMetersAudit(Base):
+    __tablename__ = 'em_electric_meters_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class EmElectricMetersEmMetersDataC(Base):
+    __tablename__ = 'em_electric_meters_em_meters_data_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    em_electric_meters_em_meters_dataem_electric_meters_ida = Column(String(36), index=True)
+    em_electric_meters_em_meters_dataem_meters_data_idb = Column(String(36), index=True)
+
+
+class EmMetersDatum(Base):
+    __tablename__ = 'em_meters_data'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    date_meters_date = Column(Date)
+
+
+class EmMetersDataAudit(Base):
+    __tablename__ = 'em_meters_data_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class EmailAddrBeanRel(Base):
+    __tablename__ = 'email_addr_bean_rel'
+    __table_args__ = (
+        Index('idx_bean_id', 'bean_id', 'bean_module'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    email_address_id = Column(CHAR(36), nullable=False, index=True)
+    bean_id = Column(CHAR(36), nullable=False)
+    bean_module = Column(String(100))
+    primary_address = Column(TINYINT(1), server_default=text("'0'"))
+    reply_to_address = Column(TINYINT(1), server_default=text("'0'"))
+    date_created = Column(DateTime)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class EmailAddress(Base):
+    __tablename__ = 'email_addresses'
+    __table_args__ = (
+        Index('idx_ea_opt_out_invalid', 'email_address', 'opt_out', 'invalid_email'),
+        Index('idx_ea_caps_opt_out_invalid', 'email_address_caps', 'opt_out', 'invalid_email')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    email_address = Column(String(255))
+    email_address_caps = Column(String(255))
+    invalid_email = Column(TINYINT(1), server_default=text("'0'"))
+    opt_out = Column(TINYINT(1), server_default=text("'0'"))
+    date_created = Column(DateTime)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+t_email_cache = Table(
+    'email_cache', metadata,
+    Column('ie_id', CHAR(36), index=True),
+    Column('mbox', String(60)),
+    Column('subject', String(255), index=True),
+    Column('fromaddr', String(100)),
+    Column('toaddr', String(255), index=True),
+    Column('senddate', DateTime),
+    Column('message_id', String(255)),
+    Column('mailsize', INTEGER(10)),
+    Column('imap_uid', INTEGER(10)),
+    Column('msgno', INTEGER(10)),
+    Column('recent', TINYINT(4)),
+    Column('flagged', TINYINT(4)),
+    Column('answered', TINYINT(4)),
+    Column('deleted', TINYINT(4)),
+    Column('seen', TINYINT(4)),
+    Column('draft', TINYINT(4)),
+    Index('idx_mail_date', 'ie_id', 'mbox', 'senddate'),
+    Index('idx_mail_from', 'ie_id', 'mbox', 'fromaddr')
+)
+
+
+class EmailMarketing(Base):
+    __tablename__ = 'email_marketing'
+
+    id = Column(CHAR(36), primary_key=True)
+    deleted = Column(TINYINT(1), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(255), index=True)
+    from_name = Column(String(100))
+    from_addr = Column(String(100))
+    reply_to_name = Column(String(100))
+    reply_to_addr = Column(String(100))
+    inbound_email_id = Column(String(36))
+    date_start = Column(DateTime)
+    template_id = Column(CHAR(36), nullable=False)
+    status = Column(String(100))
+    campaign_id = Column(CHAR(36))
+    all_prospect_lists = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class EmailMarketingProspectList(Base):
+    __tablename__ = 'email_marketing_prospect_lists'
+    __table_args__ = (
+        Index('email_mp_prospects', 'email_marketing_id', 'prospect_list_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    prospect_list_id = Column(String(36))
+    email_marketing_id = Column(String(36))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class EmailTemplate(Base):
+    __tablename__ = 'email_templates'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(String(36))
+    published = Column(String(3))
+    name = Column(String(255), index=True)
+    description = Column(Text)
+    subject = Column(String(255))
+    body = Column(Text)
+    body_html = Column(Text)
+    deleted = Column(TINYINT(1))
+    assigned_user_id = Column(CHAR(36))
+    text_only = Column(TINYINT(1))
+    type = Column(String(255))
+
+
+class Emailman(Base):
+    __tablename__ = 'emailman'
+    __table_args__ = (
+        Index('idx_eman_list', 'list_id', 'user_id', 'deleted'),
+        Index('idx_eman_relid_reltype_id', 'related_id', 'related_type', 'campaign_id')
+    )
+
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    user_id = Column(CHAR(36))
+    id = Column(INTEGER(11), primary_key=True)
+    campaign_id = Column(CHAR(36), index=True)
+    marketing_id = Column(CHAR(36))
+    list_id = Column(CHAR(36))
+    send_date_time = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    in_queue = Column(TINYINT(1), server_default=text("'0'"))
+    in_queue_date = Column(DateTime)
+    send_attempts = Column(INTEGER(11), server_default=text("'0'"))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    related_id = Column(CHAR(36))
+    related_type = Column(String(100))
+
+
+class Email(Base):
+    __tablename__ = 'emails'
+    __table_args__ = (
+        Index('idx_email_assigned', 'assigned_user_id', 'type', 'status'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    assigned_user_id = Column(CHAR(36))
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    deleted = Column(TINYINT(1))
+    date_sent = Column(DateTime)
+    message_id = Column(String(255), index=True)
+    name = Column(String(255), index=True)
+    type = Column(String(100))
+    status = Column(String(100))
+    flagged = Column(TINYINT(1))
+    reply_to_status = Column(TINYINT(1))
+    intent = Column(String(100), server_default=text("'pick'"))
+    mailbox_id = Column(CHAR(36))
+    parent_type = Column(String(100))
+    parent_id = Column(CHAR(36), index=True)
+
+
+class EmailsBean(Base):
+    __tablename__ = 'emails_beans'
+    __table_args__ = (
+        Index('idx_emails_beans_email_bean', 'email_id', 'bean_id', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    email_id = Column(CHAR(36))
+    bean_id = Column(CHAR(36), index=True)
+    bean_module = Column(String(100))
+    campaign_data = Column(Text)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class EmailsEmailAddrRel(Base):
+    __tablename__ = 'emails_email_addr_rel'
+    __table_args__ = (
+        Index('idx_eearl_email_id', 'email_id', 'address_type'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    email_id = Column(CHAR(36), nullable=False)
+    address_type = Column(String(4))
+    email_address_id = Column(CHAR(36), nullable=False, index=True)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class EmailsText(Base):
+    __tablename__ = 'emails_text'
+
+    email_id = Column(CHAR(36), primary_key=True)
+    from_addr = Column(String(255), index=True)
+    reply_to_addr = Column(String(255))
+    to_addrs = Column(Text)
+    cc_addrs = Column(Text)
+    bcc_addrs = Column(Text)
+    description = Column(LONGTEXT)
+    description_html = Column(LONGTEXT)
+    raw_source = Column(LONGTEXT)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class EqPickupeq(Base):
+    __tablename__ = 'eq_pickupeq'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    list = Column(String(255))
+    contact = Column(String(255))
+    status = Column(String(100), server_default=text("'request'"))
+    requestdate = Column(Date)
+    performdate = Column(Date)
+    account_id_c = Column(CHAR(36))
+
+
+class EqPickupeqAccFacilityC(Base):
+    __tablename__ = 'eq_pickupeq_acc_facility_c'
+    __table_args__ = (
+        Index('eq_pickupeq_acc_facility_alt', 'eq_pickupeq_acc_facilityeq_pickupeq_ida', 'eq_pickupeq_acc_facilityacc_facility_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    eq_pickupeq_acc_facilityeq_pickupeq_ida = Column(String(36))
+    eq_pickupeq_acc_facilityacc_facility_idb = Column(String(36))
+
+
+class EqPickupeqAudit(Base):
+    __tablename__ = 'eq_pickupeq_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class EqPickupeqContactsC(Base):
+    __tablename__ = 'eq_pickupeq_contacts_c'
+    __table_args__ = (
+        Index('eq_pickupeq_contacts_alt', 'eq_pickupeq_contactseq_pickupeq_ida', 'eq_pickupeq_contactscontacts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    eq_pickupeq_contactseq_pickupeq_ida = Column(String(36))
+    eq_pickupeq_contactscontacts_idb = Column(String(36))
+
+
+class EqPickupeqNotesC(Base):
+    __tablename__ = 'eq_pickupeq_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    eq_pickupeq_noteseq_pickupeq_ida = Column(String(36), index=True)
+    eq_pickupeq_notesnotes_idb = Column(String(36), index=True)
+
+
+class FieldsMetaDatum(Base):
+    __tablename__ = 'fields_meta_data'
+    __table_args__ = (
+        Index('idx_meta_cm_del', 'custom_module', 'deleted'),
+        Index('idx_meta_id_del', 'id', 'deleted')
+    )
+
+    id = Column(String(255), primary_key=True)
+    name = Column(String(255))
+    vname = Column(String(255))
+    comments = Column(String(255))
+    help = Column(String(255))
+    custom_module = Column(String(255))
+    type = Column(String(255))
+    len = Column(INTEGER(11))
+    required = Column(TINYINT(1), server_default=text("'0'"))
+    default_value = Column(String(255))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    audited = Column(TINYINT(1), server_default=text("'0'"))
+    massupdate = Column(TINYINT(1), server_default=text("'0'"))
+    duplicate_merge = Column(SMALLINT(6), server_default=text("'0'"))
+    reportable = Column(TINYINT(1), server_default=text("'1'"))
+    importable = Column(String(255))
+    ext1 = Column(String(255))
+    ext2 = Column(String(255))
+    ext3 = Column(String(255))
+    ext4 = Column(Text)
+
+
+class Folder(Base):
+    __tablename__ = 'folders'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(25))
+    folder_type = Column(String(25))
+    parent_folder = Column(CHAR(36), index=True)
+    has_child = Column(TINYINT(1), server_default=text("'0'"))
+    is_group = Column(TINYINT(1), server_default=text("'0'"))
+    is_dynamic = Column(TINYINT(1), server_default=text("'0'"))
+    dynamic_query = Column(Text)
+    assign_to_id = Column(CHAR(36))
+    created_by = Column(CHAR(36), nullable=False)
+    modified_by = Column(CHAR(36), nullable=False)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class FoldersRel(Base):
+    __tablename__ = 'folders_rel'
+    __table_args__ = (
+        Index('idx_fr_id_deleted_poly', 'folder_id', 'deleted', 'polymorphic_id'),
+        Index('idx_poly_module_poly_id', 'polymorphic_module', 'polymorphic_id')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    folder_id = Column(CHAR(36), nullable=False)
+    polymorphic_module = Column(String(25))
+    polymorphic_id = Column(CHAR(36), nullable=False)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class FoldersSubscription(Base):
+    __tablename__ = 'folders_subscriptions'
+    __table_args__ = (
+        Index('idx_folder_id_assigned_user_id', 'folder_id', 'assigned_user_id'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    folder_id = Column(CHAR(36), nullable=False)
+    assigned_user_id = Column(CHAR(36), nullable=False)
+
+
+class ImportMap(Base):
+    __tablename__ = 'import_maps'
+    __table_args__ = (
+        Index('idx_owner_module_name', 'assigned_user_id', 'module', 'name', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(254))
+    source = Column(String(36))
+    enclosure = Column(String(1), server_default=text("' '"))
+    delimiter = Column(String(1), server_default=text("','"))
+    module = Column(String(36))
+    content = Column(Text)
+    default_values = Column(Text)
+    has_header = Column(TINYINT(1), server_default=text("'1'"))
+    deleted = Column(TINYINT(1))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    assigned_user_id = Column(CHAR(36))
+    is_published = Column(String(3), server_default=text("'no'"))
+
+
+class InboundEmail(Base):
+    __tablename__ = 'inbound_email'
+
+    id = Column(String(36), primary_key=True)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(255))
+    status = Column(String(100), server_default=text("'Active'"))
+    server_url = Column(String(100))
+    email_user = Column(String(100))
+    email_password = Column(String(100))
+    port = Column(INTEGER(5))
+    service = Column(String(50))
+    mailbox = Column(Text)
+    delete_seen = Column(TINYINT(1), server_default=text("'0'"))
+    mailbox_type = Column(String(10))
+    template_id = Column(CHAR(36))
+    stored_options = Column(Text)
+    group_id = Column(CHAR(36))
+    is_personal = Column(TINYINT(1), server_default=text("'0'"))
+    groupfolder_id = Column(CHAR(36))
+
+
+class InboundEmailAutoreply(Base):
+    __tablename__ = 'inbound_email_autoreply'
+
+    id = Column(CHAR(36), primary_key=True)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    autoreplied_to = Column(String(100), index=True)
+    ie_id = Column(CHAR(36), nullable=False)
+
+
+class InboundEmailCacheT(Base):
+    __tablename__ = 'inbound_email_cache_ts'
+
+    id = Column(String(255), primary_key=True)
+    ie_timestamp = Column(INTEGER(10))
+
+
+class InstComment(Base):
+    __tablename__ = 'inst_comments'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    status = Column(String(100), server_default=text("'consider'"))
+    type = Column(String(100), server_default=text("'work'"))
+
+
+class InstCommentsAudit(Base):
+    __tablename__ = 'inst_comments_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class InstCommentsInstPlanC(Base):
+    __tablename__ = 'inst_comments_inst_plan_c'
+    __table_args__ = (
+        Index('inst_comments_inst_plan_alt', 'inst_comments_inst_planinst_comments_ida', 'inst_comments_inst_planinst_plan_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    inst_comments_inst_planinst_comments_ida = Column(String(36))
+    inst_comments_inst_planinst_plan_idb = Column(String(36))
+
+
+class InstPlan(Base):
+    __tablename__ = 'inst_plan'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    actual_time = Column(DateTime)
+    status = Column(String(100), server_default=text("'request'"))
+    duration = Column(INTEGER(255))
+    contact = Column(String(255))
+    equipment = Column(Text)
+    tu = Column(String(255))
+    type = Column(String(100))
+    account_id_c = Column(CHAR(36))
+    reservation_time = Column(String(255))
+    date_work = Column(Date)
+
+
+class InstPlanAccountsC(Base):
+    __tablename__ = 'inst_plan_accounts_c'
+    __table_args__ = (
+        Index('inst_plan_accounts_alt', 'inst_plan_accountsinst_plan_ida', 'inst_plan_accountsaccounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    inst_plan_accountsinst_plan_ida = Column(String(36))
+    inst_plan_accountsaccounts_idb = Column(String(36))
+
+
+class InstPlanAudit(Base):
+    __tablename__ = 'inst_plan_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class InstPlanContactsC(Base):
+    __tablename__ = 'inst_plan_contacts_c'
+    __table_args__ = (
+        Index('inst_plan_contacts_alt', 'inst_plan_contactsinst_plan_ida', 'inst_plan_contactscontacts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    inst_plan_contactsinst_plan_ida = Column(String(36))
+    inst_plan_contactscontacts_idb = Column(String(36))
+
+
+class InstPlanNotesC(Base):
+    __tablename__ = 'inst_plan_notes_c'
+    __table_args__ = (
+        Index('inst_plan_notes_alt', 'inst_plan_notesinst_plan_ida', 'inst_plan_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    inst_plan_notesinst_plan_ida = Column(String(36))
+    inst_plan_notesnotes_idb = Column(String(36))
+
+
+class InstPlanPhysiPhisicC(Base):
+    __tablename__ = 'inst_plan_physi_phisic_c'
+    __table_args__ = (
+        Index('inst_plan_physi_phisic_alt', 'inst_plan_physi_phisicinst_plan_ida', 'inst_plan_physi_phisicphysi_phisic_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    inst_plan_physi_phisicinst_plan_ida = Column(String(36))
+    inst_plan_physi_phisicphysi_phisic_idb = Column(String(36))
+
+
+class InstPlanRaSurveyC(Base):
+    __tablename__ = 'inst_plan_ra_survey_c'
+    __table_args__ = (
+        Index('inst_plan_ra_survey_alt', 'inst_plan_ra_surveyinst_plan_ida', 'inst_plan_ra_surveyra_survey_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    inst_plan_ra_surveyinst_plan_ida = Column(String(36))
+    inst_plan_ra_surveyra_survey_idb = Column(String(36))
+
+
+class JjwgAddressCache(Base):
+    __tablename__ = 'jjwg_address_cache'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    lat = Column(Float(10))
+    lng = Column(Float(11))
+
+
+class JjwgAddressCacheAudit(Base):
+    __tablename__ = 'jjwg_address_cache_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class JjwgArea(Base):
+    __tablename__ = 'jjwg_areas'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    city = Column(String(255))
+    state = Column(String(255))
+    country = Column(String(255))
+    coordinates = Column(Text)
+
+
+class JjwgAreasAudit(Base):
+    __tablename__ = 'jjwg_areas_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class JjwgMap(Base):
+    __tablename__ = 'jjwg_maps'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    distance = Column(Float(9))
+    unit_type = Column(String(100), server_default=text("'mi'"))
+    module_type = Column(String(100), server_default=text("'Accounts'"))
+    parent_type = Column(String(255))
+    parent_id = Column(CHAR(36))
+
+
+class JjwgMapsAudit(Base):
+    __tablename__ = 'jjwg_maps_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class JjwgMapsJjwgAreasC(Base):
+    __tablename__ = 'jjwg_maps_jjwg_areas_c'
+    __table_args__ = (
+        Index('jjwg_maps_jjwg_areas_alt', 'jjwg_maps_5304wg_maps_ida', 'jjwg_maps_41f2g_areas_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    jjwg_maps_5304wg_maps_ida = Column(String(36))
+    jjwg_maps_41f2g_areas_idb = Column(String(36))
+
+
+class JjwgMapsJjwgMarkersC(Base):
+    __tablename__ = 'jjwg_maps_jjwg_markers_c'
+    __table_args__ = (
+        Index('jjwg_maps_jjwg_markers_alt', 'jjwg_maps_b229wg_maps_ida', 'jjwg_maps_2e31markers_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    jjwg_maps_b229wg_maps_ida = Column(String(36))
+    jjwg_maps_2e31markers_idb = Column(String(36))
+
+
+class JjwgMarker(Base):
+    __tablename__ = 'jjwg_markers'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    city = Column(String(255))
+    state = Column(String(255))
+    country = Column(String(255))
+    jjwg_maps_lat = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_lng = Column(Float(11), server_default=text("'0.00000000'"))
+    marker_image = Column(String(100), server_default=text("'company'"))
+
+
+class JjwgMarkersAudit(Base):
+    __tablename__ = 'jjwg_markers_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class JjwgMarkersRaSurvey1C(Base):
+    __tablename__ = 'jjwg_markers_ra_survey_1_c'
+    __table_args__ = (
+        Index('jjwg_markers_ra_survey_1_alt', 'jjwg_markers_ra_survey_1jjwg_markers_ida', 'jjwg_markers_ra_survey_1ra_survey_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    jjwg_markers_ra_survey_1jjwg_markers_ida = Column(String(36))
+    jjwg_markers_ra_survey_1ra_survey_idb = Column(String(36))
+
+
+class JobQueue(Base):
+    __tablename__ = 'job_queue'
+    __table_args__ = (
+        Index('idx_status_modified', 'status', 'date_modified'),
+        Index('idx_status_entered', 'status', 'date_entered'),
+        Index('idx_status_time', 'status', 'execute_time', 'date_entered'),
+        Index('idx_status_scheduler', 'status', 'scheduler_id')
+    )
+
+    assigned_user_id = Column(CHAR(36))
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    scheduler_id = Column(CHAR(36))
+    execute_time = Column(DateTime)
+    status = Column(String(20))
+    resolution = Column(String(20))
+    message = Column(Text)
+    target = Column(String(255))
+    data = Column(Text)
+    requeue = Column(TINYINT(1), server_default=text("'0'"))
+    retry_count = Column(TINYINT(4))
+    failure_count = Column(TINYINT(4))
+    job_delay = Column(INTEGER(11))
+    client = Column(String(255))
+    percent_complete = Column(INTEGER(11))
+
+
+class Lead(Base):
+    __tablename__ = 'leads'
+    __table_args__ = (
+        Index('idx_lead_acct_name_first', 'account_name', 'deleted'),
+        Index('idx_del_user', 'deleted', 'assigned_user_id'),
+        Index('idx_leads_id_del', 'id', 'deleted'),
+        Index('idx_lead_last_first', 'last_name', 'first_name', 'deleted'),
+        Index('idx_lead_del_stat', 'last_name', 'status', 'deleted', 'first_name'),
+        Index('idx_lead_opp_del', 'opportunity_id', 'deleted'),
+        Index('idx_leads_acct_del', 'account_id', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36), index=True)
+    salutation = Column(String(255))
+    first_name = Column(String(100))
+    last_name = Column(String(100))
+    title = Column(String(100))
+    department = Column(String(100))
+    do_not_call = Column(TINYINT(1), server_default=text("'0'"))
+    phone_home = Column(String(100))
+    phone_mobile = Column(String(100))
+    phone_work = Column(String(100), index=True)
+    phone_other = Column(String(100))
+    phone_fax = Column(String(100))
+    primary_address_street = Column(String(150))
+    primary_address_city = Column(String(100))
+    primary_address_state = Column(String(100))
+    primary_address_postalcode = Column(String(20))
+    primary_address_country = Column(String(255))
+    alt_address_street = Column(String(150))
+    alt_address_city = Column(String(100))
+    alt_address_state = Column(String(100))
+    alt_address_postalcode = Column(String(20))
+    alt_address_country = Column(String(255))
+    assistant = Column(String(75))
+    assistant_phone = Column(String(100))
+    converted = Column(TINYINT(1), server_default=text("'0'"))
+    refered_by = Column(String(100))
+    lead_source = Column(String(100))
+    lead_source_description = Column(Text)
+    status = Column(String(100))
+    status_description = Column(Text)
+    reports_to_id = Column(CHAR(36), index=True)
+    account_name = Column(String(255))
+    account_description = Column(Text)
+    contact_id = Column(CHAR(36), index=True)
+    account_id = Column(CHAR(36))
+    opportunity_id = Column(CHAR(36))
+    opportunity_name = Column(String(255))
+    opportunity_amount = Column(String(50))
+    campaign_id = Column(CHAR(36))
+    birthdate = Column(Date)
+    portal_name = Column(String(255))
+    portal_app = Column(String(255))
+    website = Column(String(255))
+
+
+class LeadsAudit(Base):
+    __tablename__ = 'leads_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class LeadsCstm(Base):
+    __tablename__ = 'leads_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class LetLetter(Base):
+    __tablename__ = 'let_letters'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    inputnumber = Column(String(255))
+    inputdate = Column(Date)
+    outputnumber = Column(String(255))
+    outputdate = Column(Date)
+    organization = Column(String(100), server_default=text("'gts'"))
+    let_to = Column(String(255))
+    let_from = Column(String(255))
+    typeletters = Column(String(100), server_default=text("'output'"))
+    performer = Column(String(255))
+    file_mime_type = Column(String(100))
+    filename = Column(String(255))
+
+
+class LetLettersAccountsC(Base):
+    __tablename__ = 'let_letters_accounts_c'
+    __table_args__ = (
+        Index('let_letters_accounts_alt', 'let_letters_accountslet_letters_ida', 'let_letters_accountsaccounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    let_letters_accountslet_letters_ida = Column(String(36))
+    let_letters_accountsaccounts_idb = Column(String(36))
+
+
+class LetLettersAudit(Base):
+    __tablename__ = 'let_letters_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class LetLettersContactsC(Base):
+    __tablename__ = 'let_letters_contacts_c'
+    __table_args__ = (
+        Index('let_letters_contacts_alt', 'let_letters_contactslet_letters_ida', 'let_letters_contactscontacts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    let_letters_contactslet_letters_ida = Column(String(36))
+    let_letters_contactscontacts_idb = Column(String(36))
+
+
+class LetLettersCstm(Base):
+    __tablename__ = 'let_letters_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    number_kor_c = Column(INTEGER(255))
+    number_kor_new_c = Column(String(255))
+
+
+class LetLettersNotesC(Base):
+    __tablename__ = 'let_letters_notes_c'
+    __table_args__ = (
+        Index('let_letters_notes_alt', 'let_letters_noteslet_letters_ida', 'let_letters_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    let_letters_noteslet_letters_ida = Column(String(36))
+    let_letters_notesnotes_idb = Column(String(36))
+
+
+class LinkedDocument(Base):
+    __tablename__ = 'linked_documents'
+    __table_args__ = (
+        Index('idx_parent_document', 'parent_type', 'parent_id', 'document_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    parent_id = Column(String(36))
+    parent_type = Column(String(25))
+    document_id = Column(String(36))
+    document_revision_id = Column(String(36))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class MaMount(Base):
+    __tablename__ = 'ma_mount'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    document_name = Column(String(255))
+    filename = Column(String(255))
+    file_ext = Column(String(100))
+    file_mime_type = Column(String(100))
+    active_date = Column(Date)
+    exp_date = Column(Date)
+    category_id = Column(String(100))
+    subcategory_id = Column(String(100))
+    status_id = Column(String(100))
+
+
+class MaMountAudit(Base):
+    __tablename__ = 'ma_mount_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class MaMountConPConnectionsPlan1C(Base):
+    __tablename__ = 'ma_mount_con_p_connections_plan_1_c'
+    __table_args__ = (
+        Index('ma_mount_con_p_connections_plan_1_alt', 'ma_mount_con_p_connections_plan_1ma_mount_ida', 'ma_mount_con_p_connections_plan_1con_p_connections_plan_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ma_mount_con_p_connections_plan_1ma_mount_ida = Column(String(36))
+    ma_mount_con_p_connections_plan_1con_p_connections_plan_idb = Column(String(36))
+
+
+class MaMountCstm(Base):
+    __tablename__ = 'ma_mount_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    address_mount_c = Column(String(255))
+    contact_mount_c = Column(String(255))
+    level_signal_mount_c = Column(String(255))
+    mount_photo_c = Column(String(255))
+    mount_photo_1_c = Column(String(255))
+    mount_photo_2_c = Column(String(255))
+    mount_photo_3_c = Column(String(255))
+    con_p_connections_plan_id_c = Column(CHAR(36))
+
+
+class MaMountPoPo1C(Base):
+    __tablename__ = 'ma_mount_po_po_1_c'
+    __table_args__ = (
+        Index('ma_mount_po_po_1_alt', 'ma_mount_po_po_1ma_mount_ida', 'ma_mount_po_po_1po_po_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ma_mount_po_po_1ma_mount_ida = Column(String(36))
+    ma_mount_po_po_1po_po_idb = Column(String(36))
+
+
+class Meeting(Base):
+    __tablename__ = 'meetings'
+    __table_args__ = (
+        Index('idx_meet_stat_del', 'assigned_user_id', 'status', 'deleted'),
+        Index('idx_meet_par_del', 'parent_id', 'parent_type', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    location = Column(String(50))
+    password = Column(String(50))
+    join_url = Column(String(200))
+    host_url = Column(String(400))
+    displayed_url = Column(String(400))
+    creator = Column(String(50))
+    external_id = Column(String(50))
+    duration_hours = Column(INTEGER(3))
+    duration_minutes = Column(INTEGER(2))
+    date_start = Column(DateTime, index=True)
+    date_end = Column(DateTime)
+    parent_type = Column(String(100))
+    status = Column(String(100), server_default=text("'Planned'"))
+    type = Column(String(255), server_default=text("'Sugar'"))
+    parent_id = Column(CHAR(36))
+    reminder_time = Column(INTEGER(11), server_default=text("'-1'"))
+    email_reminder_time = Column(INTEGER(11), server_default=text("'-1'"))
+    email_reminder_sent = Column(TINYINT(1), server_default=text("'0'"))
+    outlook_id = Column(String(255))
+    sequence = Column(INTEGER(11), server_default=text("'0'"))
+    repeat_type = Column(String(36))
+    repeat_interval = Column(INTEGER(3), server_default=text("'1'"))
+    repeat_dow = Column(String(7))
+    repeat_until = Column(Date)
+    repeat_count = Column(INTEGER(7))
+    repeat_parent_id = Column(CHAR(36))
+    recurring_source = Column(String(36))
+
+
+class MeetingsContact(Base):
+    __tablename__ = 'meetings_contacts'
+    __table_args__ = (
+        Index('idx_meeting_contact', 'meeting_id', 'contact_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    meeting_id = Column(String(36), index=True)
+    contact_id = Column(String(36), index=True)
+    required = Column(String(1), server_default=text("'1'"))
+    accept_status = Column(String(25), server_default=text("'none'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class MeetingsCstm(Base):
+    __tablename__ = 'meetings_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class MeetingsLead(Base):
+    __tablename__ = 'meetings_leads'
+    __table_args__ = (
+        Index('idx_meeting_lead', 'meeting_id', 'lead_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    meeting_id = Column(String(36), index=True)
+    lead_id = Column(String(36), index=True)
+    required = Column(String(1), server_default=text("'1'"))
+    accept_status = Column(String(25), server_default=text("'none'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class MeetingsUser(Base):
+    __tablename__ = 'meetings_users'
+    __table_args__ = (
+        Index('idx_meeting_users', 'meeting_id', 'user_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    meeting_id = Column(String(36), index=True)
+    user_id = Column(String(36), index=True)
+    required = Column(String(1), server_default=text("'1'"))
+    accept_status = Column(String(25), server_default=text("'none'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class NodeNode(Base):
+    __tablename__ = 'node_node'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    organization = Column(String(100), server_default=text("'gts'"))
+
+
+class NodeNodeAudit(Base):
+    __tablename__ = 'node_node_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class NodeNodeDocumentsC(Base):
+    __tablename__ = 'node_node_documents_c'
+    __table_args__ = (
+        Index('node_node_documents_alt', 'node_node_documentsnode_node_ida', 'node_node_documentsdocuments_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    node_node_documentsnode_node_ida = Column(String(36))
+    node_node_documentsdocuments_idb = Column(String(36))
+    document_revision_id = Column(String(36))
+
+
+class NodeNodeNotesC(Base):
+    __tablename__ = 'node_node_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    node_node_notesnode_node_ida = Column(String(36), index=True)
+    node_node_notesnotes_idb = Column(String(36), index=True)
+
+
+class NodeNodeProjectC(Base):
+    __tablename__ = 'node_node_project_c'
+    __table_args__ = (
+        Index('node_node_project_alt', 'node_node_projectnode_node_ida', 'node_node_projectproject_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    node_node_projectnode_node_ida = Column(String(36))
+    node_node_projectproject_idb = Column(String(36))
+
+
+class NodeNodeTasksC(Base):
+    __tablename__ = 'node_node_tasks_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    node_node_tasksnode_node_ida = Column(String(36), index=True)
+    node_node_taskstasks_idb = Column(String(36), index=True)
+
+
+class Note(Base):
+    __tablename__ = 'notes'
+    __table_args__ = (
+        Index('idx_notes_assigned_del', 'deleted', 'assigned_user_id'),
+        Index('idx_notes_parent', 'parent_id', 'parent_type')
+    )
+
+    assigned_user_id = Column(CHAR(36))
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(255), index=True)
+    file_mime_type = Column(String(100))
+    filename = Column(String(255))
+    parent_type = Column(String(255))
+    parent_id = Column(CHAR(36))
+    contact_id = Column(CHAR(36), index=True)
+    portal_flag = Column(TINYINT(1))
+    embed_flag = Column(TINYINT(1), server_default=text("'0'"))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class NotesCstm(Base):
+    __tablename__ = 'notes_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    peeve_c = Column(TINYINT(1), server_default=text("'0'"))
+    move_c = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class OauthConsumer(Base):
+    __tablename__ = 'oauth_consumer'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    c_key = Column(String(255), unique=True)
+    c_secret = Column(String(255))
+
+
+class OauthNonce(Base):
+    __tablename__ = 'oauth_nonce'
+    __table_args__ = (
+        Index('oauth_nonce_keyts', 'conskey', 'nonce_ts'),
+    )
+
+    conskey = Column(String(32), primary_key=True, nullable=False)
+    nonce = Column(String(32), primary_key=True, nullable=False)
+    nonce_ts = Column(BIGINT(20))
+
+
+class OauthToken(Base):
+    __tablename__ = 'oauth_tokens'
+    __table_args__ = (
+        Index('oauth_state_ts', 'tstate', 'token_ts'),
+    )
+
+    id = Column(CHAR(36), primary_key=True, nullable=False)
+    secret = Column(String(32))
+    tstate = Column(String(1))
+    consumer = Column(CHAR(36), nullable=False, index=True)
+    token_ts = Column(BIGINT(20))
+    verify = Column(String(32))
+    deleted = Column(TINYINT(1), primary_key=True, nullable=False, server_default=text("'0'"))
+    callback_url = Column(String(255))
+    assigned_user_id = Column(CHAR(36))
+
+
+class ObjNNetObj(Base):
+    __tablename__ = 'obj_n_net_obj'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+
+
+class ObjNNetObjAccounts1C(Base):
+    __tablename__ = 'obj_n_net_obj_accounts_1_c'
+    __table_args__ = (
+        Index('obj_n_net_obj_accounts_1_alt', 'obj_n_net_obj_accounts_1obj_n_net_obj_ida', 'obj_n_net_obj_accounts_1accounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    obj_n_net_obj_accounts_1obj_n_net_obj_ida = Column(String(36))
+    obj_n_net_obj_accounts_1accounts_idb = Column(String(36))
+
+
+class ObjNNetObjAudit(Base):
+    __tablename__ = 'obj_n_net_obj_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class ObjNNetObjCstm(Base):
+    __tablename__ = 'obj_n_net_obj_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    num_obj_c = Column(INTEGER(255))
+    address_obj_c = Column(String(255))
+    photo_obj_c = Column(String(255))
+    address_map_obj_c = Column(String(255), server_default=text("'maps.google.com?q= Russia, Kirov, {address_obj_c}&output=embed'"))
+    photo_obj2_c = Column(String(255))
+    photo_obj3_c = Column(String(255))
+    photo_obj4_c = Column(String(255))
+    photo_obj5_c = Column(String(255))
+    photo_obj6_c = Column(String(255))
+    devices_for_audit_c = Column(Text)
+    status_obj_c = Column(String(100))
+    photo_others_c = Column(Text)
+
+
+class ObjNNetObjDocuments1C(Base):
+    __tablename__ = 'obj_n_net_obj_documents_1_c'
+    __table_args__ = (
+        Index('obj_n_net_obj_documents_1_alt', 'obj_n_net_obj_documents_1obj_n_net_obj_ida', 'obj_n_net_obj_documents_1documents_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    obj_n_net_obj_documents_1obj_n_net_obj_ida = Column(String(36))
+    obj_n_net_obj_documents_1documents_idb = Column(String(36))
+    document_revision_id = Column(String(36))
+
+
+class ObjNNetObjPoPo1C(Base):
+    __tablename__ = 'obj_n_net_obj_po_po_1_c'
+    __table_args__ = (
+        Index('obj_n_net_obj_po_po_1_alt', 'obj_n_net_obj_po_po_1obj_n_net_obj_ida', 'obj_n_net_obj_po_po_1po_po_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    obj_n_net_obj_po_po_1obj_n_net_obj_ida = Column(String(36))
+    obj_n_net_obj_po_po_1po_po_idb = Column(String(36))
+
+
+class ObjNNetObjRaActions1C(Base):
+    __tablename__ = 'obj_n_net_obj_ra_actions_1_c'
+    __table_args__ = (
+        Index('obj_n_net_obj_ra_actions_1_alt', 'obj_n_net_obj_ra_actions_1obj_n_net_obj_ida', 'obj_n_net_obj_ra_actions_1ra_actions_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    obj_n_net_obj_ra_actions_1obj_n_net_obj_ida = Column(String(36))
+    obj_n_net_obj_ra_actions_1ra_actions_idb = Column(String(36))
+
+
+class ObjNNetObjRaClaim1C(Base):
+    __tablename__ = 'obj_n_net_obj_ra_claim_1_c'
+    __table_args__ = (
+        Index('obj_n_net_obj_ra_claim_1_alt', 'obj_n_net_obj_ra_claim_1obj_n_net_obj_ida', 'obj_n_net_obj_ra_claim_1ra_claim_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    obj_n_net_obj_ra_claim_1obj_n_net_obj_ida = Column(String(36))
+    obj_n_net_obj_ra_claim_1ra_claim_idb = Column(String(36))
+
+
+class ObjNNetObjSecuritygroups1C(Base):
+    __tablename__ = 'obj_n_net_obj_securitygroups_1_c'
+    __table_args__ = (
+        Index('obj_n_net_obj_securitygroups_1_alt', 'obj_n_net_obj_securitygroups_1obj_n_net_obj_ida', 'obj_n_net_obj_securitygroups_1securitygroups_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    obj_n_net_obj_securitygroups_1obj_n_net_obj_ida = Column(String(36))
+    obj_n_net_obj_securitygroups_1securitygroups_idb = Column(String(36))
+
+
+class Opportunity(Base):
+    __tablename__ = 'opportunities'
+    __table_args__ = (
+        Index('idx_opp_id_deleted', 'id', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36), index=True)
+    opportunity_type = Column(String(255))
+    campaign_id = Column(CHAR(36))
+    lead_source = Column(String(100))
+    amount = Column(Float(asdecimal=True))
+    amount_usdollar = Column(Float(asdecimal=True))
+    currency_id = Column(CHAR(36))
+    date_closed = Column(Date)
+    next_step = Column(String(100))
+    sales_stage = Column(String(255))
+    probability = Column(Float(asdecimal=True))
+
+
+class OpportunitiesAudit(Base):
+    __tablename__ = 'opportunities_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class OpportunitiesContact(Base):
+    __tablename__ = 'opportunities_contacts'
+    __table_args__ = (
+        Index('idx_opportunities_contacts', 'opportunity_id', 'contact_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    contact_id = Column(String(36), index=True)
+    opportunity_id = Column(String(36), index=True)
+    contact_role = Column(String(50))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class OpportunitiesCstm(Base):
+    __tablename__ = 'opportunities_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    wifi_bandwidth_opp_c = Column(INTEGER(255))
+    internet_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    opp_date_opp_c = Column(Date)
+    phone_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    pdcpgi_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    pvk_opp_c = Column(INTEGER(255))
+    inet_bandwidth_opp_c = Column(Float(18))
+    packet_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    vats_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    tv_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    cctv_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    ip_cost_opp_c = Column(INTEGER(255))
+    closed_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    blockletter_opp_c = Column(TINYINT(1), server_default=text("'0'"))
+    date_blockletter_opp_c = Column(Date)
+    close_date_c = Column(Date)
+    date_apply_c = Column(Date)
+    organization_opp_c = Column(String(100), server_default=text("'empty'"))
+    code_fineko_c = Column(INTEGER(255))
+    type_cost_opp_c = Column(String(100), server_default=text("'zero'"))
+    billing_id_opp_c = Column(INTEGER(255))
+    cost_pdcpgi_opp_c = Column(INTEGER(255))
+    quantity_phone_lines_c = Column(INTEGER(255))
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class OutboundEmail(Base):
+    __tablename__ = 'outbound_email'
+    __table_args__ = (
+        Index('oe_user_id_idx', 'id', 'user_id'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50))
+    type = Column(String(15), server_default=text("'user'"))
+    user_id = Column(CHAR(36), nullable=False)
+    mail_sendtype = Column(String(8), server_default=text("'smtp'"))
+    mail_smtptype = Column(String(20), server_default=text("'other'"))
+    mail_smtpserver = Column(String(100))
+    mail_smtpport = Column(INTEGER(5), server_default=text("'0'"))
+    mail_smtpuser = Column(String(100))
+    mail_smtppass = Column(String(100))
+    mail_smtpauth_req = Column(TINYINT(1), server_default=text("'0'"))
+    mail_smtpssl = Column(INTEGER(1), server_default=text("'0'"))
+
+
+class PaPlanAcces(Base):
+    __tablename__ = 'pa_plan_access'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    date_plan = Column(Date)
+    date_complete = Column(Date)
+    status_plan_access = Column(String(100), server_default=text("'planed'"))
+    type_plan_access = Column(String(100), server_default=text("'call'"))
+
+
+class PaPlanAccessAccFacilityC(Base):
+    __tablename__ = 'pa_plan_access_acc_facility_c'
+    __table_args__ = (
+        Index('pa_plan_access_acc_facility_alt', 'pa_plan_access_acc_facilitypa_plan_access_ida', 'pa_plan_access_acc_facilityacc_facility_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    pa_plan_access_acc_facilitypa_plan_access_ida = Column(String(36))
+    pa_plan_access_acc_facilityacc_facility_idb = Column(String(36))
+
+
+class PaPlanAccessAccRequisitionC(Base):
+    __tablename__ = 'pa_plan_access_acc_requisition_c'
+    __table_args__ = (
+        Index('pa_plan_access_acc_requisition_alt', 'pa_plan_access_acc_requisitionpa_plan_access_ida', 'pa_plan_access_acc_requisitionacc_requisition_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    pa_plan_access_acc_requisitionpa_plan_access_ida = Column(String(36))
+    pa_plan_access_acc_requisitionacc_requisition_idb = Column(String(36))
+
+
+class PaPlanAccessAccUkC(Base):
+    __tablename__ = 'pa_plan_access_acc_uk_c'
+    __table_args__ = (
+        Index('pa_plan_access_acc_uk_alt', 'pa_plan_access_acc_ukpa_plan_access_ida', 'pa_plan_access_acc_ukacc_uk_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    pa_plan_access_acc_ukpa_plan_access_ida = Column(String(36))
+    pa_plan_access_acc_ukacc_uk_idb = Column(String(36))
+
+
+class PaPlanAccessAudit(Base):
+    __tablename__ = 'pa_plan_access_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PaPlanAccessCstm(Base):
+    __tablename__ = 'pa_plan_access_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    type_request_c = Column(String(100), server_default=text("'new'"))
+    area_c = Column(String(255))
+    type_account_c = Column(String(100), server_default=text("'uk'"))
+    acc_uk_id_c = Column(CHAR(36))
+    acc_requisition_id_c = Column(CHAR(36))
+
+
+class PaPlanAccessNotesC(Base):
+    __tablename__ = 'pa_plan_access_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    pa_plan_access_notespa_plan_access_ida = Column(String(36), index=True)
+    pa_plan_access_notesnotes_idb = Column(String(36), index=True)
+
+
+class PhmoPhoto(Base):
+    __tablename__ = 'phmo_photo'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    document_name = Column(String(255))
+    filename = Column(String(255))
+    file_ext = Column(String(100))
+    file_mime_type = Column(String(100))
+    active_date = Column(Date)
+    exp_date = Column(Date)
+    category_id = Column(String(100))
+    subcategory_id = Column(String(100))
+    status_id = Column(String(100))
+
+
+class PhmoPhotoAudit(Base):
+    __tablename__ = 'phmo_photo_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PhmoPhotoCstm(Base):
+    __tablename__ = 'phmo_photo_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    photo_ph_mounts_c = Column(String(255))
+
+
+class PhysiCasesP(Base):
+    __tablename__ = 'physi_cases_p'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    case_numb = Column(INTEGER(255))
+    date_case = Column(DateTime)
+    date_close = Column(DateTime)
+    resolution = Column(Text)
+    status = Column(String(100), server_default=text("'New'"))
+    priority = Column(String(100), server_default=text("'P1'"))
+    physi_phisic_id_c = Column(CHAR(36))
+
+
+class PhysiCasesPAudit(Base):
+    __tablename__ = 'physi_cases_p_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PhysiCasesPNotesC(Base):
+    __tablename__ = 'physi_cases_p_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_cases_p_notesphysi_cases_p_ida = Column(String(36), index=True)
+    physi_cases_p_notesnotes_idb = Column(String(36), index=True)
+
+
+class PhysiContractNetwork(Base):
+    __tablename__ = 'physi_contract_network'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    date_contr = Column(Date)
+    organization = Column(String(100), server_default=text("'gts'"))
+    bandwidth = Column(String(255))
+    cost = Column(INTEGER(255))
+    block = Column(TINYINT(1), server_default=text("'0'"))
+    tarif = Column(Text)
+    address = Column(String(255))
+
+
+class PhysiContractNetworkAudit(Base):
+    __tablename__ = 'physi_contract_network_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PhysiContractNetworkNotesC(Base):
+    __tablename__ = 'physi_contract_network_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_contract_network_notesphysi_contract_network_ida = Column(String(36), index=True)
+    physi_contract_network_notesnotes_idb = Column(String(36), index=True)
+
+
+class PhysiContractPhone(Base):
+    __tablename__ = 'physi_contract_phone'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    date_contr = Column(Date)
+    cost = Column(String(255))
+    tarif = Column(Text)
+    address = Column(String(255))
+
+
+class PhysiContractPhoneAudit(Base):
+    __tablename__ = 'physi_contract_phone_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PhysiContractPhoneNotesC(Base):
+    __tablename__ = 'physi_contract_phone_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_contract_phone_notesphysi_contract_phone_ida = Column(String(36), index=True)
+    physi_contract_phone_notesnotes_idb = Column(String(36), index=True)
+
+
+class PhysiPhisic(Base):
+    __tablename__ = 'physi_phisic'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    address = Column(String(255))
+    phone = Column(String(255))
+    mobile = Column(String(255))
+    email = Column(String(255))
+    serial_passport = Column(String(5))
+    number_passport = Column(String(6))
+    issue_passport = Column(String(255))
+    date_passport = Column(Date)
+
+
+class PhysiPhisicAudit(Base):
+    __tablename__ = 'physi_phisic_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PhysiPhisicCallsC(Base):
+    __tablename__ = 'physi_phisic_calls_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_phisic_callsphysi_phisic_ida = Column(String(36), index=True)
+    physi_phisic_callscalls_idb = Column(String(36), index=True)
+
+
+class PhysiPhisicNotesC(Base):
+    __tablename__ = 'physi_phisic_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_phisic_notesphysi_phisic_ida = Column(String(36), index=True)
+    physi_phisic_notesnotes_idb = Column(String(36), index=True)
+
+
+class PhysiPhisicPhysiCasesPC(Base):
+    __tablename__ = 'physi_phisic_physi_cases_p_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_phisic_physi_cases_pphysi_phisic_ida = Column(String(36), index=True)
+    physi_phisic_physi_cases_pphysi_cases_p_idb = Column(String(36), index=True)
+
+
+class PhysiPhisicPhysiContractNetworkC(Base):
+    __tablename__ = 'physi_phisic_physi_contract_network_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_phisic_physi_contract_networkphysi_phisic_ida = Column(String(36), index=True)
+    physi_phisic_physi_contract_networkphysi_contract_network_idb = Column(String(36), index=True)
+
+
+class PhysiPhisicPhysiContractPhoneC(Base):
+    __tablename__ = 'physi_phisic_physi_contract_phone_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    physi_phisic_physi_contract_phonephysi_phisic_ida = Column(String(36), index=True)
+    physi_phisic_physi_contract_phonephysi_contract_phone_idb = Column(String(36), index=True)
+
+
+class PhysiRequest(Base):
+    __tablename__ = 'physi_request'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    document_name = Column(String(255))
+    filename = Column(String(255))
+    file_ext = Column(String(100))
+    file_mime_type = Column(String(100))
+    active_date = Column(Date)
+    exp_date = Column(Date)
+    category_id = Column(String(100))
+    subcategory_id = Column(String(100))
+    status_id = Column(String(100))
+
+
+class PhysiRequestAudit(Base):
+    __tablename__ = 'physi_request_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PoPo(Base):
+    __tablename__ = 'po_po'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    parent_type = Column(String(255))
+    parent_id = Column(CHAR(36))
+
+
+class PoPoAudit(Base):
+    __tablename__ = 'po_po_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PoPoConPConnectionsPlan1C(Base):
+    __tablename__ = 'po_po_con_p_connections_plan_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    po_po_con_p_connections_plan_1po_po_ida = Column(String(36), index=True)
+    po_po_con_p_connections_plan_1con_p_connections_plan_idb = Column(String(36), index=True)
+
+
+class PoPoCstm(Base):
+    __tablename__ = 'po_po_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    invnum_c = Column(String(255))
+    status_c = Column(String(100), server_default=text("'three'"))
+    hardware_types_c = Column(String(100))
+    account_id_c = Column(CHAR(36))
+
+
+class PoPoNotes1C(Base):
+    __tablename__ = 'po_po_notes_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    po_po_notes_1po_po_ida = Column(String(36), index=True)
+    po_po_notes_1notes_idb = Column(String(36), index=True)
+
+
+class PoPoRepRepairs1C(Base):
+    __tablename__ = 'po_po_rep_repairs_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    po_po_rep_repairs_1po_po_ida = Column(String(36), index=True)
+    po_po_rep_repairs_1rep_repairs_idb = Column(String(36), index=True)
+
+
+class Project(Base):
+    __tablename__ = 'project'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    assigned_user_id = Column(CHAR(36))
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(50))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    estimated_start_date = Column(Date)
+    estimated_end_date = Column(Date)
+    status = Column(String(255))
+    priority = Column(String(255))
+
+
+class ProjectCstm(Base):
+    __tablename__ = 'project_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    date_close_c = Column(Date)
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class ProjectTask(Base):
+    __tablename__ = 'project_task'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    project_id = Column(CHAR(36), nullable=False)
+    project_task_id = Column(INTEGER(11))
+    name = Column(String(50))
+    status = Column(String(255))
+    description = Column(Text)
+    predecessors = Column(Text)
+    date_start = Column(Date)
+    time_start = Column(INTEGER(11))
+    time_finish = Column(INTEGER(11))
+    date_finish = Column(Date)
+    duration = Column(INTEGER(11))
+    duration_unit = Column(Text)
+    actual_duration = Column(INTEGER(11))
+    percent_complete = Column(INTEGER(11))
+    date_due = Column(Date)
+    time_due = Column(Time)
+    parent_task_id = Column(INTEGER(11))
+    assigned_user_id = Column(CHAR(36))
+    modified_user_id = Column(CHAR(36))
+    priority = Column(String(255))
+    created_by = Column(CHAR(36))
+    milestone_flag = Column(TINYINT(1))
+    order_number = Column(INTEGER(11), server_default=text("'1'"))
+    task_number = Column(INTEGER(11))
+    estimated_effort = Column(INTEGER(11))
+    actual_effort = Column(INTEGER(11))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    utilization = Column(INTEGER(11), server_default=text("'100'"))
+
+
+class ProjectTaskAudit(Base):
+    __tablename__ = 'project_task_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class ProjectsAccount(Base):
+    __tablename__ = 'projects_accounts'
+    __table_args__ = (
+        Index('projects_accounts_alt', 'project_id', 'account_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    account_id = Column(String(36), index=True)
+    project_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProjectsBug(Base):
+    __tablename__ = 'projects_bugs'
+    __table_args__ = (
+        Index('projects_bugs_alt', 'project_id', 'bug_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    bug_id = Column(String(36), index=True)
+    project_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProjectsCase(Base):
+    __tablename__ = 'projects_cases'
+    __table_args__ = (
+        Index('projects_cases_alt', 'project_id', 'case_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    case_id = Column(String(36), index=True)
+    project_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProjectsContact(Base):
+    __tablename__ = 'projects_contacts'
+    __table_args__ = (
+        Index('projects_contacts_alt', 'project_id', 'contact_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    contact_id = Column(String(36), index=True)
+    project_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProjectsOpportunity(Base):
+    __tablename__ = 'projects_opportunities'
+    __table_args__ = (
+        Index('projects_opportunities_alt', 'project_id', 'opportunity_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    opportunity_id = Column(String(36), index=True)
+    project_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProjectsProduct(Base):
+    __tablename__ = 'projects_products'
+    __table_args__ = (
+        Index('projects_products_alt', 'project_id', 'product_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    product_id = Column(String(36), index=True)
+    project_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProjecttaskContacts1C(Base):
+    __tablename__ = 'projecttask_contacts_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    projecttask_contacts_1projecttask_ida = Column(String(36), index=True)
+    projecttask_contacts_1contacts_idb = Column(String(36), index=True)
+
+
+class ProspectListCampaign(Base):
+    __tablename__ = 'prospect_list_campaigns'
+    __table_args__ = (
+        Index('idx_prospect_list_campaigns', 'prospect_list_id', 'campaign_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    prospect_list_id = Column(String(36), index=True)
+    campaign_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class ProspectList(Base):
+    __tablename__ = 'prospect_lists'
+
+    assigned_user_id = Column(CHAR(36))
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50), index=True)
+    list_type = Column(String(100))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    deleted = Column(TINYINT(1))
+    description = Column(Text)
+    domain_name = Column(String(255))
+
+
+class ProspectListsProspect(Base):
+    __tablename__ = 'prospect_lists_prospects'
+    __table_args__ = (
+        Index('idx_plp_rel_id', 'related_id', 'related_type', 'prospect_list_id'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    prospect_list_id = Column(String(36), index=True)
+    related_id = Column(String(36))
+    related_type = Column(String(25))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class Prospect(Base):
+    __tablename__ = 'prospects'
+    __table_args__ = (
+        Index('idx_prospects_id_del', 'id', 'deleted'),
+        Index('idx_prospects_last_first', 'last_name', 'first_name', 'deleted'),
+        Index('idx_prospecs_del_last', 'last_name', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36), index=True)
+    salutation = Column(String(255))
+    first_name = Column(String(100))
+    last_name = Column(String(100))
+    title = Column(String(100))
+    department = Column(String(255))
+    do_not_call = Column(TINYINT(1), server_default=text("'0'"))
+    phone_home = Column(String(100))
+    phone_mobile = Column(String(100))
+    phone_work = Column(String(100))
+    phone_other = Column(String(100))
+    phone_fax = Column(String(100))
+    primary_address_street = Column(String(150))
+    primary_address_city = Column(String(100))
+    primary_address_state = Column(String(100))
+    primary_address_postalcode = Column(String(20))
+    primary_address_country = Column(String(255))
+    alt_address_street = Column(String(150))
+    alt_address_city = Column(String(100))
+    alt_address_state = Column(String(100))
+    alt_address_postalcode = Column(String(20))
+    alt_address_country = Column(String(255))
+    assistant = Column(String(75))
+    assistant_phone = Column(String(100))
+    tracker_key = Column(INTEGER(11), nullable=False, index=True)
+    birthdate = Column(Date)
+    lead_id = Column(CHAR(36))
+    account_name = Column(String(150))
+    campaign_id = Column(CHAR(36))
+
+
+class ProspectsCstm(Base):
+    __tablename__ = 'prospects_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    jjwg_maps_lng_c = Column(Float(11), server_default=text("'0.00000000'"))
+    jjwg_maps_lat_c = Column(Float(10), server_default=text("'0.00000000'"))
+    jjwg_maps_geocode_status_c = Column(String(255))
+    jjwg_maps_address_c = Column(String(255))
+
+
+class PurPurchase(Base):
+    __tablename__ = 'pur_purchases'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    grouppur = Column(String(100))
+    type = Column(String(100), server_default=text("'new'"))
+    status = Column(String(100), server_default=text("'requisition'"))
+    date_pur = Column(Date)
+    purpose = Column(Text)
+    cost = Column(INTEGER(255))
+
+
+class PurPurchasesAudit(Base):
+    __tablename__ = 'pur_purchases_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class PurPurchasesNotesC(Base):
+    __tablename__ = 'pur_purchases_notes_c'
+    __table_args__ = (
+        Index('pur_purchases_notes_alt', 'pur_purchases_notespur_purchases_ida', 'pur_purchases_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    pur_purchases_notespur_purchases_ida = Column(String(36))
+    pur_purchases_notesnotes_idb = Column(String(36))
+
+
+class QuQuestion(Base):
+    __tablename__ = 'qu_question'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    type = Column(String(100), server_default=text("'new'"))
+    user_id_c = Column(CHAR(36))
+    account_id_c = Column(CHAR(36))
+    date_question = Column(Date)
+    user_accounts = Column(String(255))
+    service_problem = Column(Text)
+    support_calls = Column(String(100), server_default=text("'none'"))
+    support = Column(String(100), server_default=text("'none'"))
+    install = Column(String(100), server_default=text("'none'"))
+    sell = Column(String(100), server_default=text("'none'"))
+    quality_client = Column(String(100), server_default=text("'0'"))
+
+
+class QuQuestionAccountsC(Base):
+    __tablename__ = 'qu_question_accounts_c'
+    __table_args__ = (
+        Index('qu_question_accounts_alt', 'qu_question_accountsqu_question_ida', 'qu_question_accountsaccounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    qu_question_accountsqu_question_ida = Column(String(36))
+    qu_question_accountsaccounts_idb = Column(String(36))
+
+
+class QuQuestionAudit(Base):
+    __tablename__ = 'qu_question_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class RaAction(Base):
+    __tablename__ = 'ra_actions'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    planactiondate = Column(DateTime)
+    actiondate = Column(DateTime)
+    planduration = Column(INTEGER(255))
+    duration = Column(INTEGER(255))
+    noservice = Column(TINYINT(1), server_default=text("'0'"))
+    plannoservice = Column(TINYINT(1), server_default=text("'0'"))
+    address = Column(String(255))
+    status = Column(String(100), server_default=text("'adapting'"))
+    goal = Column(Text)
+    comment = Column(Text)
+
+
+class RaActionsAccountsC(Base):
+    __tablename__ = 'ra_actions_accounts_c'
+    __table_args__ = (
+        Index('ra_actions_accounts_alt', 'ra_actions_accountsra_actions_ida', 'ra_actions_accountsaccounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_actions_accountsra_actions_ida = Column(String(36))
+    ra_actions_accountsaccounts_idb = Column(String(36))
+
+
+class RaActionsAudit(Base):
+    __tablename__ = 'ra_actions_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class RaActionsCasesC(Base):
+    __tablename__ = 'ra_actions_cases_c'
+    __table_args__ = (
+        Index('ra_actions_cases_alt', 'ra_actions_casesra_actions_ida', 'ra_actions_casescases_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_actions_casesra_actions_ida = Column(String(36))
+    ra_actions_casescases_idb = Column(String(36))
+
+
+class RaActionsNotesC(Base):
+    __tablename__ = 'ra_actions_notes_c'
+    __table_args__ = (
+        Index('ra_actions_notes_alt', 'ra_actions_notesra_actions_ida', 'ra_actions_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_actions_notesra_actions_ida = Column(String(36))
+    ra_actions_notesnotes_idb = Column(String(36))
+
+
+class RaActionsSecuritygroups1C(Base):
+    __tablename__ = 'ra_actions_securitygroups_1_c'
+    __table_args__ = (
+        Index('ra_actions_securitygroups_1_alt', 'ra_actions_securitygroups_1ra_actions_ida', 'ra_actions_securitygroups_1securitygroups_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_actions_securitygroups_1ra_actions_ida = Column(String(36))
+    ra_actions_securitygroups_1securitygroups_idb = Column(String(36))
+
+
+class RaActionsTasksC(Base):
+    __tablename__ = 'ra_actions_tasks_c'
+    __table_args__ = (
+        Index('ra_actions_tasks_alt', 'ra_actions_tasksra_actions_ida', 'ra_actions_taskstasks_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_actions_tasksra_actions_ida = Column(String(36))
+    ra_actions_taskstasks_idb = Column(String(36))
+
+
+class RaClaim(Base):
+    __tablename__ = 'ra_claim'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    date_event = Column(Date)
+    group_onus = Column(String(100))
+    volume = Column(Text)
+
+
+class RaClaimAudit(Base):
+    __tablename__ = 'ra_claim_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class RaClaimBugs1C(Base):
+    __tablename__ = 'ra_claim_bugs_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_claim_bugs_1ra_claim_ida = Column(String(36), index=True)
+    ra_claim_bugs_1bugs_idb = Column(String(36), index=True)
+
+
+class RaClaimCasesC(Base):
+    __tablename__ = 'ra_claim_cases_c'
+    __table_args__ = (
+        Index('ra_claim_cases_alt', 'ra_claim_casesra_claim_ida', 'ra_claim_casescases_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_claim_casesra_claim_ida = Column(String(36))
+    ra_claim_casescases_idb = Column(String(36))
+
+
+class RaClaimNotesC(Base):
+    __tablename__ = 'ra_claim_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_claim_notesra_claim_ida = Column(String(36), index=True)
+    ra_claim_notesnotes_idb = Column(String(36), index=True)
+
+
+class RaClaimPhysiCasesPC(Base):
+    __tablename__ = 'ra_claim_physi_cases_p_c'
+    __table_args__ = (
+        Index('ra_claim_physi_cases_p_alt', 'ra_claim_physi_cases_pra_claim_ida', 'ra_claim_physi_cases_pphysi_cases_p_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_claim_physi_cases_pra_claim_ida = Column(String(36))
+    ra_claim_physi_cases_pphysi_cases_p_idb = Column(String(36))
+
+
+class RaClaimRaActionsC(Base):
+    __tablename__ = 'ra_claim_ra_actions_c'
+    __table_args__ = (
+        Index('ra_claim_ra_actions_alt', 'ra_claim_ra_actionsra_claim_ida', 'ra_claim_ra_actionsra_actions_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_claim_ra_actionsra_claim_ida = Column(String(36))
+    ra_claim_ra_actionsra_actions_idb = Column(String(36))
+
+
+class RaSurvey(Base):
+    __tablename__ = 'ra_survey'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    address = Column(String(255))
+    contact = Column(String(255))
+    status = Column(String(100), server_default=text("'request'"))
+    description_survey = Column(Text)
+    date_request = Column(Date)
+    addressmap = Column(String(255), server_default=text("'maps.google.com?q= Russia, Kirov, {address}&output=embed'"))
+    date_survey = Column(Date)
+    resolution = Column(String(255))
+
+
+class RaSurveyAccRequisition1C(Base):
+    __tablename__ = 'ra_survey_acc_requisition_1_c'
+    __table_args__ = (
+        Index('ra_survey_acc_requisition_1_alt', 'ra_survey_acc_requisition_1ra_survey_ida', 'ra_survey_acc_requisition_1acc_requisition_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_survey_acc_requisition_1ra_survey_ida = Column(String(36))
+    ra_survey_acc_requisition_1acc_requisition_idb = Column(String(36))
+
+
+class RaSurveyAccountsC(Base):
+    __tablename__ = 'ra_survey_accounts_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_survey_accountsra_survey_ida = Column(String(36), index=True)
+    ra_survey_accountsaccounts_idb = Column(String(36), index=True)
+
+
+class RaSurveyAudit(Base):
+    __tablename__ = 'ra_survey_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class RaSurveyCstm(Base):
+    __tablename__ = 'ra_survey_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    source_inf_c = Column(Text)
+    permit_installation_c = Column(String(100), server_default=text("'none'"))
+    ess_comment_c = Column(Text)
+    date_installation_c = Column(Date)
+    position_c = Column(String(50))
+    maps_pos_c = Column(String(255), server_default=text("'https://www.google.ru/maps/place/58.6008947,49.6473304,14z'"))
+    status_rs_c = Column(String(100), server_default=text("'none'"))
+    comment_rs_c = Column(Text)
+
+
+class RaSurveyNotesC(Base):
+    __tablename__ = 'ra_survey_notes_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_survey_notesra_survey_ida = Column(String(36), index=True)
+    ra_survey_notesnotes_idb = Column(String(36), index=True)
+
+
+class RaSurveyPhysiPhisicC(Base):
+    __tablename__ = 'ra_survey_physi_phisic_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    ra_survey_physi_phisicra_survey_ida = Column(String(36), index=True)
+    ra_survey_physi_phisicphysi_phisic_idb = Column(String(36), index=True)
+
+
+class Relationship(Base):
+    __tablename__ = 'relationships'
+
+    id = Column(CHAR(36), primary_key=True)
+    relationship_name = Column(String(150), index=True)
+    lhs_module = Column(String(100))
+    lhs_table = Column(String(64))
+    lhs_key = Column(String(64))
+    rhs_module = Column(String(100))
+    rhs_table = Column(String(64))
+    rhs_key = Column(String(64))
+    join_table = Column(String(128))
+    join_key_lhs = Column(String(128))
+    join_key_rhs = Column(String(128))
+    relationship_type = Column(String(64))
+    relationship_role_column = Column(String(64))
+    relationship_role_column_value = Column(String(50))
+    reverse = Column(TINYINT(1), server_default=text("'0'"))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class Release(Base):
+    __tablename__ = 'releases'
+    __table_args__ = (
+        Index('idx_releases', 'name', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    deleted = Column(TINYINT(1))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(50))
+    list_order = Column(INTEGER(4))
+    status = Column(String(100))
+
+
+class RepRepair(Base):
+    __tablename__ = 'rep_repairs'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+
+
+class RepRepairsAudit(Base):
+    __tablename__ = 'rep_repairs_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class RepRepairsBugs1C(Base):
+    __tablename__ = 'rep_repairs_bugs_1_c'
+    __table_args__ = (
+        Index('rep_repairs_bugs_1_alt', 'rep_repairs_bugs_1rep_repairs_ida', 'rep_repairs_bugs_1bugs_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    rep_repairs_bugs_1rep_repairs_ida = Column(String(36))
+    rep_repairs_bugs_1bugs_idb = Column(String(36))
+
+
+class RepRepairsCstm(Base):
+    __tablename__ = 'rep_repairs_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    user_id_c = Column(CHAR(36))
+    user_id1_c = Column(CHAR(36))
+    date_of_completion_c = Column(Date)
+    cat_work_c = Column(String(100), server_default=text("'1'"))
+    account_id_c = Column(CHAR(36))
+    address_c = Column(String(255))
+    check_ovm_c = Column(TINYINT(1), server_default=text("'0'"))
+    photo_one_c = Column(String(255))
+    photo_two_c = Column(String(255))
+    photo_three_c = Column(String(255))
+    photo_four_c = Column(String(255))
+    photo_five_c = Column(String(255))
+    photo_six_c = Column(String(255))
+    contacts_c = Column(String(255))
+    time_c = Column(String(255))
+    user_id2_c = Column(CHAR(36))
+    status_c = Column(String(100), server_default=text("'one'"))
+    comment_c = Column(Text)
+    new_cat_work_c = Column(Text)
+
+
+class RepRepairsNotes1C(Base):
+    __tablename__ = 'rep_repairs_notes_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    rep_repairs_notes_1rep_repairs_ida = Column(String(36), index=True)
+    rep_repairs_notes_1notes_idb = Column(String(36), index=True)
+
+
+class RepTechnicalConnection(Base):
+    __tablename__ = 'rep_technical_connections'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    date_work = Column(Date)
+    type = Column(String(100))
+
+
+class RepTechnicalConnectionsAudit(Base):
+    __tablename__ = 'rep_technical_connections_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class Role(Base):
+    __tablename__ = 'roles'
+    __table_args__ = (
+        Index('idx_role_id_del', 'id', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(150))
+    description = Column(Text)
+    modules = Column(Text)
+    deleted = Column(TINYINT(1))
+
+
+class RolesModule(Base):
+    __tablename__ = 'roles_modules'
+
+    id = Column(String(36), primary_key=True)
+    role_id = Column(String(36), index=True)
+    module_id = Column(String(36), index=True)
+    allow = Column(TINYINT(1), server_default=text("'0'"))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class RolesUser(Base):
+    __tablename__ = 'roles_users'
+
+    id = Column(String(36), primary_key=True)
+    role_id = Column(String(36), index=True)
+    user_id = Column(String(36), index=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class SavedSearch(Base):
+    __tablename__ = 'saved_search'
+    __table_args__ = (
+        Index('idx_desc', 'name', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(150))
+    search_module = Column(String(150))
+    deleted = Column(TINYINT(1))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    assigned_user_id = Column(CHAR(36))
+    contents = Column(Text)
+    description = Column(Text)
+
+
+class Scheduler(Base):
+    __tablename__ = 'schedulers'
+    __table_args__ = (
+        Index('idx_schedule', 'date_time_start', 'deleted'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    created_by = Column(CHAR(36))
+    modified_user_id = Column(CHAR(36))
+    name = Column(String(255))
+    job = Column(String(255))
+    date_time_start = Column(DateTime)
+    date_time_end = Column(DateTime)
+    job_interval = Column(String(100))
+    time_from = Column(Time)
+    time_to = Column(Time)
+    last_run = Column(DateTime)
+    status = Column(String(100))
+    catch_up = Column(TINYINT(1), server_default=text("'1'"))
+
+
+class Securitygroup(Base):
+    __tablename__ = 'securitygroups'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    noninheritable = Column(TINYINT(1))
+
+
+class SecuritygroupsAclRole(Base):
+    __tablename__ = 'securitygroups_acl_roles'
+
+    id = Column(CHAR(36), primary_key=True)
+    securitygroup_id = Column(CHAR(36))
+    role_id = Column(CHAR(36))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class SecuritygroupsAudit(Base):
+    __tablename__ = 'securitygroups_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class SecuritygroupsDefault(Base):
+    __tablename__ = 'securitygroups_default'
+
+    id = Column(CHAR(36), primary_key=True)
+    securitygroup_id = Column(CHAR(36))
+    module = Column(String(50))
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class SecuritygroupsRecord(Base):
+    __tablename__ = 'securitygroups_records'
+    __table_args__ = (
+        Index('idx_securitygroups_records_del', 'deleted', 'record_id', 'module', 'securitygroup_id'),
+        Index('idx_securitygroups_records_mod', 'module', 'deleted', 'record_id', 'securitygroup_id')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    securitygroup_id = Column(CHAR(36))
+    record_id = Column(CHAR(36))
+    module = Column(CHAR(36))
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class SecuritygroupsUser(Base):
+    __tablename__ = 'securitygroups_users'
+    __table_args__ = (
+        Index('securitygroups_users_idxd', 'user_id', 'deleted', 'securitygroup_id'),
+        Index('securitygroups_users_idxc', 'user_id', 'deleted', 'securitygroup_id', 'id')
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    securitygroup_id = Column(String(36), index=True)
+    user_id = Column(String(36), index=True)
+    noninheritable = Column(TINYINT(1))
+
+
+class SkSketch(Base):
+    __tablename__ = 'sk_sketch'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    document_name = Column(String(255))
+    filename = Column(String(255))
+    file_ext = Column(String(100))
+    file_mime_type = Column(String(100))
+    active_date = Column(Date)
+    exp_date = Column(Date)
+    category_id = Column(String(100), server_default=text("'scheme'"))
+    subcategory_id = Column(String(100), server_default=text("'requisition'"))
+    status_id = Column(String(100))
+    address = Column(String(255))
+    status_requisition = Column(String(100), server_default=text("'request'"))
+
+
+class SkSketchAccRequisitionC(Base):
+    __tablename__ = 'sk_sketch_acc_requisition_c'
+    __table_args__ = (
+        Index('sk_sketch_acc_requisition_alt', 'sk_sketch_acc_requisitionsk_sketch_ida', 'sk_sketch_acc_requisitionacc_requisition_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    sk_sketch_acc_requisitionsk_sketch_ida = Column(String(36))
+    sk_sketch_acc_requisitionacc_requisition_idb = Column(String(36))
+
+
+class SkSketchAudit(Base):
+    __tablename__ = 'sk_sketch_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class SkSketchRaSurveyC(Base):
+    __tablename__ = 'sk_sketch_ra_survey_c'
+    __table_args__ = (
+        Index('sk_sketch_ra_survey_alt', 'sk_sketch_ra_surveysk_sketch_ida', 'sk_sketch_ra_surveyra_survey_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    sk_sketch_ra_surveysk_sketch_ida = Column(String(36))
+    sk_sketch_ra_surveyra_survey_idb = Column(String(36))
+
+
+class Sugarfeed(Base):
+    __tablename__ = 'sugarfeed'
+    __table_args__ = (
+        Index('idx_sgrfeed_rmod_rid_date', 'related_module', 'related_id', 'date_entered'),
+        Index('sgrfeed_date', 'date_entered', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(String(255))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    related_module = Column(String(100))
+    related_id = Column(CHAR(36))
+    link_url = Column(String(255))
+    link_type = Column(String(30))
+
+
+class Task(Base):
+    __tablename__ = 'tasks'
+    __table_args__ = (
+        Index('idx_task_par_del', 'parent_id', 'parent_type', 'deleted'),
+        Index('idx_task_con_del', 'contact_id', 'deleted')
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(50), index=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36), index=True)
+    status = Column(String(100), index=True, server_default=text("'Not Started'"))
+    date_due_flag = Column(TINYINT(1), server_default=text("'0'"))
+    date_due = Column(DateTime)
+    date_start_flag = Column(TINYINT(1), server_default=text("'0'"))
+    date_start = Column(DateTime)
+    parent_type = Column(String(255))
+    parent_id = Column(CHAR(36))
+    contact_id = Column(CHAR(36))
+    priority = Column(String(100))
+
+
+class TasksAccounts1C(Base):
+    __tablename__ = 'tasks_accounts_1_c'
+    __table_args__ = (
+        Index('tasks_accounts_1_alt', 'tasks_accounts_1tasks_ida', 'tasks_accounts_1accounts_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tasks_accounts_1tasks_ida = Column(String(36))
+    tasks_accounts_1accounts_idb = Column(String(36))
+
+
+class TasksCalls1C(Base):
+    __tablename__ = 'tasks_calls_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tasks_calls_1tasks_ida = Column(String(36), index=True)
+    tasks_calls_1calls_idb = Column(String(36), index=True)
+
+
+class TcClosecontract(Base):
+    __tablename__ = 'tc_closecontract'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    dateclose = Column(Date)
+    dateperform = Column(Date)
+    user_id_c = Column(CHAR(36))
+    opportunity_id_c = Column(CHAR(36))
+    note_id_c = Column(CHAR(36))
+
+
+class TcClosecontractAudit(Base):
+    __tablename__ = 'tc_closecontract_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class TcClosecontractNotesC(Base):
+    __tablename__ = 'tc_closecontract_notes_c'
+    __table_args__ = (
+        Index('tc_closecontract_notes_alt', 'tc_closecontract_notestc_closecontract_ida', 'tc_closecontract_notesnotes_idb'),
+    )
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_closecontract_notestc_closecontract_ida = Column(String(36))
+    tc_closecontract_notesnotes_idb = Column(String(36))
+
+
+class TcRenamecontract(Base):
+    __tablename__ = 'tc_renamecontract'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    daterename = Column(Date)
+    dateperform = Column(Date)
+    user_id_c = Column(CHAR(36))
+
+
+class TcRenamecontractAccounts1C(Base):
+    __tablename__ = 'tc_renamecontract_accounts_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_renamecontract_accounts_1accounts_ida = Column(String(36), index=True)
+    tc_renamecontract_accounts_1tc_renamecontract_idb = Column(String(36), index=True)
+
+
+class TcRenamecontractAccountsC(Base):
+    __tablename__ = 'tc_renamecontract_accounts_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_renamecontract_accountsaccounts_ida = Column(String(36), index=True)
+    tc_renamecontract_accountstc_renamecontract_idb = Column(String(36), index=True)
+
+
+class TcRenamecontractAudit(Base):
+    __tablename__ = 'tc_renamecontract_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class TcRenamecontractCstm(Base):
+    __tablename__ = 'tc_renamecontract_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    status_c = Column(String(100), server_default=text("'one'"))
+
+
+class TcRenamecontractOpportunities1C(Base):
+    __tablename__ = 'tc_renamecontract_opportunities_1_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_renamecontract_opportunities_1opportunities_ida = Column(String(36), index=True)
+    tc_renamecontract_opportunities_1tc_renamecontract_idb = Column(String(36), index=True)
+
+
+class TcRenamecontractOpportunitiesC(Base):
+    __tablename__ = 'tc_renamecontract_opportunities_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_renamecontract_opportunitiesopportunities_ida = Column(String(36), index=True)
+    tc_renamecontract_opportunitiestc_renamecontract_idb = Column(String(36), index=True)
+
+
+class TcRenamecontractTcTarifchangephoneC(Base):
+    __tablename__ = 'tc_renamecontract_tc_tarifchangephone_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_renamecontract_tc_tarifchangephonetc_renamecontract_ida = Column(String(36), index=True)
+    tc_renamecontract_tc_tarifchangephonetc_tarifchangephone_idb = Column(String(36), index=True)
+
+
+class TcRenamecontractTcTariffchangeinetC(Base):
+    __tablename__ = 'tc_renamecontract_tc_tariffchangeinet_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_renamecontract_tc_tariffchangeinettc_renamecontract_ida = Column(String(36), index=True)
+    tc_renamecontract_tc_tariffchangeinettc_tariffchangeinet_idb = Column(String(36), index=True)
+
+
+class TcTarifchangephone(Base):
+    __tablename__ = 'tc_tarifchangephone'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    datechange = Column(Date)
+    dateperform = Column(Date)
+    user_id_c = Column(CHAR(36))
+    oldservice = Column(Text)
+    newservice = Column(Text)
+    opportunity_id_c = Column(CHAR(36))
+    opportunity_id1_c = Column(CHAR(36))
+
+
+class TcTarifchangephoneAccountsC(Base):
+    __tablename__ = 'tc_tarifchangephone_accounts_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_tarifchangephone_accountsaccounts_ida = Column(String(36), index=True)
+    tc_tarifchangephone_accountstc_tarifchangephone_idb = Column(String(36), index=True)
+
+
+class TcTarifchangephoneAudit(Base):
+    __tablename__ = 'tc_tarifchangephone_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class TcTarifchangephoneCstm(Base):
+    __tablename__ = 'tc_tarifchangephone_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    status_c = Column(String(100), server_default=text("'one'"))
+
+
+class TcTariffchangeinet(Base):
+    __tablename__ = 'tc_tariffchangeinet'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    oldbandwith = Column(Float(18))
+    newbandwith = Column(Float(18))
+    oldcost = Column(INTEGER(255))
+    newcost = Column(INTEGER(255))
+    datechange = Column(Date)
+    daterealchange = Column(Date)
+    checked = Column(TINYINT(1), server_default=text("'0'"))
+    datechecked = Column(Date)
+    user_id_c = Column(CHAR(36))
+    opportunity_id_c = Column(CHAR(36))
+    opportunity_id1_c = Column(CHAR(36))
+    checkcomment = Column(Text)
+    user_id1_c = Column(CHAR(36))
+    oldlimit = Column(INTEGER(255))
+    newlimit = Column(INTEGER(255))
+
+
+class TcTariffchangeinetAccountsC(Base):
+    __tablename__ = 'tc_tariffchangeinet_accounts_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    tc_tariffchangeinet_accountsaccounts_ida = Column(String(36), index=True)
+    tc_tariffchangeinet_accountstc_tariffchangeinet_idb = Column(String(36), index=True)
+
+
+class TcTariffchangeinetAudit(Base):
+    __tablename__ = 'tc_tariffchangeinet_audit'
+
+    id = Column(CHAR(36), primary_key=True)
+    parent_id = Column(CHAR(36), nullable=False, index=True)
+    date_created = Column(DateTime)
+    created_by = Column(String(36))
+    field_name = Column(String(100))
+    data_type = Column(String(100))
+    before_value_string = Column(String(255))
+    after_value_string = Column(String(255))
+    before_value_text = Column(Text)
+    after_value_text = Column(Text)
+
+
+class TcTariffchangeinetCstm(Base):
+    __tablename__ = 'tc_tariffchangeinet_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    status_c = Column(String(100), server_default=text("'transmit'"))
+
+
+class Tracker(Base):
+    __tablename__ = 'tracker'
+    __table_args__ = (
+        Index('idx_tracker_userid_vis_id', 'user_id', 'visible', 'id'),
+        Index('idx_tracker_userid_itemid_vis', 'user_id', 'item_id', 'visible')
+    )
+
+    id = Column(INTEGER(11), primary_key=True)
+    monitor_id = Column(CHAR(36), nullable=False, index=True)
+    user_id = Column(String(36))
+    module_name = Column(String(255))
+    item_id = Column(String(36), index=True)
+    item_summary = Column(String(255))
+    date_modified = Column(DateTime, index=True)
+    action = Column(String(255))
+    session_id = Column(String(36))
+    visible = Column(TINYINT(1), server_default=text("'0'"))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+
+
+class UpgradeHistory(Base):
+    __tablename__ = 'upgrade_history'
+
+    id = Column(CHAR(36), primary_key=True)
+    filename = Column(String(255))
+    md5sum = Column(String(32), unique=True)
+    type = Column(String(30))
+    status = Column(String(50))
+    version = Column(String(64))
+    name = Column(String(255))
+    description = Column(Text)
+    id_name = Column(String(255))
+    manifest = Column(LONGTEXT)
+    date_entered = Column(DateTime)
+    enabled = Column(TINYINT(1), server_default=text("'1'"))
+
+
+class UserPreference(Base):
+    __tablename__ = 'user_preferences'
+    __table_args__ = (
+        Index('idx_userprefnamecat', 'assigned_user_id', 'category'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    category = Column(String(50))
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    assigned_user_id = Column(CHAR(36))
+    contents = Column(LONGTEXT)
+
+
+class User(Base):
+    __tablename__ = 'users'
+    __table_args__ = (
+        Index('idx_user_name', 'user_name', 'is_group', 'status', 'last_name', 'first_name', 'id'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    user_name = Column(String(60))
+    user_hash = Column(String(255))
+    system_generated_password = Column(TINYINT(1))
+    pwd_last_changed = Column(DateTime)
+    authenticate_id = Column(String(100))
+    sugar_login = Column(TINYINT(1), server_default=text("'1'"))
+    first_name = Column(String(30))
+    last_name = Column(String(30))
+    is_admin = Column(TINYINT(1), server_default=text("'0'"))
+    external_auth_only = Column(TINYINT(1), server_default=text("'0'"))
+    receive_notifications = Column(TINYINT(1), server_default=text("'1'"))
+    description = Column(Text)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    title = Column(String(50))
+    department = Column(String(50))
+    phone_home = Column(String(50))
+    phone_mobile = Column(String(50))
+    phone_work = Column(String(50))
+    phone_other = Column(String(50))
+    phone_fax = Column(String(50))
+    status = Column(String(100))
+    address_street = Column(String(150))
+    address_city = Column(String(100))
+    address_state = Column(String(100))
+    address_country = Column(String(100))
+    address_postalcode = Column(String(20))
+    deleted = Column(TINYINT(1))
+    portal_only = Column(TINYINT(1), server_default=text("'0'"))
+    show_on_employees = Column(TINYINT(1), server_default=text("'1'"))
+    employee_status = Column(String(100))
+    messenger_id = Column(String(100))
+    messenger_type = Column(String(100))
+    reports_to_id = Column(CHAR(36))
+    is_group = Column(TINYINT(1))
+
+
+class UsersCstm(Base):
+    __tablename__ = 'users_cstm'
+
+    id_c = Column(CHAR(36), primary_key=True)
+    dept_c = Column(String(100), server_default=text("'installer'"))
+
+
+t_users_feeds = Table(
+    'users_feeds', metadata,
+    Column('user_id', String(36)),
+    Column('feed_id', String(36)),
+    Column('rank', INTEGER(11)),
+    Column('date_modified', DateTime),
+    Column('deleted', TINYINT(1), server_default=text("'0'")),
+    Index('idx_ud_user_id', 'user_id', 'feed_id')
+)
+
+
+class UsersLastImport(Base):
+    __tablename__ = 'users_last_import'
+
+    id = Column(CHAR(36), primary_key=True)
+    assigned_user_id = Column(CHAR(36), index=True)
+    import_module = Column(String(36))
+    bean_type = Column(String(36))
+    bean_id = Column(CHAR(36))
+    deleted = Column(TINYINT(1))
+
+
+class UsersPasswordLink(Base):
+    __tablename__ = 'users_password_link'
+
+    id = Column(CHAR(36), primary_key=True)
+    username = Column(String(36), index=True)
+    date_generated = Column(DateTime)
+    deleted = Column(TINYINT(1))
+
+
+class UsersSignature(Base):
+    __tablename__ = 'users_signatures'
+
+    id = Column(CHAR(36), primary_key=True)
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1))
+    user_id = Column(String(36), index=True)
+    name = Column(String(255))
+    signature = Column(Text)
+    signature_html = Column(Text)
+
+
+class Vcal(Base):
+    __tablename__ = 'vcals'
+    __table_args__ = (
+        Index('idx_vcal', 'type', 'user_id'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    deleted = Column(TINYINT(1))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    user_id = Column(CHAR(36), nullable=False)
+    type = Column(String(100))
+    source = Column(String(100))
+    content = Column(Text)
+
+
+class Version(Base):
+    __tablename__ = 'versions'
+    __table_args__ = (
+        Index('idx_version', 'name', 'deleted'),
+    )
+
+    id = Column(CHAR(36), primary_key=True)
+    deleted = Column(TINYINT(1))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    name = Column(String(255))
+    file_version = Column(String(255))
+    db_version = Column(String(255))
+
+
+class Zr2Querytemplate(Base):
+    __tablename__ = 'zr2_querytemplate'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    sql1 = Column(Text)
+
+
+class Zr2Report(Base):
+    __tablename__ = 'zr2_report'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    filename = Column(String(255))
+
+
+class Zr2Reportcontainer(Base):
+    __tablename__ = 'zr2_reportcontainer'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+
+
+class Zr2ReportcontainerZr2ReportC(Base):
+    __tablename__ = 'zr2_reportcontainer_zr2_report_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    zr2_reportcontainer_zr2_reportzr2_reportcontainer_ida = Column(String(36), index=True)
+    zr2_reportcontainer_zr2_reportzr2_report_idb = Column(String(36), index=True)
+
+
+class Zr2Reportparameter(Base):
+    __tablename__ = 'zr2_reportparameter'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    friendly_name = Column(String(255))
+    default_name = Column(String(255))
+    default_value = Column(String(255))
+    range_name = Column(String(255))
+    range_options = Column(Text)
+
+
+class Zr2Reportparameterlink(Base):
+    __tablename__ = 'zr2_reportparameterlink'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    default_value = Column(String(255))
+    bind_to_module_name = Column(String(255))
+
+
+class Zr2ReportparameterlinkZr2QuerytemplateC(Base):
+    __tablename__ = 'zr2_reportparameterlink_zr2_querytemplate_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    zr2_query313cemplate_ida = Column(String(36), index=True)
+    zr2_report0ed1terlink_idb = Column(String(36), index=True)
+
+
+class Zr2ReportparameterlinkZr2ReportparameterC(Base):
+    __tablename__ = 'zr2_reportparameterlink_zr2_reportparameter_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    zr2_report29aerameter_ida = Column(String(36), index=True)
+    zr2_report53a6terlink_idb = Column(String(36), index=True)
+
+
+class Zr2ReportparameterlinkZr2ReporttemplateC(Base):
+    __tablename__ = 'zr2_reportparameterlink_zr2_reporttemplate_c'
+
+    id = Column(String(36), primary_key=True)
+    date_modified = Column(DateTime)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    zr2_report313cemplate_ida = Column(String(36), index=True)
+    zr2_report0ed1terlink_idb = Column(String(36), index=True)
+
+
+class Zr2Reporttemplate(Base):
+    __tablename__ = 'zr2_reporttemplate'
+
+    id = Column(CHAR(36), primary_key=True)
+    name = Column(String(255))
+    date_entered = Column(DateTime)
+    date_modified = Column(DateTime)
+    modified_user_id = Column(CHAR(36))
+    created_by = Column(CHAR(36))
+    description = Column(Text)
+    deleted = Column(TINYINT(1), server_default=text("'0'"))
+    assigned_user_id = Column(CHAR(36))
+    filename = Column(String(255))
+    export_as = Column(String(255))
+    error_message = Column(Text)
