@@ -1,10 +1,18 @@
 from datetime import datetime, date, timedelta
 import pytz
+from collections import namedtuple
 
 from .helpers import get_timestamp_from_date
 from .database import session_utm
 from .models import User, BlocksInfo, ServiceLink, ServicesDatum
 from .models import TariffsHistory
+
+
+BlockedUser = namedtuple(
+    'BlockedUser', ['id', 'login', 'name', 'address', 'phone', 'block_date'])
+
+BlockedUserTariff = namedtuple(
+    'BlockedUser', ['id', 'login', 'name', 'address', 'phone', 'block_date', 'tariff'])
 
 
 def fetch_blocked_users(block_date_start=None, block_date_stop=None):
@@ -35,8 +43,10 @@ def fetch_blocked_users(block_date_start=None, block_date_stop=None):
     blocked_users_query_ordered = session_utm.query(
         blocked_users_query
     ).order_by(blocked_users_query.c.block_date)
-
-    return list(blocked_users_query_ordered)
+    blocked_users = [
+        BlockedUser._make(user) for user in list(blocked_users_query_ordered)
+    ]
+    return blocked_users
 
 
 def fetch_blocked_users_at_month(block_date_start, block_date_stop):
@@ -45,7 +55,7 @@ def fetch_blocked_users_at_month(block_date_start, block_date_stop):
     в промежутке между block_date_start и block_date_stop
     """
     blocked_users = fetch_blocked_users(block_date_start, block_date_stop)
-    user_ids = [block_id for block_id, *block in blocked_users]
+    user_ids = [user.id for user in blocked_users]
 
     # Запрашиваем активные сервисные связки
     services_user = session_utm.query(
@@ -66,10 +76,10 @@ def fetch_blocked_users_at_month(block_date_start, block_date_stop):
     blocked_users_info = []
     # Получаем тарифы пользователя и формируем список словарей с информацией
     # об ушёдшим в блок пользователям
-    for block in blocked_users:
+    for user in blocked_users:
         services = [
             services_user for service_id, *services_user in services_user
-            if service_id == block[0]
+            if service_id == user.id
         ]
 
         if not services:
@@ -79,20 +89,21 @@ def fetch_blocked_users_at_month(block_date_start, block_date_stop):
             ).join(
                 User, TariffsHistory.account_id == User.basic_account
             ).filter(
-                User.id == block[0]
+                User.id == user.id
             ).order_by(TariffsHistory.unlink_date.desc()).all()
             service = tariff_history[0][0] if len(tariff_history) > 0 else ''
         else:
             # Есть активные сервисные связки
-            service_names = [ser[0] for ser in services]
+            service_names = [service[0] for service in services]
             service = '; '.join(service_names)
-        blocked_users_info.append({
-            'login': block[1],
-            'user': block[2],
-            'address': block[3],
-            'phone': block[4],
-            'date': datetime.fromtimestamp(
-                block[5], tz=pytz.timezone('Europe/Moscow')),
-            'tarif': service,
-        })
+        blocked_users_info.append(BlockedUserTariff(
+            id=user.id,
+            login=user.login,
+            name=user.name,
+            address=user.address,
+            phone=user.phone,
+            block_date=datetime.fromtimestamp(
+                user.block_date, tz=pytz.timezone('Europe/Moscow')),
+            tariff=service,
+        ))
     return blocked_users_info

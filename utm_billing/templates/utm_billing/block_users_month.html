@@ -28,14 +28,14 @@
             </tr>
         </thead>
         <tbody>
-        {% for block in block_users %}
+        {% for user in block_users %}
             <tr class="main-table__tr">
-                <td>{{ block.login}}</td>
-                <td>{{ block.user }}</td>
-                <td>{{ block.address }}</td>
-                <td>{{ block.tarif }}</td>
-                <td>{{ block.phone }}</td>
-                <td>{{ block.date|date:'Y-m-d' }}</td>
+                <td>{{ user.login}}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.tariff }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.block_date|date:'Y-m-d' }}</td>
             </tr>
         {% endfor %}
         </tbody>
