@@ -9,6 +9,7 @@
             <tr>
                 <th class="text-center">Логин</th>
                 <th>Абонент</th>
+                <th>Адрес</th>
                 <th>Тариф</th>
                 <th>Телефон</th>
                 <th class="text-center" title="Дата блокировки">Дата</th>
@@ -20,6 +21,7 @@
                 <tr>
                     <td class="text-center">{{ hardware.login }}</td>
                     <td>{{ hardware.name }}</td>
+                    <td>{{ hardware.address }}</td>
                     <td>{{ hardware.tariff }}</td>
                     <td>{{ hardware.phone }}</td>
                     <td class="text-center">{{ hardware.block_date|date:'Y-m-d' }}</td>
