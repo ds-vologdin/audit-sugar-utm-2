@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from utils.helpers import get_report_begin_end_date
 from utils.helpers import get_report_periods
 from utils.helpers import get_last_years, get_last_months
-from utils.auth import is_user_in_groups
+from utils.auth import access_group
 
 from utm_billing.utm_utils.utm_pay_statistic import fetch_pays_from_utm, calculate_pays_stat_periods
 from utm_billing.utm_utils.utm_pay_statistic import calculate_summary_statistic_pays
@@ -17,7 +17,7 @@ class PayStatisticView(LoginRequiredMixin, View):
     template_name = 'utm_billing/pay_statistic.html'
     login_url = '/accounts/login/'
 
-    @is_user_in_groups('finance')
+    @access_group('finance')
     def get(self, request, *args, **kwargs):
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')
@@ -53,7 +53,7 @@ class BlockUsersMonth(LoginRequiredMixin, View):
     template_name = "utm_billing/block_users_month.html"
     login_url = '/accounts/login/'
 
-    @is_user_in_groups('service')
+    @access_group('service')
     def get(self, request, *args, **kwargs):
 
         year = self.kwargs.get('year')

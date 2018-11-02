@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 
-def is_user_in_groups(group, template_error='base/access_error.html'):
+def access_group(group, template_error='base/access_error.html'):
     def decorator(wrapped_function):
         def wrapper(self, request, *args, **kwargs):
             if not request.user.groups.filter(name=group).exists():
