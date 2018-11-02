@@ -4,9 +4,9 @@ from operator import itemgetter
 
 from sqlalchemy import func
 
-from .database import session_utm
-from .models import PaymentTransaction, BalanceHistory, User
-from .helpers import get_timestamp_from_date
+from utm_billing.database import session_utm
+from utm_billing.models import PaymentTransaction, BalanceHistory, User
+from utils.helpers import get_timestamp_from_date
 
 
 def group_pays_by_date(pays_raw):

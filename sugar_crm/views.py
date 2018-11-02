@@ -1,19 +1,22 @@
-from django.views.generic import TemplateView
+from django.views.generic import View
+from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .utils.hardware_to_remove import fetch_hardware_to_remove
+from utils.auth import is_user_in_groups
+
+from .sugar_utils.hardware_to_remove import fetch_hardware_to_remove
 
 
-class HardwareToRemoveView(LoginRequiredMixin, TemplateView):
+class HardwareToRemoveView(LoginRequiredMixin, View):
     template_name = "sugar_crm/hardware_to_remove.html"
     login_url = '/accounts/login/'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    @is_user_in_groups('service')
+    def get(self, request, *args, **kwargs):
         hardware_to_remove = fetch_hardware_to_remove()
 
-        context.update({
+        context = {
             'hardware_to_remove': hardware_to_remove,
             'type_report': 'hardware_to_remove',
-        })
-        return context
+        }
+        return render(request, self.template_name, context)

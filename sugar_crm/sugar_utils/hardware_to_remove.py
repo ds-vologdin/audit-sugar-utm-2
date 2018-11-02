@@ -2,7 +2,7 @@ from collections import namedtuple
 from datetime import datetime, timedelta
 import pytz
 
-from utm_billing.utm_block_users import fetch_blocked_users
+from utm_billing.utm_utils.utm_block_users import fetch_blocked_users
 from ..models import PoPo, PoPoCstm, Account, AccountsCstm
 from ..database import session_crm
 from .sugar_crm_dicts import HARDWARE_TYPES, STATUS_DEVICE

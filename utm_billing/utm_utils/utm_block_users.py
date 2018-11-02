@@ -2,10 +2,10 @@ from datetime import datetime, date, timedelta
 import pytz
 from collections import namedtuple
 
-from .helpers import get_timestamp_from_date
-from .database import session_utm
-from .models import User, BlocksInfo, ServiceLink, ServicesDatum
-from .models import TariffsHistory
+from utils.helpers import get_timestamp_from_date
+from utm_billing.database import session_utm
+from utm_billing.models import User, BlocksInfo, ServiceLink, ServicesDatum
+from utm_billing.models import TariffsHistory
 
 
 BlockedUser = namedtuple(

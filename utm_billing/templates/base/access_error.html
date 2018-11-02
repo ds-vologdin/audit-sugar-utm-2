@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+    <div class="jumbotron">
+        <h1>У вас недостаточно прав</h1>
+        <h4>Обратитесь к администратору <a href="mailto:ds.vologdin@yandex.ru">ds.vologdin@yandex.ru</a></h4>
+        <h5>Ваш логин: {{ request.user }}</h5>
+        {% if access_group %}
+            Страница доступна только членам группы <b>"{{ access_group }}"</b>
+        {% endif %}
+    </div>
+{% endblock main %}
