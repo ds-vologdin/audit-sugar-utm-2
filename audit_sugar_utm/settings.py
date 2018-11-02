@@ -89,6 +89,7 @@ class Base(Configuration):
     USE_TZ = True
 
     STATIC_URL = '/static/'
+    LOGIN_REDIRECT_URL = '/'
 
 
 class Dev(DatabaseDevMixin, Base):

@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .helpers import get_report_begin_end_date
 from .helpers import get_report_periods
@@ -42,16 +43,19 @@ class GetContextPayStatisticMixin:
         return context
 
 
-class PayStatisticView(GetContextPayStatisticMixin, TemplateView):
+class PayStatisticView(GetContextPayStatisticMixin, LoginRequiredMixin, TemplateView):
     template_name = "utm_billing/pay_statistic.html"
+    login_url = '/accounts/login/'
 
 
-class PayMonthStatisticView(GetContextPayStatisticMixin, TemplateView):
+class PayMonthStatisticView(GetContextPayStatisticMixin, LoginRequiredMixin, TemplateView):
     template_name = "utm_billing/pay_month_statistic.html"
+    login_url = '/accounts/login/'
 
 
-class BlockUsersMonth(TemplateView):
+class BlockUsersMonth(TemplateView, LoginRequiredMixin):
     template_name = "utm_billing/block_users_month.html"
+    login_url = '/accounts/login/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

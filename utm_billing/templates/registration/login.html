@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="login form for 'audit-utm-crm'">
+        <meta name="author" content="D.Vologidn">
+
+        <title>Signin audit-utm-crm</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'base/css/login.css' %}">
+    </head>
+
+  <body class="text-center">
+    <div class="login-block">
+        <form class="form-signin" method="post">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-lg btn-primary btn-block signin-button" type="submit">Sign in</button>
+            {{ field.errors }}
+            <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+        </form>
+    </div>
+  </body>
+</html>
