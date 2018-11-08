@@ -22,7 +22,7 @@
               <a class="p-2 text-dark" href="{% url 'pay' %}">Платежи</a>
               <a class="p-2 text-dark" href="{% url 'block_last' %}">Блокировки</a>
               <a class="p-2 text-dark" href="{% url 'hardware_to_remove' %}">Оборудование</a>
-              <a class="p-2 text-dark" href="#">Тикеты</a>
+              <a class="p-2 text-dark" href="{% url 'opened_tickets' %}">Тикеты</a>
             </nav>
             {% if request.user.is_authenticated %}
                 <a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>

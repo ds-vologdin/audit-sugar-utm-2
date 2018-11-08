@@ -1,0 +1,119 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+<div class="jumbotron">
+    <h1>Статистика по открытым тикетам</h1>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбрать период
+        </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'opened_tickets' 'week' %}">Последняя неделя</a>
+          <a class="dropdown-item" href="{% url 'opened_tickets' 'quarter' %}">Последние 90 дней</a>
+          <a class="dropdown-item" href="{% url 'opened_tickets' 'year' %}">Последний год</a>
+          <a class="dropdown-item" href="{% url 'opened_tickets' '2years' %}">Последние 2 года</a>
+          <a class="dropdown-item" href="{% url 'opened_tickets' '3years' %}">Последние 3 года</a>
+      </div>
+    </div>
+    {% if date_begin and date_end %}
+        <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
+    {% endif %}
+    <canvas id="chart-opened-tickets"></canvas>
+</div>
+{% endblock main %}
+
+{% block js %}
+<!--JS для прорисовки графика -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script>
+    var date_labels = [{% for current_date, _ in statistic_of_opened_tickets %} "{{ current_date|date:'Y-m-d' }}", {% endfor %}];
+    var statistic_of_opened_tickets_all = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.all }}, {% endfor %}];
+    var statistic_of_opened_tickets_tp = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.tp }}, {% endfor %}];
+    var statistic_of_opened_tickets_rs = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.rs }}, {% endfor %}];
+    var statistic_of_opened_tickets_pd = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.pd }}, {% endfor %}];
+    var statistic_of_opened_tickets_tv = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.VNTV }}, {% endfor %}];
+    var statistic_of_opened_tickets_tf = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.tf }}, {% endfor %}];
+    var count_created_tickets = [{% for _, count in count_created_tickets %} {{ count }}, {% endfor %}];
+    var chart_opened_tickets_el = document.getElementById("chart-opened-tickets");
+    var chart_opened_tickets = new Chart(chart_opened_tickets_el, {
+        type: 'line',
+        data: {
+            labels: date_labels,
+            datasets: [{
+                label: "Открытые тикеты",
+                borderColor: 'blue',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: statistic_of_opened_tickets_all,
+            },
+            {
+                label: "Открытые тикеты (ТП)",
+                borderColor: 'red',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: statistic_of_opened_tickets_tp,
+            },
+            {
+                label: "Открытые тикеты (РС)",
+                borderColor: 'green',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: statistic_of_opened_tickets_rs,
+            },
+            {
+                label: "Открытые тикеты (ПД)",
+                borderColor: 'orange',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: statistic_of_opened_tickets_pd,
+            },
+            {
+                label: "Открытые тикеты (ТВ)",
+                borderColor: 'grey',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: statistic_of_opened_tickets_tv,
+            },
+            {
+                label: "Открытые тикеты (Телефония)",
+                borderColor: 'yellow',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: statistic_of_opened_tickets_tf,
+            },
+               {
+                label: "Создано тикетов",
+                borderColor: 'DarkGreen',
+                backgroundColor: 'transparent',
+                lineTension: 0.2,
+                borderWidth: 2,
+                pointRadius: 1,
+                data: count_created_tickets,
+            },
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        suggestedMin: 0,
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endblock js%}
