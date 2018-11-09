@@ -1,9 +1,21 @@
 from datetime import timedelta
+from collections import namedtuple
 
 from sqlalchemy import func
 
 from sugar_crm.database import session_crm
 from sugar_crm.models import Bug, BugsCstm
+from .sugar_crm_dicts import BUG_LOCALISATION
+
+
+StatisticOfTypeTickets = namedtuple(
+    'StatisticOfTypeTickets',
+    (
+        'count_tickets',
+        'count_not_correct_localisation',
+        'statistic_of_localisation'
+    )
+)
 
 
 def fill_empty_dates_in_statistic(statistic, date_begin, date_end, default=0):
@@ -94,4 +106,37 @@ def get_statistic_of_opened_tickets(date_begin, date_end):
 
 
 def get_statistic_of_type_tickets(date_begin, date_end):
-    ...
+    tickets = session_crm.query(
+        Bug.bug_number, BugsCstm.perform_c, BugsCstm.localisation_c
+    ).join(
+        BugsCstm, Bug.id == BugsCstm.id_c
+    ).filter(
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end,
+    ).all()
+
+    statistic_of_localisation = {}
+    for ticket in tickets:
+        if ticket[2]:
+            types_of_localisation = ticket[2].split(',')
+        else:
+            types_of_localisation = ['^none^']
+
+        for type_of_localisation in types_of_localisation:
+            count = statistic_of_localisation.get(type_of_localisation, 0)
+            statistic_of_localisation[type_of_localisation] = count + 1
+
+    ordered_statistic_of_localisation = []
+    for type_localisation, count in sorted(
+            statistic_of_localisation.items(), key=lambda x: x[1], reverse=True):
+        ordered_statistic_of_localisation.append({
+            'type': type_localisation.replace('^', ''),
+            'name': BUG_LOCALISATION.get(type_localisation, type_localisation),
+            'count': count,
+            'percent': count*100/len(tickets),
+        })
+    return StatisticOfTypeTickets(
+        len(tickets),
+        statistic_of_localisation.get('^none^'),
+        ordered_statistic_of_localisation
+    )

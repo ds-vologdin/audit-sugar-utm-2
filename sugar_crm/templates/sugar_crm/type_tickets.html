@@ -1,0 +1,77 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+{% include 'sugar_crm/tickets_menu.html' %}
+<div class="jumbotron">
+    <h1>Статистика по типам тикетов</h1>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбрать период
+        </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'week' %}">Последняя неделя</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'quarter' %}">Последние 90 дней</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'year' %}">Последний год</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' '2years' %}">Последние 2 года</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' '3years' %}">Последние 3 года</a>
+      </div>
+    </div>
+    {% if date_begin and date_end %}
+        <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
+    {% endif %}
+    <h1>Локализация проблем</h1>
+    <h3>Количество тикетов: {{ count_tickets }}</h3>
+    {% if count_not_correct_localisation %}
+        <div class="alert alert-danger" role="alert">
+          Количество тикетов с незаданной локализацией: {{ count_not_correct_localisation }}
+        </div>
+    {% endif %}
+    <table class="table table-hover table-sm">
+        <thead>
+        <tr>
+            <th class="text-center">Тип локализация</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Процент от общего количества</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for statistic in statistic_of_localisation %}
+        <tr>
+            <td>{{ statistic.name }}</td>
+            <td>{{ statistic.count }}</td>
+            <td>{{ statistic.percent|floatformat:2 }}%</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <canvas id="chart-per-localisation-of-tickets"></canvas>
+</div>
+{% endblock main %}
+
+{% block js %}
+<!--JS для прорисовки графика -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script>
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+    var labels_type = [{% for statistic in statistic_of_localisation %} "{{ statistic.name }}", {% endfor %}];
+    var colors_type = [{% for _ in statistic_of_localisation %} getRandomColor(), {% endfor %}];
+    var canvas_per_localisation_of_tickets = document.getElementById("chart-per-localisation-of-tickets");
+    var chart_per_localisation_of_tickets = new Chart(canvas_per_localisation_of_tickets, {
+        type: 'pie',
+        data: {
+            labels: labels_type,
+            datasets: [{
+            data: [{% for statistic in statistic_of_localisation %} {{ statistic.percent|floatformat:2 }}, {% endfor %}],
+            backgroundColor: colors_type
+            },],
+        },
+    });
+</script>
+{% endblock js%}
