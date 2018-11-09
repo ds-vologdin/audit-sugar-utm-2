@@ -5,7 +5,7 @@ from sqlalchemy import func
 
 from sugar_crm.database import session_crm
 from sugar_crm.models import Bug, BugsCstm
-from .sugar_crm_dicts import BUG_LOCALISATION
+from .sugar_crm_dicts import BUG_LOCALISATION, BUG_PERFORM
 
 
 StatisticOfTypeTickets = namedtuple(
@@ -13,7 +13,8 @@ StatisticOfTypeTickets = namedtuple(
     (
         'count_tickets',
         'count_not_correct_localisation',
-        'statistic_of_localisation'
+        'statistic_of_localisation',
+        'statistic_of_perform'
     )
 )
 
@@ -105,6 +106,35 @@ def get_statistic_of_opened_tickets(date_begin, date_end):
     return ordered_statistic_of_opened_tickets
 
 
+def parse_types(types):
+    if types:
+        return types.split(',')
+    return ['^none^']
+
+
+def update_statistic_of_types(statistic, types_in_str):
+    """
+    Dirty function!!! Function update statistic
+    """
+    types = parse_types(types_in_str)
+    for current_type in types:
+        statistic[current_type] = statistic.get(current_type, 0) + 1
+    return statistic
+
+
+def organize_statistic(statistic, count_tickets, name_dict):
+    ordered_statistic_of_localisation = []
+    for type_localisation, count in sorted(
+            statistic.items(), key=lambda x: x[1], reverse=True):
+        ordered_statistic_of_localisation.append({
+            'type': type_localisation.replace('^', ''),
+            'name': name_dict.get(type_localisation, type_localisation),
+            'count': count,
+            'percent': count * 100 / count_tickets,
+        })
+    return ordered_statistic_of_localisation
+
+
 def get_statistic_of_type_tickets(date_begin, date_end):
     tickets = session_crm.query(
         Bug.bug_number, BugsCstm.perform_c, BugsCstm.localisation_c
@@ -116,27 +146,19 @@ def get_statistic_of_type_tickets(date_begin, date_end):
     ).all()
 
     statistic_of_localisation = {}
+    statistic_of_perform = {}
     for ticket in tickets:
-        if ticket[2]:
-            types_of_localisation = ticket[2].split(',')
-        else:
-            types_of_localisation = ['^none^']
+        update_statistic_of_types(statistic_of_perform, ticket[1])
+        update_statistic_of_types(statistic_of_localisation, ticket[2])
 
-        for type_of_localisation in types_of_localisation:
-            count = statistic_of_localisation.get(type_of_localisation, 0)
-            statistic_of_localisation[type_of_localisation] = count + 1
+    ordered_statistic_of_localisation = organize_statistic(
+        statistic_of_localisation, len(tickets), BUG_LOCALISATION)
+    ordered_statistic_of_perform = organize_statistic(
+        statistic_of_perform, len(tickets), BUG_PERFORM)
 
-    ordered_statistic_of_localisation = []
-    for type_localisation, count in sorted(
-            statistic_of_localisation.items(), key=lambda x: x[1], reverse=True):
-        ordered_statistic_of_localisation.append({
-            'type': type_localisation.replace('^', ''),
-            'name': BUG_LOCALISATION.get(type_localisation, type_localisation),
-            'count': count,
-            'percent': count*100/len(tickets),
-        })
     return StatisticOfTypeTickets(
         len(tickets),
         statistic_of_localisation.get('^none^'),
-        ordered_statistic_of_localisation
+        ordered_statistic_of_localisation,
+        ordered_statistic_of_perform
     )

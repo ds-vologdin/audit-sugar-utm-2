@@ -77,6 +77,8 @@ class TypeTicketsView(LoginRequiredMixin, View):
                 statistic_of_type_tickets.count_not_correct_localisation,
             'statistic_of_localisation':
                 statistic_of_type_tickets.statistic_of_localisation,
+            'statistic_of_perform':
+                statistic_of_type_tickets.statistic_of_perform,
             'type_report': 'tickets',
             'date_begin': date_begin,
             'date_end': date_end,
