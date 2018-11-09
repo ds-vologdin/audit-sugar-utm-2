@@ -7,7 +7,7 @@ urlpatterns = [
     path('hardware/<int:year>/<int:month>/',
          HardwareToRemoveView.as_view(),
          name='hardware_to_remove_month'),
-    path('tickets/', OpenedTicketsView.as_view(), name='opened_tickets'),
-    path('tickets/<int:year>/', OpenedTicketsView.as_view(), name='opened_tickets'),
-    path('tickets/last/<str:last>/', OpenedTicketsView.as_view(), name='opened_tickets'),
+    path('tickets/opened/', OpenedTicketsView.as_view(), name='opened_tickets'),
+    path('tickets/opened/<int:year>/', OpenedTicketsView.as_view(), name='opened_tickets'),
+    path('tickets/opened/last/<str:last>/', OpenedTicketsView.as_view(), name='last_opened_tickets'),
 ]

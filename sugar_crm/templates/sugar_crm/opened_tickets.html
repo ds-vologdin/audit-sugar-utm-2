@@ -1,6 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block main %}
+{% include 'sugar_crm/tickets_menu.html' %}
 <div class="jumbotron">
     <h1>Статистика по открытым тикетам</h1>
     <div class="dropdown">
@@ -8,11 +9,11 @@
             Выбрать период
         </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'opened_tickets' 'week' %}">Последняя неделя</a>
-          <a class="dropdown-item" href="{% url 'opened_tickets' 'quarter' %}">Последние 90 дней</a>
-          <a class="dropdown-item" href="{% url 'opened_tickets' 'year' %}">Последний год</a>
-          <a class="dropdown-item" href="{% url 'opened_tickets' '2years' %}">Последние 2 года</a>
-          <a class="dropdown-item" href="{% url 'opened_tickets' '3years' %}">Последние 3 года</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'week' %}">Последняя неделя</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'quarter' %}">Последние 90 дней</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'year' %}">Последний год</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' '2years' %}">Последние 2 года</a>
+          <a class="dropdown-item" href="{% url 'last_opened_tickets' '3years' %}">Последние 3 года</a>
       </div>
     </div>
     {% if date_begin and date_end %}
