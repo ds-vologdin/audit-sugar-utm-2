@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 
 from utils.auth import access_group
 from utils.helpers import get_report_begin_end_date
-from utils.helpers import get_report_periods
+from utils.helpers import get_last_years, get_last_months
 
 from .sugar_utils.hardware_to_remove import fetch_hardware_to_remove
 from .sugar_utils.tickets import get_statistic_of_opened_tickets
@@ -75,10 +75,14 @@ class TypeTicketsView(LoginRequiredMixin, View):
             'count_tickets': statistic_of_type_tickets.count_tickets,
             'count_not_correct_localisation':
                 statistic_of_type_tickets.count_not_correct_localisation,
+            'count_not_correct_perform':
+                statistic_of_type_tickets.count_not_correct_perform,
             'statistic_of_localisation':
                 statistic_of_type_tickets.statistic_of_localisation,
             'statistic_of_perform':
                 statistic_of_type_tickets.statistic_of_perform,
+            'months': get_last_months(last=6),
+            'years': get_last_years(last=2),
             'type_report': 'tickets',
             'date_begin': date_begin,
             'date_end': date_end,

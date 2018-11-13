@@ -9,13 +9,20 @@
             Выбрать период
         </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'week' %}">Последняя неделя</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'quarter' %}">Последние 90 дней</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'year' %}">Последний год</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' '2years' %}">Последние 2 года</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' '3years' %}">Последние 3 года</a>
+        <a class="dropdown-item" href="{% url 'last_type_tickets' 'week' %}">Последняя неделя</a>
+        <a class="dropdown-item" href="{% url 'last_type_tickets' 'quarter' %}">Последние 90 дней</a>
+        <a class="dropdown-item" href="{% url 'last_type_tickets' 'year' %}">Последний год</a>
+        <a class="dropdown-item" href="{% url 'last_type_tickets' '2years' %}">Последние 2 года</a>
+        <a class="dropdown-item" href="{% url 'last_type_tickets' '3years' %}">Последние 3 года</a>
+        {% for year in years %}
+            <a class="dropdown-item" href="{% url 'year_type_tickets' year|date:'Y' %}">{{ year|date:'Y' }}</a>
+        {% endfor %}
+        {% for month in months %}
+            <a class="dropdown-item" href="{% url 'month_type_tickets' month|date:'Y' month|date:'m' %}">{{ month|date:'Y-m' }}</a>
+        {% endfor %}
       </div>
     </div>
+
     {% if date_begin and date_end %}
         <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
     {% endif %}
@@ -45,6 +52,31 @@
         </tbody>
     </table>
     <canvas id="chart-per-localisation-of-tickets"></canvas>
+    <h1>Типы выполненных работ</h1>
+    {% if count_not_correct_perform %}
+        <div class="alert alert-danger" role="alert">
+          Количество тикетов с незаданными типами работ: {{ count_not_correct_perform }}
+        </div>
+    {% endif %}
+    <table class="table table-hover table-sm">
+        <thead>
+        <tr>
+            <th class="text-center">Тип вполнненой работы</th>
+            <th class="text-center">Количество</th>
+            <th class="text-center">Процент от общего количества</th>
+        </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for statistic in statistic_of_perform %}
+        <tr>
+            <td>{{ statistic.name }}</td>
+            <td>{{ statistic.count }}</td>
+            <td>{{ statistic.percent|floatformat:2 }}%</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <canvas id="chart-per-perform-of-tickets"></canvas>
 </div>
 {% endblock main %}
 
@@ -60,15 +92,29 @@
       }
       return color;
     }
-    var labels_type = [{% for statistic in statistic_of_localisation %} "{{ statistic.name }}", {% endfor %}];
+    var labels_type_localisation = [{% for statistic in statistic_of_localisation %} "{{ statistic.name }}", {% endfor %}];
     var colors_type = [{% for _ in statistic_of_localisation %} getRandomColor(), {% endfor %}];
     var canvas_per_localisation_of_tickets = document.getElementById("chart-per-localisation-of-tickets");
     var chart_per_localisation_of_tickets = new Chart(canvas_per_localisation_of_tickets, {
         type: 'pie',
         data: {
-            labels: labels_type,
+            labels: labels_type_localisation,
             datasets: [{
             data: [{% for statistic in statistic_of_localisation %} {{ statistic.percent|floatformat:2 }}, {% endfor %}],
+            backgroundColor: colors_type
+            },],
+        },
+    });
+
+    var labels_type_perform = [{% for statistic in statistic_of_perform %} "{{ statistic.name }}", {% endfor %}];
+    colors_type = [{% for _ in statistic_of_perform %} getRandomColor(), {% endfor %}];
+    var canvas_per_perform_of_tickets = document.getElementById("chart-per-perform-of-tickets");
+    var chart_per_perform_of_tickets = new Chart(canvas_per_perform_of_tickets, {
+        type: 'pie',
+        data: {
+            labels: labels_type_perform,
+            datasets: [{
+            data: [{% for statistic in statistic_of_perform %} {{ statistic.percent|floatformat:2 }}, {% endfor %}],
             backgroundColor: colors_type
             },],
         },

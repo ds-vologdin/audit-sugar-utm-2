@@ -13,6 +13,7 @@ StatisticOfTypeTickets = namedtuple(
     (
         'count_tickets',
         'count_not_correct_localisation',
+        'count_not_correct_perform',
         'statistic_of_localisation',
         'statistic_of_perform'
     )
@@ -159,6 +160,7 @@ def get_statistic_of_type_tickets(date_begin, date_end):
     return StatisticOfTypeTickets(
         len(tickets),
         statistic_of_localisation.get('^none^'),
+        statistic_of_perform.get('^none^'),
         ordered_statistic_of_localisation,
         ordered_statistic_of_perform
     )
