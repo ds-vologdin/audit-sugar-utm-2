@@ -9,11 +9,15 @@
             Выбрать период
         </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'week' %}">Последняя неделя</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'quarter' %}">Последние 90 дней</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' 'year' %}">Последний год</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' '2years' %}">Последние 2 года</a>
-          <a class="dropdown-item" href="{% url 'last_opened_tickets' '3years' %}">Последние 3 года</a>
+        {% for type, type_name in last_types %}
+            <a class="dropdown-item" href="{% url 'last_opened_tickets' type %}">{{ type_name }}</a>
+        {% endfor %}
+        {% for current_date in years %}
+            <a class="dropdown-item" href="{% url 'year_opened_tickets' current_date|date:'Y' %}">{{ current_date|date:'Y' }} год</a>
+        {% endfor %}
+        {% for current_date in months %}
+            <a class="dropdown-item" href="{% url 'month_opened_tickets' current_date|date:'Y' current_date|date:'m' %}">{{ current_date|date:'Y-m' }}</a>
+        {% endfor %}
       </div>
     </div>
     {% if date_begin and date_end %}

@@ -1,7 +1,7 @@
 from datetime import timedelta
 from collections import namedtuple
 
-from sqlalchemy import func
+from sqlalchemy import func, and_, or_
 
 from sugar_crm.database import session_crm
 from sugar_crm.models import Bug, BugsCstm
@@ -164,3 +164,46 @@ def get_statistic_of_type_tickets(date_begin, date_end):
         ordered_statistic_of_localisation,
         ordered_statistic_of_perform
     )
+
+WrongedTicket = namedtuple(
+    'WrongedTicket',
+    ('id', 'bug_number', 'date_entered', 'date_close', 'department', 'status',
+     'perform', 'localisation', 'duration')
+)
+
+
+def translate_types(types_in_str, dictionary):
+    types = parse_types(types_in_str)
+    return [dictionary.get(current_type, current_type) for current_type in types]
+
+
+def fetch_wronged_tickets(date_begin, date_end):
+    wronged_tickets = session_crm.query(
+        Bug.id, Bug.bug_number, Bug.date_entered, BugsCstm.date_close_c,
+        BugsCstm.department_bugs_c, BugsCstm.status_bugs_c, BugsCstm.perform_c,
+        BugsCstm.localisation_c,
+        BugsCstm.duration_bug_c + BugsCstm.duration_min_c/60
+    ).join(
+        BugsCstm, Bug.id == BugsCstm.id_c
+    ).filter(
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end,
+        Bug.deleted == 0,
+        BugsCstm.status_bugs_c != 'open',
+        and_(
+            or_(
+                BugsCstm.perform_c == None, BugsCstm.perform_c == '',
+                BugsCstm.perform_c == '^none^', BugsCstm.localisation_c == None,
+                BugsCstm.localisation_c == '', BugsCstm.localisation_c == '^none^'
+            )
+        )
+    ).order_by(Bug.date_entered).all()
+    readable_wronged_tickets = []
+    for ticket in wronged_tickets:
+        _ticket = WrongedTicket(
+            ticket[0], ticket[1], ticket[2], ticket[3], ticket[4], ticket[5],
+            translate_types(ticket[6], BUG_PERFORM),
+            translate_types(ticket[7], BUG_LOCALISATION), ticket[8]
+        )
+        readable_wronged_tickets.append(_ticket)
+    return readable_wronged_tickets

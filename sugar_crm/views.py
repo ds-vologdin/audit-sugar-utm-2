@@ -1,21 +1,19 @@
 from django.views.generic import View
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
 
 from utils.auth import access_group
-from utils.helpers import get_report_begin_end_date
-from utils.helpers import get_last_years, get_last_months
+from django.contrib.auth.mixins import LoginRequiredMixin
+from utils.mixins import GetPeriodMixin, DefaultContextMixin
 
 from .sugar_utils.hardware_to_remove import fetch_hardware_to_remove
 from .sugar_utils.tickets import get_statistic_of_opened_tickets
 from .sugar_utils.tickets import get_statistic_of_type_tickets
 from .sugar_utils.tickets import fetch_count_created_tickets_at_period
+from .sugar_utils.tickets import fetch_wronged_tickets
 
 
 class HardwareToRemoveView(LoginRequiredMixin, View):
     template_name = 'sugar_crm/hardware_to_remove.html'
-    login_url = reverse_lazy('login')
 
     @access_group('service')
     def get(self, request, *args, **kwargs):
@@ -28,49 +26,38 @@ class HardwareToRemoveView(LoginRequiredMixin, View):
         return render(request, self.template_name, context)
 
 
-class OpenedTicketsView(LoginRequiredMixin, View):
+class OpenedTicketsView(DefaultContextMixin, GetPeriodMixin, LoginRequiredMixin, View):
     template_name = 'sugar_crm/opened_tickets.html'
-    login_url = reverse_lazy('login')
 
     @access_group('service')
     def get(self, request, *args, **kwargs):
-        year = self.kwargs.get('year')
-        month = self.kwargs.get('month')
-        last = self.kwargs.get('last', 'quarter')
-
-        date_begin, date_end = get_report_begin_end_date(year, month, last)
-
+        date_begin, date_end = self.get_period('quarter')
         statistic_of_opened_tickets = get_statistic_of_opened_tickets(
             date_begin, date_end)
         count_created_tickets = fetch_count_created_tickets_at_period(
             date_begin, date_end)
 
-        context = {
+        context = self.context.copy()
+        context.update({
             'statistic_of_opened_tickets': statistic_of_opened_tickets,
             'count_created_tickets': count_created_tickets,
-            'type_report': 'tickets',
             'date_begin': date_begin,
             'date_end': date_end,
-        }
+        })
         return render(request, self.template_name, context)
 
 
-class TypeTicketsView(LoginRequiredMixin, View):
+class TypeTicketsView(DefaultContextMixin, GetPeriodMixin, LoginRequiredMixin, View):
     template_name = 'sugar_crm/type_tickets.html'
-    login_url = reverse_lazy('login')
 
     @access_group('service')
     def get(self, request, *args, **kwargs):
-        year = self.kwargs.get('year')
-        month = self.kwargs.get('month')
-        last = self.kwargs.get('last', 'quarter')
-
-        date_begin, date_end = get_report_begin_end_date(year, month, last)
-
+        date_begin, date_end = self.get_period('quarter')
         statistic_of_type_tickets = get_statistic_of_type_tickets(
             date_begin, date_end)
 
-        context = {
+        context = self.context.copy()
+        context.update({
             'statistic_of_type_tickets': statistic_of_type_tickets,
             'count_tickets': statistic_of_type_tickets.count_tickets,
             'count_not_correct_localisation':
@@ -81,10 +68,24 @@ class TypeTicketsView(LoginRequiredMixin, View):
                 statistic_of_type_tickets.statistic_of_localisation,
             'statistic_of_perform':
                 statistic_of_type_tickets.statistic_of_perform,
-            'months': get_last_months(last=6),
-            'years': get_last_years(last=2),
-            'type_report': 'tickets',
             'date_begin': date_begin,
             'date_end': date_end,
-        }
+        })
+        return render(request, self.template_name, context)
+
+
+class WrongedTicketsView(DefaultContextMixin, GetPeriodMixin, LoginRequiredMixin, View):
+    template_name = 'sugar_crm/wronged_tickets.html'
+
+    @access_group('service')
+    def get(self, request, *args, **kwargs):
+        date_begin, date_end = self.get_period()
+        wronged_tickets = fetch_wronged_tickets(date_begin, date_end)
+
+        context = self.context.copy()
+        context.update({
+            'wronged_tickets': wronged_tickets,
+            'date_begin': date_begin,
+            'date_end': date_end,
+        })
         return render(request, self.template_name, context)

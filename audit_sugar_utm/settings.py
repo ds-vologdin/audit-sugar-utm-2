@@ -90,6 +90,7 @@ class Base(Configuration):
 
     STATIC_URL = '/static/'
     LOGIN_REDIRECT_URL = '/'
+    LOGIN_URL = 'login'
 
 
 class Dev(DatabaseDevMixin, Base):
@@ -98,6 +99,6 @@ class Dev(DatabaseDevMixin, Base):
     MIDDLEWARE = Base.MIDDLEWARE + [
         'debug_toolbar.middleware.DebugToolbarMiddleware'
     ]
-    INTERNAL_IPS = ['127.0.0.1']
+    INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
     ALLOWED_HOSTS = Base.ALLOWED_HOSTS + ['127.0.0.1', 'testserver']
     STATIC_ROOT = os.path.join(Base.BASE_DIR, 'static')
