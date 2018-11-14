@@ -16,7 +16,6 @@ from utm_billing.utm_utils.utm_block_users import fetch_blocked_users_at_month
 
 class PayStatisticView(LoginRequiredMixin, View):
     template_name = 'utm_billing/pay_statistic.html'
-    login_url = reverse_lazy('login')
 
     @access_group('finance')
     def get(self, request, *args, **kwargs):
@@ -52,7 +51,6 @@ class PayMonthStatisticView(PayStatisticView):
 
 class BlockUsersMonth(LoginRequiredMixin, View):
     template_name = "utm_billing/block_users_month.html"
-    login_url = reverse_lazy('login')
 
     @access_group('service')
     def get(self, request, *args, **kwargs):
