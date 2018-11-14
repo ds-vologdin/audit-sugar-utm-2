@@ -65,7 +65,9 @@
 
 {% block js %}
 <!--JS для прорисовки графика -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+{% load static %}
+<script src="{% static 'base/js/Chart.bundle.min.js' %}"></script>
+
 <script>
 var date_labels = [{% for pay in pays_stat %} "{{ pay.date|date:'Y-m-d' }}", {% endfor %}];
 var pays_sum = [{% for pay in pays_stat %} {{ pay.summ|floatformat:2 }}, {% endfor %}];

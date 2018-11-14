@@ -16,7 +16,9 @@
 
 {% block js %}
 <!--JS для прорисовки графика -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+{% load static %}
+<script src="{% static 'base/js/Chart.bundle.min.js' %}"></script>
+
 <script>
     var date_labels = [{% for current_date, _ in statistic_of_opened_tickets %} "{{ current_date|date:'Y-m-d' }}", {% endfor %}];
     var statistic_of_opened_tickets_all = [{% for _, statistic in statistic_of_opened_tickets %} {{ statistic.all }}, {% endfor %}];
