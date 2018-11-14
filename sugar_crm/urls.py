@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from .views import HardwareToRemoveView, OpenedTicketsView, TypeTicketsView
-from .views import WrongedTicketsView, MassTicketsView
+from .views import WrongedTicketsView, MassTicketsView, WrongedMassTicketsView
 
 hardware_url_patterns = [
     path('', HardwareToRemoveView.as_view(), name='hardware_to_remove'),
@@ -42,6 +42,14 @@ tickets_url_patterns = [
          name='month_mass_tickets'),
     path('mass/last/<str:last>/', MassTicketsView.as_view(),
          name='last_mass_tickets'),
+
+    path('wronged_mass/', WrongedMassTicketsView.as_view(), name='wronged_mass_tickets'),
+    path('wronged_mass/<int:year>/', WrongedMassTicketsView.as_view(),
+         name='year_wronged_mass_tickets'),
+    path('wronged_mass/<int:year>/<int:month>/', WrongedMassTicketsView.as_view(),
+         name='month_wronged_mass_tickets'),
+    path('wronged_mass/last/<str:last>/', WrongedMassTicketsView.as_view(),
+         name='last_wronged_mass_tickets'),
 ]
 
 urlpatterns = [

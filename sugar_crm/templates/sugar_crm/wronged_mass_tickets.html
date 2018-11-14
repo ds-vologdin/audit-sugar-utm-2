@@ -3,19 +3,21 @@
 {% block main %}
 {% include 'sugar_crm/tickets_menu.html' %}
 <div class="jumbotron">
-    <h1>Массовые тикеты</h1>
+    <h1>Не корректно оформленные тикеты</h1>
     {% if date_begin and date_end %}
         <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
     {% endif %}
-    {% with url_name_last='last_mass_tickets' url_name_year='year_mass_tickets' url_name_month='month_mass_tickets' %}
+    {% with url_name_last='last_wronged_mass_tickets' url_name_year='year_wronged_mass_tickets' url_name_month='month_wronged_mass_tickets' %}
         {% include 'sugar_crm/tickets_period_dropdown.html' %}
     {% endwith %}
+
     <table class="table table-hover table-sm">
         <thead class="text-center">
         <tr>
             <th>#</th>
             <th>Тикет</th>
-            <th>Абоненты</th>
+            <th>Связанные абоненты</th>
+            <th>Проверить абонентов</th>
         </tr>
         </thead>
         <tbody>
@@ -24,35 +26,28 @@
             <td class="text-center"><a href="http://crm.kgts.su/sugarcrm/index.php?module=Bugs&action=DetailView&record={{ ticket.id }}">{{ ticket.bug_number }}</a></td>
             <td>
                 <div><b>Дата:</b> {{ ticket.date_entered|date:'Y-m-d' }}</div>
-                <div><b>Статус:</b> {{ ticket.status }}</div>
                 <div><b>Проблема:</b> {{ ticket.name }}</div>
-                <div><b>Адрес:</b> {{ ticket.address }}</div>
                 <div><b>Описание:</b></div>
                 <div>{{ ticket.description|linebreaks }}</div>
-                {% if ticket.close %}
-                    <div><b>Причина закрытия:</b> {{ ticket.close }}</div>
-                {% endif %}
-                {% if ticket.duration %}
-                    <div><b>Сервис отсутствовал {{ ticket.duration|floatformat:"-2" }} ч.</b></div>
-                {% endif %}
             </td>
             <td>
                 <ul>
                     {% for account in ticket.accounts %}
-                        <li>
-                            <a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account.id }}">{{ account.name }}</a>
-                            ({{ account.address }})
-                            {% if account.payment %} - {{ account.payment }} руб.{% endif %}
-                        </li>
+                        <li><a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account.id }}">{{ account.name }}</a></li>
                     {% endfor %}
                 </ul>
-                {% if ticket.payment %}
-                    <div><b>Итого: {{ ticket.payment }} руб.</b></div>
-                {% endif %}
+            </td>
+            <td>
+                <ul>
+                    {% for account in ticket.not_fixed_accounts %}
+                        <li><a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account.id }}">{{ account.name }}</a></li>
+                    {% endfor %}
+                </ul>
             </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
+
 {% endblock main %}

@@ -4,9 +4,9 @@ from utils.helpers import get_last_years, get_last_months
 
 class DefaultContextMixin:
     last_types = [
-        ('week', 'Последняя неделя'), ('quarter', 'Последние 90 дней'),
-        ('year', 'Последний год'), ('2years', 'Последние 2 годы'),
-        ('3years', 'Последний 3 год')
+        ('week', 'Последняя неделя'), ('month', 'Последние 30 дней'),
+        ('quarter', 'Последние 90 дней'), ('year', 'Последний год'),
+        ('2years', 'Последние 2 годы'), ('3years', 'Последний 3 год')
     ]
     context = {
         'months': get_last_months(last=6),

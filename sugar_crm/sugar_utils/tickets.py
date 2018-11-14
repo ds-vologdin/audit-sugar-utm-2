@@ -23,12 +23,7 @@ WrongedTicket = namedtuple(
     ('id', 'bug_number', 'date_entered', 'date_close', 'department', 'status',
      'perform', 'localisation', 'duration')
 )
-MassTickets = namedtuple(
-    'MassTicket',
-    ('id', 'bug_number', 'date_entered', 'name', 'description', 'status',
-     'address', 'close', 'duration', 'accounts', 'payment')
-)
-AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
+
 
 
 def fill_empty_dates_in_statistic(statistic, date_begin, date_end, default=0):
@@ -236,6 +231,15 @@ def fetch_mass_tickets(date_begin, date_end):
         Bug.deleted == 0,
     ).order_by(Bug.date_entered).all()
 
+    AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
+    MassTickets = namedtuple(
+        'MassTicket',
+        ('id', 'bug_number', 'date_entered', 'name', 'description', 'status',
+         'address', 'close', 'duration', 'accounts', 'payment')
+    )
+
+    # Группируем таблицу по id, привязанных абонентов собираем в список
+    # Это не красивое решение, но к сожалению в mysql нет типа array
     grouped_tickets = {}
     for ticket in tickets:
         account = AccountInTicket(*ticket[9:13])
@@ -243,14 +247,118 @@ def fetch_mass_tickets(date_begin, date_end):
             accounts = [account]
             payment = account.payment
         else:
-            accounts = grouped_tickets[ticket[0]][9]
+            accounts = grouped_tickets[ticket[0]].accounts
             accounts.append(account)
-            payment = grouped_tickets[ticket[0]][10] + account.payment
-        grouped_tickets[ticket[0]] = (*ticket[0:9], accounts, payment)
+            payment = grouped_tickets[ticket[0]].payment + account.payment
+        grouped_tickets[ticket[0]] = MassTickets(*ticket[0:9], accounts, payment)
 
     mass_tickets = []
     for ticket in grouped_tickets.values():
-        if len(ticket[9]) > 1:
+        if len(ticket.accounts) > 1:
             mass_tickets.append(MassTickets._make(ticket))
-
     return mass_tickets
+
+
+def is_found_account_in_line(account, line):
+    # Ищем в начале строки название организации
+    found_acc = line[:10 + len(account)].find(account)
+    if found_acc == -1:
+        return False
+
+    # С целью уменьшения ложных срабатываний проверяем, что после названия
+    # организации стоит пробел, точка, запятая или строка уже кончилась
+    end_char = found_acc + len(account)
+    if not (line[end_char:end_char + 1] == '' or
+            line[end_char:end_char + 1] == ' ' or
+            line[end_char:end_char + 1] == '.' or
+            line[end_char:end_char + 1] == ','):
+        return False
+
+    # Перед названием организации должен быть пробел, или это начало строки
+    if not (found_acc == 0 or line[found_acc - 1:found_acc] == ' '):
+        return False
+    return True
+
+
+def is_found_account_in_description(account, description):
+    account = account.lower().replace(',', '').replace(
+        'ооо', '').replace('зао', '').replace('ип', '').strip()
+    if (account == 'точка' or account == 'мария' or
+        account == 'статус' or account == 'объект' or
+            account == 'виктория'):
+        # Это особые организации, которые создаёт кучу ложных
+        # срабатываний, поэтому сразу говорим, что ничего не нашли...
+        return False
+
+    # Переформатируем description
+    description = description.lower().replace(',', '').replace(
+        '\r', '').replace('(', ' ').replace(')', ' ').replace(
+        '"', ' ').replace('\'', ' ')
+    for line in description.splitlines():
+        if is_found_account_in_line(account, line):
+            # если контрагент найден, дальше строки смотреть не надо
+            return True
+    return False
+
+
+def fetch_wronged_mass_tickets(date_begin, date_end):
+    tickets = session_crm.query(
+        Bug.id, Bug.bug_number, Bug.date_entered, Bug.name, Bug.description,
+        AccountsBug.account_id, Account.name
+    ).join(
+        AccountsBug, AccountsBug.bug_id == Bug.id
+    ).join(
+        Account, Account.id == AccountsBug.account_id
+    ).filter(
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end,
+        Bug.deleted == 0,
+        Bug.description != None
+    ).order_by(Bug.date_entered).all()
+
+    AccountInTicket = namedtuple('Account', ('id', 'name'))
+    MassTickets = namedtuple(
+        'WrongedMassTickets',
+        ('id', 'bug_number', 'date_entered', 'name', 'description',
+         'accounts', 'not_fixed_accounts')
+    )
+
+    # Группируем таблицу по id, привязанных абонентов собираем в список
+    # Это не красивое решение, но к сожалению в mysql нет типа array
+    grouped_tickets = {}
+    for ticket in tickets:
+        account = AccountInTicket(*ticket[5:7])
+        if ticket[0] not in grouped_tickets:
+            accounts = [account]
+            grouped_tickets[ticket[0]] = MassTickets(*ticket[0:5], accounts, [])
+        else:
+            grouped_tickets[ticket[0]].accounts.append(account)
+
+    accounts = session_crm.query(
+        Account.id, Account.name
+    ).join(
+        AccountsCstm, Account.id == AccountsCstm.id_c
+    ).filter(
+        AccountsCstm.status_acc_c == 'active',
+        AccountsCstm.company_acc_c == 1,
+        Account.deleted == 0
+    ).all()
+
+    # Ищем тикеты, в описании которых есть упоминания названий абонентов,
+    # не привязанных к тикету
+    tickets_with_not_fixed_accounts = []
+    for ticket in grouped_tickets.values():
+        ticket_account_ids = set([account.id for account in ticket.accounts])
+        for account_id, account_name in accounts:
+            if account_id in ticket_account_ids:
+                continue
+            if is_found_account_in_description(account_name, ticket.description):
+                ticket.not_fixed_accounts.append(AccountInTicket(
+                    account_id, account_name))
+        if ticket.not_fixed_accounts:
+            tickets_with_not_fixed_accounts.append(ticket)
+
+    wronged_tickets = [
+        ticket for ticket in tickets_with_not_fixed_accounts if ticket.not_fixed_accounts
+    ]
+    return wronged_tickets
