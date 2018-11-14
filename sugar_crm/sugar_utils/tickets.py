@@ -4,7 +4,7 @@ from collections import namedtuple
 from sqlalchemy import func, and_, or_
 
 from sugar_crm.database import session_crm
-from sugar_crm.models import Bug, BugsCstm
+from sugar_crm.models import Bug, BugsCstm, AccountsBug, Account, AccountsCstm
 from .sugar_crm_dicts import BUG_LOCALISATION, BUG_PERFORM
 
 
@@ -18,6 +18,17 @@ StatisticOfTypeTickets = namedtuple(
         'statistic_of_perform'
     )
 )
+WrongedTicket = namedtuple(
+    'WrongedTicket',
+    ('id', 'bug_number', 'date_entered', 'date_close', 'department', 'status',
+     'perform', 'localisation', 'duration')
+)
+MassTickets = namedtuple(
+    'MassTicket',
+    ('id', 'bug_number', 'date_entered', 'name', 'description', 'status',
+     'address', 'close', 'duration', 'accounts', 'payment')
+)
+AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
 
 
 def fill_empty_dates_in_statistic(statistic, date_begin, date_end, default=0):
@@ -165,12 +176,6 @@ def get_statistic_of_type_tickets(date_begin, date_end):
         ordered_statistic_of_perform
     )
 
-WrongedTicket = namedtuple(
-    'WrongedTicket',
-    ('id', 'bug_number', 'date_entered', 'date_close', 'department', 'status',
-     'perform', 'localisation', 'duration')
-)
-
 
 def translate_types(types_in_str, dictionary):
     types = parse_types(types_in_str)
@@ -207,3 +212,45 @@ def fetch_wronged_tickets(date_begin, date_end):
         )
         readable_wronged_tickets.append(_ticket)
     return readable_wronged_tickets
+
+
+def fetch_mass_tickets(date_begin, date_end):
+    tickets = session_crm.query(
+        Bug.id, Bug.bug_number, Bug.date_entered, Bug.name, Bug.description,
+        BugsCstm.status_bugs_c, BugsCstm.address_bugs_c,
+        BugsCstm.reason_for_closure_bugs_c,
+        BugsCstm.duration_bug_c + BugsCstm.duration_min_c / 60,
+        AccountsBug.account_id, Account.name, Account.billing_address_street,
+        AccountsCstm.month_profit_acc_c
+    ).join(
+        BugsCstm, BugsCstm.id_c == Bug.id
+    ).join(
+        AccountsBug, AccountsBug.bug_id == Bug.id
+    ).join(
+        Account, Account.id == AccountsBug.account_id
+    ).join(
+        AccountsCstm, Account.id == AccountsCstm.id_c
+    ).filter(
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end,
+        Bug.deleted == 0,
+    ).order_by(Bug.date_entered).all()
+
+    grouped_tickets = {}
+    for ticket in tickets:
+        account = AccountInTicket(*ticket[9:13])
+        if ticket[0] not in grouped_tickets:
+            accounts = [account]
+            payment = account.payment
+        else:
+            accounts = grouped_tickets[ticket[0]][9]
+            accounts.append(account)
+            payment = grouped_tickets[ticket[0]][10] + account.payment
+        grouped_tickets[ticket[0]] = (*ticket[0:9], accounts, payment)
+
+    mass_tickets = []
+    for ticket in grouped_tickets.values():
+        if len(ticket[9]) > 1:
+            mass_tickets.append(MassTickets._make(ticket))
+
+    return mass_tickets

@@ -10,6 +10,7 @@ from .sugar_utils.tickets import get_statistic_of_opened_tickets
 from .sugar_utils.tickets import get_statistic_of_type_tickets
 from .sugar_utils.tickets import fetch_count_created_tickets_at_period
 from .sugar_utils.tickets import fetch_wronged_tickets
+from .sugar_utils.tickets import fetch_mass_tickets
 
 
 class HardwareToRemoveView(LoginRequiredMixin, View):
@@ -85,6 +86,23 @@ class WrongedTicketsView(DefaultContextMixin, GetPeriodMixin, LoginRequiredMixin
         context = self.context.copy()
         context.update({
             'wronged_tickets': wronged_tickets,
+            'date_begin': date_begin,
+            'date_end': date_end,
+        })
+        return render(request, self.template_name, context)
+
+
+class MassTicketsView(DefaultContextMixin, GetPeriodMixin, LoginRequiredMixin, View):
+    template_name = 'sugar_crm/mass_tickets.html'
+
+    @access_group('service')
+    def get(self, request, *args, **kwargs):
+        date_begin, date_end = self.get_period()
+        mass_tickets = fetch_mass_tickets(date_begin, date_end)
+
+        context = self.context.copy()
+        context.update({
+            'mass_tickets': mass_tickets,
             'date_begin': date_begin,
             'date_end': date_end,
         })

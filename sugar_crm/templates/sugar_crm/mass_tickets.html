@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+{% include 'sugar_crm/tickets_menu.html' %}
+    <h1>Массовые тикеты</h1>
+    {% if date_begin and date_end %}
+        <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
+    {% endif %}
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Выбрать период
+        </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        {% for type, type_name in last_types %}
+            <a class="dropdown-item" href="{% url 'last_mass_tickets' type %}">{{ type_name }}</a>
+        {% endfor %}
+        {% for current_date in years %}
+            <a class="dropdown-item" href="{% url 'year_mass_tickets' current_date|date:'Y' %}">{{ current_date|date:'Y' }} год</a>
+        {% endfor %}
+        {% for current_date in months %}
+            <a class="dropdown-item" href="{% url 'month_mass_tickets' current_date|date:'Y' current_date|date:'m' %}">{{ current_date|date:'Y-m' }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <table class="table table-hover table-sm">
+        <thead class="text-center">
+        <tr>
+            <th>#</th>
+            <th>Тикет</th>
+            <th>Абоненты</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ticket in mass_tickets %}
+        <tr>
+            <td class="text-center"><a href="http://crm.kgts.su/sugarcrm/index.php?module=Bugs&action=DetailView&record={{ ticket.id }}">{{ ticket.bug_number }}</a></td>
+            <td>
+                <div><b>Дата:</b> {{ ticket.date_entered|date:'Y-m-d' }}</div>
+                <div><b>Статус:</b> {{ ticket.status }}</div>
+                <div><b>Проблема:</b> {{ ticket.name }}</div>
+                <div><b>Адрес:</b> {{ ticket.address }}</div>
+                <div><b>Описание:</b></div>
+                <div>{{ ticket.description|linebreaks }}</div>
+                {% if ticket.close %}
+                    <div><b>Причина закрытия:</b> {{ ticket.close }}</div>
+                {% endif %}
+                {% if ticket.duration %}
+                    <div><b>Сервис отсутствовал {{ ticket.duration|floatformat:"-2" }} ч.</b></div>
+                {% endif %}
+            </td>
+            <td>
+                <ul>
+                    {% for account in ticket.accounts %}
+                        <li>
+                            <a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account.id }}">{{ account.name }}</a>
+                            ({{ account.address }})
+                            {% if account.payment %} - {{ account.payment }} руб.{% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if ticket.payment %}
+                    <div><b>Итого: {{ ticket.payment }} руб.</b></div>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock main %}
