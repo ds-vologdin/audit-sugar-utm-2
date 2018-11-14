@@ -280,7 +280,7 @@ def is_found_account_in_line(account, line):
     return True
 
 
-def is_found_account_in_description(account, description):
+def is_found_account_in_description(account, description_lines):
     account = account.lower().replace(',', '').replace(
         'ооо', '').replace('зао', '').replace('ип', '').strip()
     if (account == 'точка' or account == 'мария' or
@@ -290,13 +290,8 @@ def is_found_account_in_description(account, description):
         # срабатываний, поэтому сразу говорим, что ничего не нашли...
         return False
 
-    # Переформатируем description
-    description = description.lower().replace(',', '').replace(
-        '\r', '').replace('(', ' ').replace(')', ' ').replace(
-        '"', ' ').replace('\'', ' ')
-    for line in description.splitlines():
+    for line in description_lines:
         if is_found_account_in_line(account, line):
-            # если контрагент найден, дальше строки смотреть не надо
             return True
     return False
 
@@ -348,11 +343,16 @@ def fetch_wronged_mass_tickets(date_begin, date_end):
     # не привязанных к тикету
     tickets_with_not_fixed_accounts = []
     for ticket in grouped_tickets.values():
-        ticket_account_ids = set([account.id for account in ticket.accounts])
+        ticket_account_ids = set(account.id for account in ticket.accounts)
+        # Чистим описание тикета от любымих символов саппорта
+        description = ticket.description.lower().replace(',', '').replace(
+            '\r', '').replace('(', ' ').replace(')', ' ').replace(
+            '"', ' ').replace('\'', ' ')
+        description_lines = description.splitlines()
         for account_id, account_name in accounts:
             if account_id in ticket_account_ids:
                 continue
-            if is_found_account_in_description(account_name, ticket.description):
+            if is_found_account_in_description(account_name, description_lines):
                 ticket.not_fixed_accounts.append(AccountInTicket(
                     account_id, account_name))
         if ticket.not_fixed_accounts:
