@@ -4,22 +4,9 @@
 {% include 'sugar_crm/tickets_menu.html' %}
 <div class="jumbotron">
     <h1>Статистика по типам тикетов</h1>
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Выбрать период
-        </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        {% for type, type_name in last_types %}
-            <a class="dropdown-item" href="{% url 'last_wronged_tickets' type %}">{{ type_name }}</a>
-        {% endfor %}
-        {% for year in years %}
-            <a class="dropdown-item" href="{% url 'year_type_tickets' year|date:'Y' %}">{{ year|date:'Y' }} год</a>
-        {% endfor %}
-        {% for month in months %}
-            <a class="dropdown-item" href="{% url 'month_type_tickets' month|date:'Y' month|date:'m' %}">{{ month|date:'Y-m' }}</a>
-        {% endfor %}
-      </div>
-    </div>
+    {% with url_name_last='last_type_tickets' url_name_year='year_type_tickets' url_name_month='month_type_tickets' %}
+        {% include 'sugar_crm/tickets_period_dropdown.html' %}
+    {% endwith %}
 
     {% if date_begin and date_end %}
         <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>

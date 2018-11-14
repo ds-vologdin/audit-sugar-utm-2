@@ -6,22 +6,9 @@
     {% if date_begin and date_end %}
         <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
     {% endif %}
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Выбрать период
-        </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        {% for type, type_name in last_types %}
-            <a class="dropdown-item" href="{% url 'last_mass_tickets' type %}">{{ type_name }}</a>
-        {% endfor %}
-        {% for current_date in years %}
-            <a class="dropdown-item" href="{% url 'year_mass_tickets' current_date|date:'Y' %}">{{ current_date|date:'Y' }} год</a>
-        {% endfor %}
-        {% for current_date in months %}
-            <a class="dropdown-item" href="{% url 'month_mass_tickets' current_date|date:'Y' current_date|date:'m' %}">{{ current_date|date:'Y-m' }}</a>
-        {% endfor %}
-      </div>
-    </div>
+    {% with url_name_last='last_mass_tickets' url_name_year='year_mass_tickets' url_name_month='month_mass_tickets' %}
+        {% include 'sugar_crm/tickets_period_dropdown.html' %}
+    {% endwith %}
     <table class="table table-hover table-sm">
         <thead class="text-center">
         <tr>
