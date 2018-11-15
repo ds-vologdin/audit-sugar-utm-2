@@ -1,7 +1,7 @@
 from datetime import timedelta
 from collections import namedtuple
 
-from sqlalchemy import func, and_, or_
+from sqlalchemy import func, and_, or_, desc
 
 from sugar_crm.database import session_crm
 from sugar_crm.models import Bug, BugsCstm, AccountsBug, Account, AccountsCstm
@@ -23,7 +23,20 @@ WrongedTicket = namedtuple(
     ('id', 'bug_number', 'date_entered', 'date_close', 'department', 'status',
      'perform', 'localisation', 'duration')
 )
-
+MassTickets = namedtuple(
+    'MassTicket',
+    ('id', 'bug_number', 'date_entered', 'name', 'description', 'status',
+     'address', 'close', 'duration', 'accounts', 'payment')
+)
+WrongedMassTickets = namedtuple(
+        'WrongedMassTickets',
+        ('id', 'bug_number', 'date_entered', 'name', 'description',
+         'accounts', 'not_fixed_accounts')
+    )
+AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
+AccountInTicketLite = namedtuple('AccountLite', ('id', 'name'))
+TopTicket = namedtuple('TopTicket', ('account', 'count', 'tickets', 'tickets_other'))
+TicketLite = namedtuple('TicketLite', ('id', 'bug_number', 'date_entered'))
 
 
 def fill_empty_dates_in_statistic(statistic, date_begin, date_end, default=0):
@@ -231,13 +244,6 @@ def fetch_mass_tickets(date_begin, date_end):
         Bug.deleted == 0,
     ).order_by(Bug.date_entered).all()
 
-    AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
-    MassTickets = namedtuple(
-        'MassTicket',
-        ('id', 'bug_number', 'date_entered', 'name', 'description', 'status',
-         'address', 'close', 'duration', 'accounts', 'payment')
-    )
-
     # Группируем таблицу по id, привязанных абонентов собираем в список
     # Это не красивое решение, но к сожалению в mysql нет типа array
     grouped_tickets = {}
@@ -311,21 +317,14 @@ def fetch_wronged_mass_tickets(date_begin, date_end):
         Bug.description != None
     ).order_by(Bug.date_entered).all()
 
-    AccountInTicket = namedtuple('Account', ('id', 'name'))
-    MassTickets = namedtuple(
-        'WrongedMassTickets',
-        ('id', 'bug_number', 'date_entered', 'name', 'description',
-         'accounts', 'not_fixed_accounts')
-    )
-
     # Группируем таблицу по id, привязанных абонентов собираем в список
     # Это не красивое решение, но к сожалению в mysql нет типа array
     grouped_tickets = {}
     for ticket in tickets:
-        account = AccountInTicket(*ticket[5:7])
+        account = AccountInTicketLite(*ticket[5:7])
         if ticket[0] not in grouped_tickets:
             accounts = [account]
-            grouped_tickets[ticket[0]] = MassTickets(*ticket[0:5], accounts, [])
+            grouped_tickets[ticket[0]] = WrongedMassTickets(*ticket[0:5], accounts, [])
         else:
             grouped_tickets[ticket[0]].accounts.append(account)
 
@@ -353,7 +352,7 @@ def fetch_wronged_mass_tickets(date_begin, date_end):
             if account_id in ticket_account_ids:
                 continue
             if is_found_account_in_description(account_name, description_lines):
-                ticket.not_fixed_accounts.append(AccountInTicket(
+                ticket.not_fixed_accounts.append(AccountInTicketLite(
                     account_id, account_name))
         if ticket.not_fixed_accounts:
             tickets_with_not_fixed_accounts.append(ticket)
@@ -362,3 +361,58 @@ def fetch_wronged_mass_tickets(date_begin, date_end):
         ticket for ticket in tickets_with_not_fixed_accounts if ticket.not_fixed_accounts
     ]
     return wronged_tickets
+
+
+def fetch_tickets_of_account_ids(account_ids):
+    tickets_raw = session_crm.query(
+        Bug.id, Bug.bug_number, Bug.date_entered, AccountsBug.account_id
+    ).join(
+        AccountsBug, Bug.id == AccountsBug.bug_id
+    ).filter(
+        AccountsBug.account_id.in_(account_ids)
+    ).order_by(Bug.date_entered).all()
+
+    tickets = {}
+    for ticket in tickets_raw:
+        account_id = ticket[3]
+        if account_id in tickets:
+            tickets[account_id].append(TicketLite(*ticket[:3]))
+        else:
+            tickets[account_id] = [TicketLite(*ticket[:3])]
+    return tickets
+
+
+def fetch_top_tickets(date_begin, date_end, top=30):
+    top_tickets_raw = session_crm.query(
+        Account.id, Account.name,  Account.billing_address_street,
+        AccountsCstm.month_profit_acc_c, func.count(AccountsBug.id).label('count')
+    ).join(
+        AccountsCstm, Account.id == AccountsCstm.id_c
+    ).join(
+        AccountsBug, Account.id == AccountsBug.account_id
+    ).join(
+        Bug, AccountsBug.bug_id == Bug.id
+    ).filter(
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end,
+        Bug.deleted == 0,
+        AccountsBug.account_id != '90657094-4fdd-9c4c-dc07-559b8ff0c6ea',
+        AccountsBug.account_id != '581c9d33-2f3f-88e3-9d28-55e052c92010',
+    ).group_by(Account.id).order_by(desc('count')).limit(top).all()
+
+    top_tickets = []
+    account_ids = []
+    for ticket in top_tickets_raw:
+        top_tickets.append(TopTicket(AccountInTicket(*ticket[:4]), ticket[4], [], []))
+        account_ids.append(ticket[0])
+
+    tickets_of_account_ids = fetch_tickets_of_account_ids(account_ids)
+
+    for ticket in top_tickets:
+        tickets_account = tickets_of_account_ids.get(ticket.account.id, [])
+        for ticket_account in tickets_account:
+            if date_begin <= ticket_account.date_entered.date() < date_end:
+                ticket.tickets.append(ticket_account)
+            else:
+                ticket.tickets_other.append(ticket_account)
+    return top_tickets
