@@ -6,7 +6,7 @@ class DefaultContextMixin:
     last_types = [
         ('week', 'Последняя неделя'), ('month', 'Последние 30 дней'),
         ('quarter', 'Последние 90 дней'), ('year', 'Последний год'),
-        ('2years', 'Последние 2 годы'), ('3years', 'Последний 3 год')
+        ('2years', 'Последние 2 года'), ('3years', 'Последние 3 года')
     ]
     context = {
         'months': get_last_months(last=6),

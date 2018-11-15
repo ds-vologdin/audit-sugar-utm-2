@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+    {% include 'sugar_crm/tickets_menu.html' %}
+    <div class="jumbotron">
+        <h1>ТОП тикетов</h1>
+        {% if date_begin and date_end %}
+            <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
+        {% endif %}
+        {% with url_name_last='last_top_calls' url_name_year='year_top_calls' url_name_month='month_top_calls' %}
+            {% include 'sugar_crm/tickets_period_dropdown.html' %}
+        {% endwith %}
+
+        <table class="table table-hover table-sm">
+            <thead class="text-center">
+            <tr>
+                <th>Телефон</th>
+                <th>Абонент</th>
+                <th>Количество звонков</th>
+                <th>Тикеты</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for account_call in top_calls %}
+            <tr>
+                <td class="text-center">{{ account_call.phone }}</td>
+                <td>
+                {% if account_call.account %}
+                    <a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account_call.account.id }}">{{ account_call.account.name }}</a>
+                    ({{ account_call.account.address }})
+                    {% if account_call.account.payment %}
+                        - {{ account_call.account.payment }} руб.
+                    {% endif %}
+                {% endif %}
+                </td>
+                <td class="text-center">{{ account_call.count }}</td>
+                <td>
+                    {% for ticket in account_call.tickets %}
+                        <a href="http://crm.kgts.su/sugarcrm/index.php?module=Bugs&action=DetailView&record={{ ticket.id }}">{{ ticket.bug_number }}</a>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock main %}

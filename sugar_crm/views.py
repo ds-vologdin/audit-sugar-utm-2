@@ -13,6 +13,7 @@ from .sugar_utils.tickets import fetch_wronged_tickets
 from .sugar_utils.tickets import fetch_mass_tickets
 from .sugar_utils.tickets import fetch_wronged_mass_tickets
 from .sugar_utils.tickets import fetch_top_tickets
+from .sugar_utils.tickets import fetch_top_calls_to_support
 
 
 class HardwareToRemoveView(LoginRequiredMixin, View):
@@ -143,6 +144,23 @@ class TopTicketsView(DefaultTicketsViewMixin, View):
         context = self.context.copy()
         context.update({
             'top_tickets': top_tickets,
+            'date_begin': date_begin,
+            'date_end': date_end,
+        })
+        return render(request, self.template_name, context)
+
+
+class TopCallsView(DefaultTicketsViewMixin, View):
+    template_name = 'sugar_crm/top_calls.html'
+
+    @access_group('service')
+    def get(self, request, *args, **kwargs):
+        date_begin, date_end = self.get_period()
+        top_calls = fetch_top_calls_to_support(date_begin, date_end)
+
+        context = self.context.copy()
+        context.update({
+            'top_calls': top_calls,
             'date_begin': date_begin,
             'date_end': date_end,
         })

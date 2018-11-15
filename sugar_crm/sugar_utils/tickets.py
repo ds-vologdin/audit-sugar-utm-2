@@ -5,6 +5,7 @@ from sqlalchemy import func, and_, or_, desc
 
 from sugar_crm.database import session_crm
 from sugar_crm.models import Bug, BugsCstm, AccountsBug, Account, AccountsCstm
+from sugar_crm.models import Call, AccountsCalls1C
 from .sugar_crm_dicts import BUG_LOCALISATION, BUG_PERFORM
 
 
@@ -37,6 +38,10 @@ AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
 AccountInTicketLite = namedtuple('AccountLite', ('id', 'name'))
 TopTicket = namedtuple('TopTicket', ('account', 'count', 'tickets', 'tickets_other'))
 TicketLite = namedtuple('TicketLite', ('id', 'bug_number', 'date_entered'))
+TopCall = namedtuple('TopCall', ('phone', 'count', 'account', 'tickets'))
+
+INTERNAL_PHONES = ('226001', '226002', '226333', '227485', '227012',
+                   '226012', '227081', '226081')
 
 
 def fill_empty_dates_in_statistic(statistic, date_begin, date_end, default=0):
@@ -363,14 +368,21 @@ def fetch_wronged_mass_tickets(date_begin, date_end):
     return wronged_tickets
 
 
-def fetch_tickets_of_account_ids(account_ids):
-    tickets_raw = session_crm.query(
+def fetch_tickets_of_account_ids(account_ids, date_begin=None, date_end=None):
+    tickets_query = session_crm.query(
         Bug.id, Bug.bug_number, Bug.date_entered, AccountsBug.account_id
     ).join(
         AccountsBug, Bug.id == AccountsBug.bug_id
     ).filter(
         AccountsBug.account_id.in_(account_ids)
-    ).order_by(Bug.date_entered).all()
+    ).order_by(Bug.date_entered)
+    if date_begin:
+        tickets_query = tickets_query.filter(
+            func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin)
+    if date_end:
+        tickets_query = tickets_query.filter(
+            func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end)
+    tickets_raw = tickets_query.all()
 
     tickets = {}
     for ticket in tickets_raw:
@@ -382,7 +394,7 @@ def fetch_tickets_of_account_ids(account_ids):
     return tickets
 
 
-def fetch_top_tickets(date_begin, date_end, top=30):
+def fetch_top_tickets(date_begin, date_end, top=50):
     top_tickets_raw = session_crm.query(
         Account.id, Account.name,  Account.billing_address_street,
         AccountsCstm.month_profit_acc_c, func.count(AccountsBug.id).label('count')
@@ -416,3 +428,49 @@ def fetch_top_tickets(date_begin, date_end, top=30):
             else:
                 ticket.tickets_other.append(ticket_account)
     return top_tickets
+
+
+def fetch_top_calls_to_support(date_begin, date_end, top=50):
+    calls_to_support_raw = session_crm.query(
+        func.substring_index(
+            func.substring_index(Call.name, ' ', -3), ' ', 1).label('from_number'),
+        func.count(Call.id).label('count'),
+        AccountsCalls1C.accounts_calls_1accounts_ida,
+        Account.name, Account.billing_address_street,
+        AccountsCstm.month_profit_acc_c,
+    ).outerjoin(
+        AccountsCalls1C, Call.id == AccountsCalls1C.accounts_calls_1calls_idb
+    ).outerjoin(
+        Account, AccountsCalls1C.accounts_calls_1accounts_ida == Account.id
+    ).outerjoin(
+        AccountsCstm, Account.id == AccountsCstm.id_c
+    ).filter(
+        func.convert_tz(Call.date_start, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Call.date_start, '+00:00', '+03:00') < date_end,
+        Call.direction == 'Inbound',
+        Call.status == 'autoheld',
+        Call.created_by == "9daf7540-986e-8385-7040-55b63cc60145",
+        ~func.substring_index(
+            func.substring_index(Call.name, ' ', -3), ' ', 1
+        ).label('from_number').in_(INTERNAL_PHONES)
+    ).group_by('from_number').order_by(desc('count')).limit(top).all()
+
+    calls_to_support = []
+    account_ids = []
+    for call in calls_to_support_raw:
+        if call[2]:
+            calls_to_support.append(
+                TopCall(*call[:2], AccountInTicket(*call[2:6]), []))
+            account_ids.append(call[2])
+        else:
+            calls_to_support.append(TopCall(*call[:2], None, None))
+
+    tickets_of_account_ids = fetch_tickets_of_account_ids(
+        account_ids, date_begin, date_end)
+    for call in calls_to_support:
+        if not call.account:
+            continue
+        tickets = tickets_of_account_ids.get(call.account.id)
+        if tickets:
+            call.tickets.extend(tickets)
+    return calls_to_support
