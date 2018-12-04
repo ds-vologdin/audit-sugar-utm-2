@@ -1,0 +1,86 @@
+{% extends "base/base.html" %}
+
+{% block main %}
+    {% include 'sugar_crm/tickets_menu.html' %}
+    <div class="jumbotron">
+        <h1>Готовность сети</h1>
+        {% if date_begin and date_end %}
+            <h3>{{ date_begin|date:'Y-m-d' }} - {{ date_end|date:'Y-m-d' }}</h3>
+        {% endif %}
+        {% with url_name_last='last_top_no_service' url_name_year='year_top_no_service' url_name_month='month_top_no_service' %}
+            {% include 'sugar_crm/tickets_period_dropdown.html' %}
+        {% endwith %}
+
+        <h1>ТОП 50 организаций с низким коэффицентом готовности</h1>
+        <table class="table table-hover table-sm">
+            <thead class="text-center">
+            <tr>
+                <th>Абонент</th>
+                <th style="min-width: 200px">Тикеты</th>
+                <th>Отсутствие сервиса</th>
+                <th>Готовность</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for account in account_companies_stop_service %}
+            <tr>
+                <td>
+                    <a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account.account.id }}">
+                        {{ account.account.name }} ({{ account.account.address }})
+                        {% if account.account.payment %}
+                            - {{ account.account.payment }} руб.
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                    <ul>
+                    {% for ticket in account.tickets %}
+                        <li><a href="http://crm.kgts.su/sugarcrm/index.php?module=Bugs&action=DetailView&record="{{ ticket.id }}>
+                            {{ ticket.bug_number }} ({{ ticket.duration|floatformat:2 }})</a></li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td class="text-center">{{ account.duration|floatformat:2 }}</td>
+                <td class="text-center">{{ account.availability|floatformat:4 }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h1>ТОП 50 физический лиц с низким коэффицентом готовности</h1>
+        <table class="table table-hover table-sm">
+            <thead class="text-center">
+            <tr>
+                <th>Абонент</th>
+                <th>Тикеты</th>
+                <th>Отсутствие сервиса</th>
+                <th>Готовность</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for account in account_mans_stop_service %}
+            <tr>
+                <td>
+                    <a href="http://crm.kgts.su/sugarcrm/index.php?module=Accounts&action=DetailView&record={{ account.account.id }}">
+                        {{ account.account.name }} ({{ account.account.address }})
+                        {% if account.account.payment %}
+                            - {{ account.account.payment }} руб.
+                        {% endif %}
+                    </a>
+                </td>
+                <td>
+                    <ul>
+                    {% for ticket in account.tickets %}
+                        <li><a href="http://crm.kgts.su/sugarcrm/index.php?module=Bugs&action=DetailView&record="{{ ticket.id }}>
+                            {{ ticket.bug_number }} ({{ ticket.duration|floatformat:2 }})</a></li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td class="text-center">{{ account.duration|floatformat:2 }}</td>
+                <td class="text-center">{{ account.availability|floatformat:4 }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock main %}

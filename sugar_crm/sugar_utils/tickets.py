@@ -30,15 +30,19 @@ MassTickets = namedtuple(
      'address', 'close', 'duration', 'accounts', 'payment')
 )
 WrongedMassTickets = namedtuple(
-        'WrongedMassTickets',
-        ('id', 'bug_number', 'date_entered', 'name', 'description',
-         'accounts', 'not_fixed_accounts')
-    )
+    'WrongedMassTickets',
+    ('id', 'bug_number', 'date_entered', 'name', 'description',
+     'accounts', 'not_fixed_accounts')
+)
 AccountInTicket = namedtuple('Account', ('id', 'name', 'address', 'payment'))
 AccountInTicketLite = namedtuple('AccountLite', ('id', 'name'))
 TopTicket = namedtuple('TopTicket', ('account', 'count', 'tickets', 'tickets_other'))
 TicketLite = namedtuple('TicketLite', ('id', 'bug_number', 'date_entered'))
 TopCall = namedtuple('TopCall', ('phone', 'count', 'account', 'tickets'))
+NoServiceTicket = namedtuple(
+    'NoServiceTicket',
+    ('id', 'bug_number', 'date_entered', 'duration', 'accounts')
+)
 
 INTERNAL_PHONES = ('226001', '226002', '226333', '227485', '227012',
                    '226012', '227081', '226081')
@@ -474,3 +478,77 @@ def fetch_top_calls_to_support(date_begin, date_end, top=50):
         if tickets:
             call.tickets.extend(tickets)
     return calls_to_support
+
+
+def calc_ticket_duration(hours, minutes):
+    result = 0
+    if hours:
+        result += hours
+    if minutes:
+        result += minutes/60
+    return result
+
+
+def fetch_tickets_with_stop_service(date_begin, date_end):
+    AccountInTicketStopService = namedtuple(
+        'Account', ('id', 'name', 'address', 'payment', 'company'))
+
+    tickets_raw = session_crm.query(
+        Bug.id, Bug.bug_number, Bug.date_entered, BugsCstm.duration_bug_c,
+        BugsCstm.duration_min_c, Account.id, Account.name,
+        Account.billing_address_street, AccountsCstm.month_profit_acc_c,
+        AccountsCstm.company_acc_c
+    ).join(
+        BugsCstm, BugsCstm.id_c == Bug.id
+    ).join(
+        AccountsBug, AccountsBug.bug_id == Bug.id
+    ).join(
+        Account, AccountsBug.account_id == Account.id
+    ).join(
+        AccountsCstm, AccountsCstm.id_c == Account.id
+    ).filter(
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') >= date_begin,
+        func.convert_tz(Bug.date_entered, '+00:00', '+03:00') < date_end,
+        or_(BugsCstm.duration_bug_c > 0, BugsCstm.duration_min_c > 0)
+    ).all()
+
+    tickets = {}
+    for ticket in tickets_raw:
+        ticket_id = ticket[0]
+        if ticket_id == '90657094-4fdd-9c4c-dc07-559b8ff0c6ea':
+            # фильтруем лишнее
+            continue
+        duration = calc_ticket_duration(ticket[3], ticket[4])
+        account = AccountInTicketStopService(*ticket[5:9], ticket[9])
+        if ticket_id in tickets:
+            tickets[ticket_id].accounts.append(account)
+        else:
+            tickets[ticket_id] = NoServiceTicket(
+                *ticket[:3], duration, [account])
+    return tickets.values()
+
+
+def get_top_account_with_stop_service(tickets, period_in_hours):
+    NoServiceAccount = namedtuple(
+        'NoServiceAccount', ('account', 'tickets', 'duration', 'availability'))
+    TicketNoService = namedtuple('TicketLite', ('id', 'bug_number', 'duration'))
+    account_stop_duration = {}
+    for ticket in tickets:
+        _ticket = TicketNoService(ticket.id, ticket.bug_number, ticket.duration)
+        for account in ticket.accounts:
+            if account.id in account_stop_duration:
+                _account = account_stop_duration[account.id]
+                _tickets = _account.tickets
+                duration = _account.duration
+            else:
+                _tickets = []
+                duration = 0
+            _tickets.append(_ticket)
+
+            duration += ticket.duration
+            availability = (period_in_hours - duration) / period_in_hours
+
+            account_stop_duration[account.id] = NoServiceAccount(
+                account, _tickets, duration, availability)
+    return sorted(
+        account_stop_duration.values(), key=lambda x: x.duration, reverse=True)

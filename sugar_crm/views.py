@@ -14,6 +14,8 @@ from .sugar_utils.tickets import fetch_mass_tickets
 from .sugar_utils.tickets import fetch_wronged_mass_tickets
 from .sugar_utils.tickets import fetch_top_tickets
 from .sugar_utils.tickets import fetch_top_calls_to_support
+from .sugar_utils.tickets import fetch_tickets_with_stop_service
+from .sugar_utils.tickets import get_top_account_with_stop_service
 
 
 class HardwareToRemoveView(LoginRequiredMixin, View):
@@ -161,6 +163,36 @@ class TopCallsView(DefaultTicketsViewMixin, View):
         context = self.context.copy()
         context.update({
             'top_calls': top_calls,
+            'date_begin': date_begin,
+            'date_end': date_end,
+        })
+        return render(request, self.template_name, context)
+
+
+class TopNoServiceTicketsView(DefaultTicketsViewMixin, View):
+    template_name = 'sugar_crm/top_no_service.html'
+
+    @access_group('service')
+    def get(self, request, *args, **kwargs):
+        date_begin, date_end = self.get_period(default='quarter')
+        tickets = fetch_tickets_with_stop_service(date_begin, date_end)
+
+        period = (date_end - date_begin).total_seconds() / (60 * 60)
+        accounts_stop_service = get_top_account_with_stop_service(tickets, period)
+
+        account_companies = []
+        account_mans = []
+        for account in accounts_stop_service:
+            if account.account.company == 1:
+                account_companies.append(account)
+            else:
+                account_mans.append(account)
+
+        context = self.context.copy()
+        context.update({
+            'account_companies_stop_service': account_companies[:50],
+            'account_mans_stop_service': account_mans[:50],
+            'tickets': tickets,
             'date_begin': date_begin,
             'date_end': date_end,
         })
