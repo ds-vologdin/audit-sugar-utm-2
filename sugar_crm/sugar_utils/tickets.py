@@ -515,7 +515,7 @@ def fetch_tickets_with_stop_service(date_begin, date_end):
     tickets = {}
     for ticket in tickets_raw:
         ticket_id = ticket[0]
-        if ticket_id == '90657094-4fdd-9c4c-dc07-559b8ff0c6ea':
+        if ticket_id in ('90657094-4fdd-9c4c-dc07-559b8ff0c6ea',):
             # фильтруем лишнее
             continue
         duration = calc_ticket_duration(ticket[3], ticket[4])
@@ -536,6 +536,9 @@ def get_top_account_with_stop_service(tickets, period_in_hours):
     for ticket in tickets:
         _ticket = TicketNoService(ticket.id, ticket.bug_number, ticket.duration)
         for account in ticket.accounts:
+            if account.id in ('90657094-4fdd-9c4c-dc07-559b8ff0c6ea',):
+                # фильтруем лишнее
+                continue
             if account.id in account_stop_duration:
                 _account = account_stop_duration[account.id]
                 _tickets = _account.tickets
